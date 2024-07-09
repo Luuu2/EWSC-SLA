@@ -2,11 +2,11 @@
 
 .container {
     position: relative;
-    max-width: 600px;
+    max-width: 300px;
     margin: 0 auto;
-    padding: 80px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    padding: 50px;
+    border: 0px solid #ccc;
+    border-radius: 10px;
     background-color: #f9f9f9;
 }
 
@@ -23,12 +23,11 @@ p{
 }
 
 body{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    background-color: rgb(9, 191, 252);
+    background-image: url("4.jpg"); 
+    background-size: cover;  
+    background-repeat: no-repeat;  
+    background-position: center; 
+    margin: 0; 
 }
 
 label {

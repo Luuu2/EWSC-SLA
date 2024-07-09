@@ -7,17 +7,17 @@
 
 logo img{
     width: 10px;
-    height: auto;
+    height: 10px;
 
     }
 
     body {
-        background-image: url("4.jpg");  /* Replace with your image path */
-        background-size: cover;  /* Resize image to cover the body */
-        background-repeat: no-repeat;  /* Prevent image repetition */
-        background-position: center;  /* Center the image horizontally */
-        margin: 0;  /* Remove default margin */
-          /* Optional: Set text color for contrast */
+        background-image: url("4.jpg"); 
+        background-size: cover;  
+        background-repeat: no-repeat;  
+        background-position: center; 
+        margin: 0;  
+          
       }
 
 
@@ -25,7 +25,7 @@ logo img{
 
 h1 {
     padding: 40px;
-    color: #017a7e;
+    color: #07daff;
 text-align: center;
 font-size: 24px;
 font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
@@ -83,9 +83,26 @@ button:hover {
   }
   
   .logo-container img {
-    width: 200px;  /* Adjust width as needed */
+    max-width: 100%;  /* Adjust width as needed */
     height: auto;     /* Maintains image aspect ratio */
-    display: block;   /
+      
   }
+
+
+.username-box {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: none;
+    align-items: center;
+}
+
+.username-box p {
+    margin: 0;
+}
   
         
