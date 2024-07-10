@@ -1,0 +1,1224 @@
+
+  
+  
+  img{
+    max-width: 20%;
+    height: auto;
+    background-color: aliceblue;
+  }
+
+  #header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  
+
+h2{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+font-size:medium;
+}
+
+body {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
+.container {
+    position: relative;
+    display: inline-block;
+}
+
+.menu-icon {
+    font-size: 24px;
+    cursor: pointer;
+
+}
+
+.menu-list {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 200px;
+    z-index: 1;
+}
+
+.menu-list li {
+    padding: 12px 16px;
+}
+
+.menu-list li a {
+    text-decoration: none;
+    color: black;
+    display: block;
+}
+
+.menu-list li:hover {
+    background-color: #85c3fd;
+}
+
+.menu-icon:hover {
+    background-color: #b7e4f1;
+}
+
+.menu-text {
+    display: none;
+    margin-left: 5px;
+    font-size: 16px;
+    vertical-align: middle;
+}
+
+.menu-icon:hover .menu-text {
+    display:inline;
+}
+
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    height: 100vh;
+}
+
+.wrapper {
+    display: flex;
+    width: 100%;
+}
+
+.side-panel {
+    background-color: #f4f4f4;
+    padding: 20px;
+    width: 250px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="SLA rating.css">
+    <title>SLA Rating</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="side-panel">
+    
+            <header>
+               <img src="download.jpg" alt="EWSC Logo" class="logo">
+            </header>
+
+    </div>
+
+    <div class="container">
+        <div class="menu-container">
+            <div class="menu-icon" onclick="toggleMenu()">
+                ☰
+                <span class="menu-text">Menu</span>
+            </div>
+            <ul id="menu" class="menu-list">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="menu-content">
+        <div id="header">
+        
+    </div>
+    <div class="container">
+        <h2>SLA Rating</h2>
+    </div>
+    </div>
+    <script src="sla rating.js"></script>
+</body>
+</html>
+
+
+
+
+function keyInDate() {
+    const date = new Date();
+    const formattedDate = date.toISOString().substring(0, 10); // YYYY-MM-DD format
+    document.getElementById('dateInput').value = formattedDate;
+}
+
+<div class="container">
+    <label for="sla1">SLA 1:</label>
+    <input type="text" id="sla1" class="sla-input" name="sla1">
+</div>
+
+<label for="username">Username:</label>
+<input type="text" id="username" name="username" required>
+
+<div class="container" >
+    <button type="submit" class="page-option">Save</button>
+    <button type="submit" class="page-option2">Clear</button>
+    <button type="submit" class="page-option3">Exit</button>
+    
+
+    function saveInput() {
+        // Retrieve all input values and store them in localStorage
+        localStorage.setItem('dateInput', document.getElementById('dateInput').value);
+        for (let i = 1; i <= 5; i++) {
+            localStorage.setItem('sla' + i, document.getElementById('sla' + i).value);
+        }
+        alert('Inputs saved!');
+    }
+    
+    function clearInput() {
+        // Clear the values of all input fields
+        document.getElementById('dateInput').value = '';
+        for (let i = 1; i <= 5; i++) {
+            document.getElementById('sla' + i).value = '';
+        }
+        alert('Inputs cleared!');
+    }
+    
+    function exitPage() {
+        // Redirect to the login page
+        window.location.href = 'login.html';
+
+
+
+        <div class="sla-container">
+            <div class="sla-row">
+                <div class="sla-item">
+                <div class="text">Sample Text 1</div>
+                <div class="dropdown"></div>
+            </div>
+          <div class="sla-item">
+            <label for="display-sla1">SLA 1:</label>
+            <span id="display-sla1" class="sla-input"></span>
+          </div>
+        </div>
+      
+        <div class="sla-row">
+         <div class="sla-item">
+            <label for="display-sla2">SLA 2:</label>
+            <span id="display-sla2" class="sla-input"></span>
+        </div>
+        </div>
+
+        <div class="sla-row"> 
+        <div class="sla-item">
+            <label for="display-sla3">SLA 3:</label>
+            <span id="display-sla3" class="sla-input"></span>
+        </div>
+    </div>
+
+    <div class="sla-row">
+        <div class="sla-item">
+            <label for="display-sla4">SLA 4:</label>
+            <span id="display-sla4" class="sla-input"></span>
+        </div>
+    </div>
+        
+    <div class="sla-row">
+        <div class="sla-item">
+            <label for="display-sla5">SLA 5:</label>
+            <span id="display-sla5" class="sla-input"></span>
+        </div>
+    </div>
+    
+    </div>
+    </div>
+
+    <div class="sla-container">
+        <div class="sla-row">
+            <div class="sla-item">
+                <label for="display-sla1">SLA 1:</label>
+                <span id="display-sla1" class="sla-input"></span>
+            </div>
+            <div class="box">
+                <div class="text">Rating</div>
+                <div class="dropdown"></div>
+            </div>
+        </div>
+        
+        <div class="sla-row">
+            <div class="sla-item">
+                <label for="display-sla2">SLA 2:</label>
+                <span id="display-sla2" class="sla-input"></span>
+            </div>
+            <div class="box">
+                <div class="text">Rating</div>
+                <div class="dropdown"></div>
+            </div>
+        </div>
+        
+        <div class="sla-row">
+            <div class="sla-item">
+                <label for="display-sla3">SLA 3:</label>
+                <span id="display-sla3" class="sla-input"></span>
+            </div>
+            <div class="box">
+                <div class="text">Rating</div>
+                <div class="dropdown"></div>
+            </div>
+        </div>
+        
+        <div class="sla-row">
+            <div class="sla-item">
+                <label for="display-sla4">SLA 4:</label>
+                <span id="display-sla4" class="sla-input"></span>
+            </div>
+            <div class="box">
+                <div class="text">Rating</div>
+                <div class="dropdown"></div>
+            </div>
+        </div>
+        
+        <div class="sla-row">
+            <div class="sla-item">
+                <label for="display-sla5">SLA 5:</label>
+                <span id="display-sla5" class="sla-input"></span>
+            </div>
+            <div class="box">
+                <div class="text">Rating</div>
+                <div class="dropdown"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+.box {
+    flex: 1;
+    display: flex;
+   background-color: #ffffff;
+    border: 1px solid #706868;
+    border-radius: 5px;
+    padding: 3px;
+  flex-direction: column;
+  align-items: left;
+  text-align:left;
+  width: 100%;
+}
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="SLA rating.css">
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="wrapper">
+        <div class="side-panel">
+            <header>
+
+            </header>
+            <div class="menu-container">
+                <div class="menu-icon" onclick="toggleMenu()">
+                    ☰
+                    <span class="menu-text">Menu</span>
+                </div>
+                <ul id="menu" class="menu-list">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+
+    <div class="container">
+     
+        <div class="username-box" id="usernameBox"></div>
+         <h3> Rate SLAs</h3>
+
+         <div class="container">
+            <button class="dropdown-btn" onclick="toggleDropdown()">Select Department</button>
+            <ul id="department-dropdown" class="dropdown-list">
+                <li><a href="#hr">Human Resources</a></li>
+                <li><a href="#finance">Finance</a></li>
+                <li><a href="#it">Information Technology</a></li>
+                <li><a href="#marketing">Marketing</a></li>
+            </ul>
+          <div>
+
+        
+         <div class="sla-row">
+            <div class="sla-item">
+                <label for="display-sla4">SLA 1:</label>
+                <span id="display-sla4" class="sla-input"></span>
+            </div>
+            <div class="box">
+                <div class="text">Rating</div>
+                <div class="dropdown"></div>
+            </div>
+        </div>
+        
+        <div class="sla-row">
+            <div class="sla-item">
+                <label for="display-sla4">SLA 2:</label>
+                <span id="display-sla4" class="sla-input"></span>
+            </div>
+            <div class="box">
+                <div class="text">Rating</div>
+                <div class="dropdown"></div>
+            </div>
+        </div>
+            
+            <div class="sla-row">
+                <div class="sla-item">
+                    <label for="display-sla3">SLA 3:</label>
+                    <span id="display-sla3" class="sla-input"></span>
+                </div>
+                <div class="box">
+                    <div class="text">Rating</div>
+                    <div class="dropdown"></div>
+                </div>
+            </div>
+            
+            <div class="sla-row">
+                <div class="sla-item">
+                    <label for="display-sla4">SLA 4:</label>
+                    <span id="display-sla4" class="sla-input"></span>
+                </div>
+                <div class="box">
+                    <div class="text">Rating</div>
+                    <div class="dropdown"></div>
+                </div>
+            </div>
+            
+            <div class="sla-row">
+                <div class="sla-item">
+                    <label for="display-sla5">SLA 5:</label>
+                    <span id="display-sla5" class="sla-input"></span>
+                </div>
+                <div class="box">
+                    <div class="text">Rating</div>
+                    <div class="dropdown"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        
+        
+        
+
+        <!-- Content of your dashboard page -->
+    
+
+
+
+
+        
+    
+        
+    <script src="SLA rating.js"></script>
+</body>
+</html>
+
+
+/* General styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+}
+
+.wrapper {
+    display: flex;
+    width: 100%;
+}
+
+.side-panel {
+    background-color: #f4f4f4;
+    padding: 20px;
+    width: fit-content;
+    box-shadow: 2px 0 5px rgba(85, 181, 245, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+
+#header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+/* Menu styles */
+.menu-container {
+    position: relative;
+    width: 80%;
+}
+
+.menu-icon {
+    font-size: 24px;
+    cursor: pointer;
+    background-color: #f2f5f7;
+    color: rgb(14, 13, 13);
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.menu-icon:hover {
+    background-color: #58caff;
+}
+
+.menu-text {
+    display: none;
+    font-size: 16px;
+    vertical-align: middle;
+    margin-left: 10px;
+}
+
+.menu-icon:hover .menu-text {
+    display: inline;
+}
+
+.menu-list {
+    display: none;
+    background-color: #f9f9f9;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0 0;
+    width: 100%;
+}
+
+.menu-list li {
+    padding: 12px 16px;
+}
+
+.menu-list li a {
+    text-decoration: none;
+    color: rgb(7, 189, 245);
+    display: block;
+}
+
+.menu-list li:hover {
+    background-color: #85c3fd;
+}
+
+
+.username-box {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #0c559e;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: none;
+    align-items: center;
+    font-size:x-small;
+}
+
+.username-box p {
+    margin: 0;
+}
+
+
+
+.container {
+    flex: 1;
+    padding: 50px; /* Adjust as needed */
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+h3 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    text-align: center;
+    align-self: center;
+}
+
+.sla-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.sla-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+.sla-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;
+}
+
+.sla-item label {
+    margin-bottom: 5px;
+}
+
+.sla-input {
+    padding: 30px;
+    background-color: #ffffff;
+    border: 1px solid #706868;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    width: 60%;
+}
+
+.box {
+    display: flex;
+    background-color: #ffffff;
+    border: 1px solid #706868;
+    border-radius: 5px;
+    padding: 3px;
+    flex-direction: column;
+    align-items: left;
+    text-align: left;
+    width: 60px; /* Minimize width to fit content */
+    height: min-content; /* Minimize height to fit content */
+}
+
+.text {
+    margin-right: 10px;
+    font-size: small;
+    align-items: left;
+
+}
+
+.dropdown {
+    width: 6px;
+    height: 6px;
+    border-left: 2px solid black;
+    border-bottom: 2px solid black;
+    transform: rotate(315deg);
+    position: absolute;
+    right: 55px;;
+}
+
+
+/* Dropdown button styles */
+.dropdown-btn {
+    background-color: #fffcfc;
+    color: rgb(0, 0, 0);
+    padding: 5px;
+    border:1px solid#333;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 400px;
+    text-align: left;
+}
+
+.dropdown-btn:hover {
+    background-color: #85c3fd;
+}
+
+.dropdown-list {
+    display: none;
+    background-color: #faf3f3;
+    box-shadow: 0 8px 16px rgba(255, 252, 252, 0.2);
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0 0;
+    width: 200px;
+    position: absolute;
+}
+
+.dropdown-list li {
+    padding: 12px 16px;
+}
+
+.dropdown-list li a {
+    text-decoration: none;
+    color: rgb(7, 189, 245);
+    display: block;
+}
+
+.dropdown-list li:hover {
+    background-color: #85c3fd;
+}
+
+.spacing{
+    margin-top: 20px;
+    
+
+}
+
+<div class="sla-row">
+    <div class="sla-item">
+        <label for="display-sla5">SLA 5:</label>
+        <span id="display-sla5" class="sla-input"></span>
+    </div>
+    <div class="box">
+        <div class="text">Rating</div>
+        <div class="dropdown"></div>
+    </div>
+</div>
+
+
+.comment-section {
+    display: flex;
+    flex-direction: column;
+    font-size: small;
+}
+
+.comment-label {
+    text-decoration: underline;
+    font-size: small;
+}
+
+.comment-input {
+    width: 100%;
+    padding: 5px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
+    font-size: small;
+}
+
+<div class="container2">
+    <button type="button" class="page-option" onclick="saveInput()">Save</button>
+    <button type="button" class="page-option2" onclick="clearInput()">Clear</button>
+    <button type="button" class="page-option3" onclick="exitPage()">Exit</button>
+</div>
+
+
+<div class="sla-row">
+    <div class="sla-item">
+        <label for="display-sla5">SLA 5:</label>
+        <span id="display-sla5" class="sla-input"></span>
+    </div>
+    <div class="box">
+        <div class="rating-row">
+            <div class="text">Rating</div>
+            <div class="dropdown"></div>
+        </div>
+    </div>
+
+    container2{
+        align-items: start;
+        flex-direction: column;
+    
+    }
+    
+    .page-option,.page-option2 , .page-option3{
+        background-color: #08ca38;
+        color: #fff;
+        border: none;
+        padding: 5px;
+        cursor: pointer;
+        border-radius: 3px;
+        margin: 10px 0 0 0;
+        margin-top: 50px;
+        margin-right:70px ;
+        
+    }
+    
+    .page-option2{
+        background-color: #0074D9;
+    } 
+    
+    .page-option3{
+        background-color: #f51e1e; 
+    }
+    .page-option:hover{
+        background-color: #85c3fd;
+    }
+    
+    .page-option2:hover{
+        background-color: #85c3fd;
+    }
+    
+    .page-option3:hover{
+        background-color: #e21709;
+    }
+    
+    
+    <div class="sla-row">
+        <div class="sla-item">
+            <label for="display-sla1">SLA 1:</label>
+            <span id="display-sla1" class="sla-input"></span>
+        </div>
+        <div class="box">
+            <div class="text">Rating</div>
+            <div class="dropdown"></div>
+        </div>
+    </div>
+   
+
+
+    <div class="sla-row">
+        <div class="sla-item">
+            <label for="display-sla2">SLA 2:</label>
+            <span id="display-sla2" class="sla-input"></span>
+        </div>
+        <div class="box">
+            <div class="text">Rating</div>
+            <div class="dropdown"></div>
+        </div>
+    </div>
+    
+
+    <div class="sla-row">
+        <div class="sla-item">
+            <label for="display-sla3">SLA 3:</label>
+            <span id="display-sla3" class="sla-input"></span>
+        </div>
+        <div class="box">
+            <div class="text">Rating</div>
+            <div class="dropdown"></div>
+        </div>
+    </div>
+
+    <div class="sla-row">
+        <div class="sla-item">
+            <label for="display-sla4">SLA 4:</label>
+            <span id="display-sla4" class="sla-input"></span>
+        </div>
+        <div class="box">
+            <div class="text">Rating</div>
+            <div class="dropdown"></div>
+        </div>
+    </div>
+   
+    <div class="sla-row">
+        <div class="sla-item">
+            <label for="display-sla4">SLA 5:</label>
+            <span id="display-sla4" class="sla-input"></span>
+        </div>
+        <div class="box">
+            <div class="text">Rating</div>
+            <div class="dropdown"></div>
+        </div>
+    </div>
+
+
+
+    /* General styles */
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        display: flex;
+        height: 100vh;
+    }
+    
+    .wrapper {
+        display: flex;
+        width: 100%;
+    }
+    
+    .side-panel {
+        background-color: #f4f4f4;
+        padding: 20px;
+        width: fit-content;
+        box-shadow: 2px 0 5px rgba(85, 181, 245, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .main-content {
+        flex-grow: 1;
+        padding: 20px;
+        margin-left: 5px;
+    }
+    
+    header .logo {
+        width: 50%;
+        max-width: 100px;
+        height: auto;
+        background-color: aliceblue;
+        margin-bottom: 5px;
+        margin-top: 5px;
+        margin-left: 5px;
+    }
+    
+    #header {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+    
+    h2 {
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: large;
+        margin-top: 5px;
+    }
+    
+    /* Menu styles */
+    .menu-container {
+        position: relative;
+        width: 80%;
+    }
+    
+    .menu-icon {
+        font-size: 24px;
+        cursor: pointer;
+        background-color: #f2f5f7;
+        color: rgb(14, 13, 13);
+        padding: 10px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        transition: background-color 0.3s;
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .menu-icon:hover {
+        background-color: #58caff;
+    }
+    
+    .menu-text {
+        display: none;
+        font-size: 16px;
+        vertical-align: middle;
+        margin-left: 10px;
+    }
+    
+    .menu-icon:hover .menu-text {
+        display: inline;
+    }
+    
+    .menu-list {
+        display: none;
+        background-color: #f9f9f9;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        list-style: none;
+        padding: 0;
+        margin: 10px 0 0 0;
+        width: 100%;
+    }
+    
+    .menu-list li {
+        padding: 12px 16px;
+    }
+    
+    .menu-list li a {
+        text-decoration: none;
+        color: rgb(7, 189, 245);
+        display: block;
+    }
+    
+    .menu-list li:hover {
+        background-color: #85c3fd;
+    }
+    
+    /* Dropdown button styles */
+    .dropdown-btn {
+        background-color: #fffcfc;
+        color: rgb(0, 0, 0);
+        padding: 5px;
+        border:1px solid#333;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 10px;
+        width: 100%;
+        text-align: left;
+    
+    }
+    
+    .dropdown-btn:hover {
+        background-color: #85c3fd;
+    }
+    
+    .dropdown-list {
+        display: none;
+        background-color: #faf3f3;
+        box-shadow: 0 8px 16px rgba(255, 252, 252, 0.2);
+        list-style: none;
+        padding: 0;
+        margin: 10px 0 0 0;
+        width: 200px;
+        position: absolute;
+    }
+    
+    .dropdown-list li {
+        padding: 12px 16px;
+    }
+    
+    .dropdown-list li a {
+        text-decoration: none;
+        color: rgb(7, 189, 245);
+        display: block;
+    }
+    
+    .dropdown-list li:hover {
+        background-color: #85c3fd;
+    }
+    
+    .spacing{
+        margin-top: 20px;
+        margin-bottom: 20px;
+        
+    
+    }
+    
+    .date-input {
+        width: 100%; /* Ensure input takes full available width */
+        padding:0;
+        border: 1px solid #020202;
+        border-radius: 5px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        outline: none;
+        font-size: 16px;
+        
+    }
+    
+    .date-input:focus {
+        border-color: #000000;
+        box-shadow: 0 0 5px rgba(117, 167, 243, 0.5);
+    }
+    
+         /* Styles for the SLA 1 input */
+         .sla-input {
+            width: 100%; /* Ensure input takes full available width */
+            padding: 10px;
+            border: 1px solid #020202;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(12, 94, 161, 0.1);
+            outline: none;
+            font-size: 11px;
+            margin-top: 5px;
+           margin-bottom: 30px;
+        }
+    
+         label{
+          
+            font-weight: bold;
+    
+           
+            
+        }
+        
+    
+        .sla-input:focus {
+            border-color: #000000;
+            box-shadow: 0 0 5px rgba(117, 167, 243, 0.5);
+        }
+    
+        .page-option,.page-option2 , .page-option3{
+            background-color: #08ca38;
+            color: #fff;
+            border: none;
+            padding: 5px;
+            cursor: pointer;
+            border-radius: 3px;
+            margin: 10px 0 0 0;
+            margin-top: 30px;
+            margin-right:50px;
+        }
+    
+        .page-option2{
+            background-color: #0074D9;
+        } 
+    
+        .page-option3{
+            background-color: #be0303; 
+        }
+        .page-option:hover{
+            background-color: #85c3fd;
+        }
+    
+        .page-option2:hover{
+            background-color: #85c3fd;
+        }
+    
+        .page-option3:hover{
+            background-color: #e21709;
+        }
+    
+        .username-box {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: none;
+            align-items: center;
+        }
+        
+        .username-box p {
+            margin: 0;
+        } 
+    
+    
+        .username-box {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #0c559e;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: none;
+            align-items: center;
+            font-size:x-small;
+        }
+        
+        .username-box p {
+            margin: 0;
+        }
+    
+        h3{
+            
+            text-align: center;
+    
+        }
+        
+       
+        .container-wrapper {
+            background-color: #bdbdbd;
+            border: 1px solid black;
+            padding: 20px;
+            margin: 5px;
+            box-sizing: border-box;
+            margin-top: 20px;
+            margin-left: 5px;
+            box-sizing: border-box;
+            margin-right: 10px;
+            align-items: start;
+            padding:100px;
+            width: 100%;
+            text-align: left;
+        }
+    
+        
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="SLA entry.css">
+    <title>SLA Rating</title>
+</head>
+<body>
+    
+
+  
+
+        <div class="wrapper">
+            <div class="side-panel">
+           
+            <div class="menu-container">
+                <div class="menu-icon" onclick="toggleMenu()">
+                    ☰
+                    <span class="menu-text">Menu</span>
+                </div>
+                <ul id="menu" class="menu-list">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <header>
+            <img src="download.jpg" alt="EWSC Logo" class="logo">
+        </header>
+
+        <div class="container">
+
+            <div class="container">
+                <h3>SLA App</h3>
+            <div class="username-box" id="usernameBox"></div>
+        
+            <div class="main-content">
+            <div id="header">
+                <span class="username"></span>
+            </div>
+        <div class="container-wrapper">
+            
+                    <h2>SLA Entry</h2>
+                    <button class="dropdown-btn" onclick="toggleDropdown()">Select Department</button>
+                    <ul id="department-dropdown" class="dropdown-list">
+                        <li><a href="#hr">Human Resources</a></li>
+                        <li><a href="#finance">Finance</a></li>
+                        <li><a href="#it">Information Technology</a></li>
+                        <li><a href="#marketing">Marketing</a></li>
+                    </ul>
+                  <div>
+                    <button type="button" class="spacing" onclick="document.getElementById('dateInput').focus();">QRT Date</button>
+                    <input type="date" id="dateInput" class="dateInput" placeholder="YYYY-MM-DD"> 
+                  </div>   
+                    <div class="container">
+                        <label for="sla1">SLA 1:</label>
+                        <input type="text" id="sla1" class="sla-input" name="sla1">
+                    </div>
+                    <div class="container">
+                        <label for="sla1">SLA 2:</label>
+                        <input type="text" id="sla1" class="sla-input" name="sla1">
+                    </div>
+                    <div class="container">
+                        <label for="sla1">SLA 3:</label>
+                        <input type="text" id="sla1" class="sla-input" name="sla1">
+                    </div>
+                    <div class="container">
+                        <label for="sla1">SLA 4:</label>
+                        <input type="text" id="sla1" class="sla-input" name="sla1">
+                    </div>
+                    <div class="container">
+                        <label for="sla1">SLA 5:</label>
+                        <input type="text" id="sla1" class="sla-input" name="sla1">
+                    </div>
+
+                    <div class="container">
+                        <button type="button" class="page-option" onclick="saveInput()">Save</button>
+                        <button type="button" class="page-option2" onclick="clearInput()">Clear</button>
+                        <button type="button" class="page-option3" onclick="exitPage()">Exit</button>
+                    </div>
+                           
+                    </div>
+                <!-- Main content goes here -->
+            </div>
+        </div>
+    </div>
+    <script src="sla entry.js"></script>
+</body>
+</html>
+        
+        
+        
+      
+    
