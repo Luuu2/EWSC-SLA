@@ -1,9 +1,4 @@
 
-
-
-
-
-
 function myFunction(x) {
     x.classList.toggle("change");
   }
@@ -35,7 +30,6 @@ function toggleDropdown() {
         dropdown.style.display = "block";
     }
 }
-
 // Add event listener to the document
 document.addEventListener("click", handleClickOutside);
 document.addEventListener("click", function(event) {
@@ -44,6 +38,10 @@ document.addEventListener("click", function(event) {
     if (!dropdown.contains(event.target) && !dropdownBtn.contains(event.target)) {
         dropdown.style.display = "none";
     }
+});
+
+document.getElementById('dateInput').addEventListener('change', function() {
+    console.log('Selected date: ' + this.value);
 });
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -66,36 +64,42 @@ document.addEventListener('DOMContentLoaded', function() {
         usernameBox.style.display = 'flex';
     }
 });
-// Displays SLAs From previous page
-document.addEventListener('DOMContentLoaded', () => {
-    for (let i = 1; i <= 5; i++) {
-        document.getElementById(`display-sla${i}`).textContent = localStorage.getItem(`sla${i}`) || 'N/A';
+
+function saveInput() {
+    if (confirm('Do you want to save the inputs?')) {
+        const dateInput = document.getElementById('dateInput').value;
+        const sla1 = document.getElementById('sla1').value;
+        const sla2 = document.getElementById('sla2').value;
+        const sla3 = document.getElementById('sla3').value;
+        const sla4 = document.getElementById('sla4').value;
+        const sla5 = document.getElementById('sla5').value;
+
+        localStorage.setItem('dateInput', dateInput);
+        localStorage.setItem('sla1', sla1);
+        localStorage.setItem('sla2', sla2);
+        localStorage.setItem('sla3', sla3);
+        localStorage.setItem('sla4', sla4);
+        localStorage.setItem('sla5', sla5);
+
+        alert('Inputs saved successfully.');
     }
-});
+}
 
-// dropdown funtionality
-document.addEventListener('DOMContentLoaded', function() {
-    var dropdown = document.querySelector('.dropdown');
-    var dropdownList = document.querySelector('.dropdown-list');
-    
-    dropdown.addEventListener('click', function(event) {
-        dropdownList.style.display = dropdownList.style.display === 'block' ? 'none' : 'block';
-        event.stopPropagation();
-    });
+function clearInput() {
+    if (confirm('Do you want to clear all inputs?')) {
+        document.getElementById('dateInput').value = '';
+        document.getElementById('sla1').value = '';
+        document.getElementById('sla2').value = '';
+        document.getElementById('sla3').value = '';
+        document.getElementById('sla4').value = '';
+        document.getElementById('sla5').value = '';
 
-    // Hide the dropdown list when clicking outside of it
-    document.addEventListener('click', function(event) {
-        if (!dropdown.contains(event.target) && !dropdownList.contains(event.target)) {
-            dropdownList.style.display = 'none';
-        }
-    });
+        alert('All inputs cleared.');
+    }
+}
 
-    // Handle selection
-    var dropdownItems = document.querySelectorAll('.dropdown-list li');
-    dropdownItems.forEach(function(item) {
-        item.addEventListener('click', function() {
-            document.querySelector('.text').innerText = this.innerText;
-            dropdownList.style.display = 'none';
-        });
-    });
-});
+function exitPage() {
+    if (confirm('Do you want to exit to the login page?')) {
+        window.location.href = 'login.html';
+    }
+}

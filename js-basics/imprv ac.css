@@ -96,6 +96,7 @@ html, body {
     background-color: #85c3fd;
 }
 
+/*username-box styles*/
 .username-box {
     position: absolute;
     top: 20px;
@@ -132,6 +133,7 @@ h3 {
 }
 
 
+/*table styles*/
 .col1 {width: 300px;} 
 .col2 { width: 60px; }
 .col3 { width: 300px; }
@@ -142,7 +144,7 @@ h3 {
 .row, .row2,.row3,.row4,.row5{
     border-bottom: none;
     border-right: none;
-    height: 50px;
+    height: 80px;
 }
 
 .hrow{
@@ -155,3 +157,132 @@ h3 {
     border-left: none;
     border-right: none ;
 }
+
+.center-cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dropdown-container {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown {
+    width: 6px;
+    height: 6px;
+    border-left: 2px solid black;
+    border-bottom: 2px solid black;
+    transform: rotate(315deg);
+    position: absolute;
+    bottom: 8px; /* Adjust as necessary to position the arrow */
+    right: 5px;
+    cursor: pointer;
+
+}
+
+.dropdown-list {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    border: 1px solid #706868;
+    border-radius: 5px;
+    list-style: none;
+    padding: 0;
+    margin: 5px 0 0 0;
+    z-index: 1;
+}
+
+.dropdown-list li {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.dropdown-list li:hover {
+    background-color: #f1f1f1;
+}
+
+.box {
+    display: flex;
+    background-color: #ffffff;
+    border: 1px solid #706868;
+    border-radius: 5px;
+    padding: 3px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100px; /* Minimize width to fit content */
+    position: relative;
+    height: min-content; /* Minimize height to fit content */
+    max-width: 100px; /* Max width to fit content */
+    margin-top: 70px;
+    margin-bottom:60px;
+}
+.input-field{
+    
+}
+.text {
+    margin-right: 10px;
+    font-size: small;
+    align-items: left;
+
+}
+
+.textarea-field {
+    width: 100%; /* Full width of its container */
+    height: 100px; /* Height of the textarea */
+    padding: 10px; /* Padding inside the textarea */
+    border: 1px solid #ccc; /* Border styling */
+    border-radius: 5px; /* Rounded corners */
+    font-family: Arial, sans-serif; /* Font family */
+    font-size: 14px; /* Font size */
+    resize: vertical; /* Allow only vertical resizing */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    margin-top: 10px; /* Margin at the top */
+}
+
+
+/* page option styles*/
+.page-option,.page-option2 , .page-option3{
+    background-color: #08ca38;
+    color: #fff;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 3px;
+    margin: 10px 0 0 0;
+    margin-top: 50px;
+    margin-right:70px ;
+    display: flex;
+    justify-content: space-between;
+    
+}
+.container1{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+
+.page-option2{
+    background-color: #0074D9;
+} 
+
+.page-option3{
+    background-color: #f51e1e; 
+}
+.page-option:hover{
+    background-color: #85c3fd;
+}
+
+.page-option2:hover{
+    background-color: #85c3fd;
+}
+
+.page-option3:hover{
+    background-color: #e21709;
+}
+
+
+
