@@ -1217,8 +1217,126 @@ h3 {
     <script src="sla entry.js"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+function myFunction(x) {
+    x.classList.toggle("change");
+  }
+
+  function toggleMenu() {
+    var menu = document.getElementById("menu");
+    if (menu.style.display === "block") {
+        menu.style.display = "none";
+    } else {
+        menu.style.display = "block";
+    }
+}
+
+// Function to hide the menu when clicking outside of it
+function handleClickOutside(event) {
+    var menu = document.getElementById("menu");
+    var menuIcon = document.querySelector(".menu-icon");
+    if (!menu.contains(event.target) && !menuIcon.contains(event.target)) {
+        menu.style.display = "none";
+    }
+}
+
+
+    // Handle login form submission
+    const loginForm = document.getElementById('loginForm');
+    if (loginForm) {
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            localStorage.setItem('username', username); // Store username in localStorage
+            window.location.href = 'dashboard.html'; // Redirect to dashboard or next page
+        });
+    }
+
+    // Display username or default message on subsequent pages
+    const username = localStorage.getItem('username') || 'Guest'; // Change 'Guest' to your desired default message
+    const usernameBox = document.getElementById('usernameBox');
+    if (usernameBox) {
+        usernameBox.textContent = username; // Only display the username or "Guest"
+        usernameBox.style.display = 'flex';
+    }
+    
+// Displays SLAs From previous page
+document.addEventListener('DOMContentLoaded', () => {
+    for (let i = 1; i <= 5; i++) {
+        document.getElementById(`display-sla${i}`).textContent = localStorage.getItem(`sla${i}`) || 'N/A';
+    }
+});
+
+//dropdown funtionality//
+document.addEventListener('DOMContentLoaded', function() {
+    var dropdown = document.querySelector('.dropdown');
+    var dropdownList = document.querySelector('.dropdown-list');
+    
+    dropdown.addEventListener('click', function(event) {
+        dropdownList.style.display = dropdownList.style.display === 'block' ? 'none' : 'block';
+        event.stopPropagation();
+    });
+
+    // Hide the dropdown list when clicking outside of it
+    document.addEventListener('click', function(event) {
+        if (!dropdown.contains(event.target) && !dropdownList.contains(event.target)) {
+            dropdownList.style.display = 'none';
+        }
+    });
+
+    // Handle selection
+    var dropdownItems = document.querySelectorAll('.dropdown-list li');
+    dropdownItems.forEach(function(item) {
+        item.addEventListener('click', function() {
+            document.querySelector('.text').innerText = this.innerText;
+            dropdownList.style.display = 'none';
+        });
+    });
+});
         
         
-        
-      
+document.addEventListener('DOMContentLoaded', function() {
+    // Dropdown functionality
+    var dropdown = document.querySelector('.dropdown');
+    var dropdownList = document.querySelector('.dropdown-list');
+    
+    dropdown.addEventListener('click', function(event) {
+        dropdownList.style.display = dropdownList.style.display === 'block' ? 'none' : 'block';
+        event.stopPropagation();
+    });
+
+    // Hide the dropdown list when clicking outside of it
+    document.addEventListener('click', function(event) {
+        if (!dropdown.contains(event.target) && !dropdownList.contains(event.target)) {
+            dropdownList.style.display = 'none';
+        }
+    });
+
+    // Handle selection
+    var dropdownItems = document.querySelectorAll('.dropdown-list li');
+    dropdownItems.forEach(function(item) {
+        item.addEventListener('click', function() {
+            document.querySelector('.text').innerText = this.innerText;
+            dropdownList.style.display = 'none';
+        });
+    });   
+    .textarea-field {
+
+        width: 20%;
+        padding: 20px;
+        border: 1px solid #020202;
+        border-radius: 6px;
+        box-shadow: 2px 2px 5px rgba(12, 94, 161, 0.1);
+        outline: none;
+        font-size: 12px;
+        margin-top:20px;
+        margin-left: 10PX;
+    }
     

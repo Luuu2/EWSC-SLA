@@ -5,6 +5,8 @@ body {
     font-family: Arial, sans-serif;
     display: flex;
     height: 100vh;
+    flex-direction: column; /* Change to column to accommodate header-row */
+    align-items: flex-start; /* Align items to the start to keep headers aligned with containers */
 }
 
 .wrapper {
@@ -30,7 +32,7 @@ body {
     border: 1px solid #000;   /* Black borders */
     padding: 0;
     box-sizing: border-box;
-     
+     border-bottom: none;
 }
 
 .main-content {
@@ -194,6 +196,24 @@ h2 {
     background-color: #85c3fd;
 }
 
+/*text field hearder*/
+
+.header-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+margin-top: 30px;
+    margin-bottom: 2px; /* Add some space between the header row and the first container */
+    padding: 0 20px; /* Align header row with containers */
+}
+
+.header-item {
+    flex: 1;
+    font-weight: bold;
+    text-align: center;
+   
+}
+
 .spacing {
     margin-top: 20px;
 }
@@ -209,24 +229,36 @@ h2 {
 }
 
 .date-input:focus {
-    border-color: #000000;
+    border-color:#0fa7ff;
     box-shadow: 0 0 5px rgba(117, 167, 243, 0.5);
 }
 
-.sla-input {
-    width: 70%;
-    padding: 15px;
-    border: 1px solid #020202;
+
+.textarea-field:focus {
+    border-color: #0fa7ff;
+    box-shadow: 0 0 5px rgba(117, 167, 243, 0.5);
+}
+
+.container {
+    display: flex;
+    align-items: center; /* Vertically center the label with the textareas */
+    margin-bottom: 20px; /* Add some space between containers */
+}
+
+.container label {
+    margin-right: 10px; /* Space between the label and textareas */
+    font-weight: bold;
+    flex-shrink: 0; /* Prevent the label from shrinking */
+}
+
+.textarea-field {
+    flex-grow: 1; /* Allow textareas to take the remaining space */
+    margin: 0 5px; /* Add some space between textareas */
+    padding: 10px;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    box-shadow: 2px 2px 5px rgba(12, 94, 161, 0.1);
-    outline: none;
-    font-size: 12px;
-    margin-top: 20px;
-}
-
-.sla-input:focus {
-    border-color: #000000;
-    box-shadow: 0 0 5px rgba(117, 167, 243, 0.5);
+    resize: vertical; /* Allow vertical resizing */
+    height: 50px;
 }
 
 label{
