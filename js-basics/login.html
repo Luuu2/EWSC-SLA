@@ -13,16 +13,16 @@
     <div class="background-image"></div>
 
     <header>
+      <h1> Welcome To EWSC SLA Rating</h1>
       <div class="logo">
         <img src="download.jpg" alt="ewsc logo">
       </div>
     </header>
 
-    <h1> Welcome To EWSC SLA Rating</h1>
    
     <div class="container">
     
-      <form action="/login" method="post">
+      <form onsubmit="return handleFormSubmit(event)">
       <label for="username">Username:</label>
       <input type="text" id="username" name="username" required>
       <label for="password">Password:</label>
