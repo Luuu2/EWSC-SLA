@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="ConsolRept.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="side-panel">
+            <header></header>
+            <div class="menu-container">
+                <div class="menu-icon" onclick="toggleMenu()">
+                    ☰
+                    <span class="menu-text">Menu</span>
+                </div>
+                <ul id="menu" class="menu-list">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="username-box" id="usernameBox">
+                <p>Guest</p>
+            </div>
+
+            <header class="main-header">
+                <h3>Consolidation Reports</h3>
+            </header>
+
+            <button class="dropdown-btn" onclick="toggleDropdown()">Select Department</button>
+            <ul id="department-dropdown" class="dropdown-list">
+                <li><a href="#hr">Human Resources</a></li>
+                <li><a href="#finance">Finance</a></li>
+                <li><a href="#it">Information Communication Technology</a></li>
+                <li><a href="#marketing">Customer Experience</a></li>
+                <li><a href="#marketing">Business Intelligence</a></li>
+            </ul>
+            <div>
+                <button type="button" class="spacing" onclick="document.getElementById('dateInput').focus();">QRT Date</button>
+                <input type="date" id="dateInput" class="dateInput" placeholder="YYYY-MM-DD">
+            </div>
+
+            <div class="container1">
+                <button type="button" class="page-option" onclick="saveInput()">Submit</button>
+            </div>
+
+            <button class="dropdown-btn" onclick="toggleDropdown()">Avarage Departmental SLA Score</button>
+            <ul id="department-dropdown" class="dropdown-list">
+                <li><a href="#hr">Human Resources</a></li>
+                <li><a href="#finance">Finance</a></li>
+                <li><a href="#it">Information Communication Technology</a></li>
+                <li><a href="#marketing">Customer Experience</a></li>
+                <li><a href="#marketing">Business Intelligence</a></li>
+            </ul>
+            
+        </div>
+    </div>
+
+    <script>
+      
+    </script>
+</body>
+</html>

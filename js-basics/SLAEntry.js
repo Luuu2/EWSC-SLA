@@ -12,6 +12,23 @@ function myFunction(x) {
     }
 }
 
+// function to save service level and redirict to rating page//
+function saveServiceLevels() {
+    const serviceLevel1 = document.getElementById('service-level1').value;
+    const serviceLevel2 = document.getElementById('service-level2').value;
+    const serviceLevel3 = document.getElementById('service-level3').value;
+    const serviceLevel4 = document.getElementById('service-level4').value;
+    const serviceLevel5 = document.getElementById('service-level5').value;
+
+    // Save service levels to localStorage
+    localStorage.setItem('serviceLevel1', serviceLevel1);
+    localStorage.setItem('serviceLevel2', serviceLevel2);
+    localStorage.setItem('serviceLevel2', serviceLevel3);
+    localStorage.setItem('serviceLevel2', serviceLevel4);
+    localStorage.setItem('serviceLevel2', serviceLevel5);
+    // Redirect to the rating page
+    window.location.href = 'SLARating.html';
+}
 // Function to hide the menu when clicking outside of it
 function handleClickOutside(event) {
     var menu = document.getElementById("menu");

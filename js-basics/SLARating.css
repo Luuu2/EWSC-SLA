@@ -126,10 +126,19 @@ h3 {
     color: #0b5daa;
     margin-bottom: 20px;
     border-bottom: 1px solid #ddd;
-    padding-bottom: 10px;
+    padding-bottom: 5px;
     text-align: center;
     align-self: center;
+    margin-bottom: 50px;
 }
+
+
+.label{
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
 .sla-container {
     display: flex;
     flex-direction: column;
@@ -164,6 +173,18 @@ h3 {
     width: 60%;
     
 }
+.sla-input2 {
+    padding: 30px;
+
+    background-color: #ffffff;
+    border: 1px solid #706868;
+    border-radius: 5px;
+    margin-bottom: 0px;
+    width: 60%;
+    
+
+}
+
 
 .box {
     display: flex;
@@ -178,6 +199,7 @@ h3 {
     position: relative; 
     height: min-content; /* Minimize height to fit content */
     margin-right: 100px;
+    margin-top: 50px;
 }
 
 .text {
@@ -213,7 +235,7 @@ h3 {
     margin-top: 10px;
     width: 480px;
     text-align: left;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
 }
 
 .dropdown-btn:hover {
@@ -229,6 +251,7 @@ h3 {
     margin:10px 0 0 0;
     width: 200px;
     position: absolute;
+  
 }
 
 .dropdown-list li {

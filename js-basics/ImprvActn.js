@@ -82,3 +82,25 @@ function myFunction(x) {
 
 // Add event listener for clicks outside the menu
 document.addEventListener('click', handleClickOutside);
+
+
+// Function to toggle the department dropdown
+function toggleDropdown() {
+    var dropdown = document.getElementById("department-dropdown");
+    if (dropdown.style.display === "block") {
+        dropdown.style.display = "none";
+    } else {
+        dropdown.style.display = "block";
+    }
+}
+
+
+// Add event listener to the document
+document.addEventListener("click", handleClickOutside);
+document.addEventListener("click", function(event) {
+    var dropdown = document.getElementById("department-dropdown");
+    var dropdownBtn = document.querySelector(".dropdown-btn");
+    if (!dropdown.contains(event.target) && !dropdownBtn.contains(event.target)) {
+        dropdown.style.display = "none";
+    }
+});
