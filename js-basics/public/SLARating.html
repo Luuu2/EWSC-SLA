@@ -1,0 +1,180 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="SLARating.css">
+</head>
+<body>
+
+
+         <div class="wrapper">
+        <div class="side-panel">
+            <header></header>
+            <div class="menu-container">
+                <div class="menu-icon" onclick="toggleMenu()">
+                    ☰
+                    <span class="menu-text">Menu</span>
+                </div>
+                <ul id="menu" class="menu-list">
+                    <li><a href="SLAEntry.html">Home</a></li>
+                    <li><a href="SLARating.html">Rate SLAs</a></li>
+                    <li><a href="CustStats.html">Customer Status</a></li>
+                    <li><a href="ImprvActn.html">Manager Status</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="username-box" id="usernameBox"></div>
+            <h3>Rate SLAs</h3>
+
+            <button class="dropdown-btn" onclick="toggleDropdown()">Select Department</button>
+            <ul id="department-dropdown" class="dropdown-list">
+                <li><a href="#hr">Human Resources</a></li>
+                <li><a href="#finance">Finance</a></li>
+                <li><a href="#it">Information Communication Technology</a></li>
+                <li><a href="#marketing">Customer Experience</a></li>
+                <li><a href="#marketing">Business Intelligence</a></li>
+            </ul>
+
+
+
+
+            <div class="sla-row">
+                <div class="sla-item">
+                    <label for="display-sla2">SLA1:</label>
+                    <span id="display-sla1" class="sla-input"></span>
+                </div>
+                  <div class="sla-item">
+                    <label for="display-sla1">Service Level:</label>
+                    <span id="display-service-level1" class="sla-input2"></span>
+                </div>
+
+                <div class="rating-row">
+                <label for="box" class="label">Measurement:</label>
+                <div class="box">
+                    <div class="text">Rating</div>
+                        <div class="dropdown"></div>
+                    </div>
+                </div>
+                <div class="comment-section">
+                    <label for="comment1" class="comment-label">Reason for rating:</label>
+                    <input type="text" id="comment1" class="comment-input" placeholder="Enter your comment here">
+                </div>
+            </div>
+           
+                
+     
+            
+            <div class="sla-row">
+                <div class="sla-item">
+                    <label for="display-sla2">SLA 2:</label>
+                    <span id="display-sla2" class="sla-input"></span>
+                </div>
+                  <div class="sla-item">
+                    <span id="display-service-level2" class="sla-input2"></span>
+                </div>
+                <div class="box">
+                    <div class="rating-row">
+                        <div class="text">Rating</div>
+                        <div class="dropdown"></div>
+                    </div>
+            </div>
+            <div class="comment-section">
+                <label for="comment2" class="comment-label">Reason for rating:</label>
+                <input type="text" id="comment2" class="comment-input" placeholder="Enter your comment here">
+            </div>
+        </div>
+                
+                
+            
+            <div class="sla-row">
+                <div class="sla-item">
+                    <label for="display-sla3">SLA 3:</label>
+                    <span id="display-sla3" class="sla-input"></span>
+                </div>
+                <div class="sla-item">
+                    <span id="display-service-level3" class="sla-input2"></span>
+                </div>
+                <div class="box">
+                    <div class="rating-row">
+                        <div class="text">Rating</div>
+                        <div class="dropdown"></div>
+                    </div>
+                </div>
+                <div class="comment-section">
+                    <label for="comment3" class="comment-label">Reason for rating:</label>
+                    <input type="text" id="comment3" class="comment-input" placeholder="Enter your comment here">
+                </div>
+            </div>
+
+
+             
+            
+            <div class="sla-row">
+                <div class="sla-item">
+                    <label for="display-sla4">SLA 4:</label>
+                    <span id="display-sla4" class="sla-input"></span>
+                </div>
+                <div class="sla-item">
+                    <span id="display-service-level4" class="sla-input2"></span>
+                </div>
+                <div class="box">
+                    <div class="rating-row">
+                        <div class="text">Rating</div>
+                        <div class="dropdown"></div>
+                    </div>
+                </div>
+                <div class="comment-section">
+                    <label for="comment4" class="comment-label">Reason for rating:</label>
+                    <input type="text" id="comment4" class="comment-input" placeholder="Enter your comment here">
+                </div>
+            </div>
+         
+            
+            <div class="sla-row">
+                <div class="sla-item">
+                    <label for="display-sla5">SLA 5:</label>
+                    <span id="display-sla5" class="sla-input"></span>
+                </div>
+                <div class="sla-item">
+                    <span id="display-service-level5" class="sla-input2"></span>
+                </div>
+                <div class="box">
+                    <div class="rating-row">
+                        <div class="text">Rating</div>
+                        <div class="dropdown"></div>
+                    </div>
+                </div>
+                <div class="comment-section">
+                    <label for="comment5" class="comment-label">Reason for rating:</label>
+                    <input type="text" id="comment5" class="comment-input" placeholder="Enter your comment here">
+                </div>
+            </div>
+            
+            <div class="container2">
+                <button type="button" class="page-option" onclick="saveInput()">Save</button>
+                <button type="button" class="page-option2" onclick="clearInput()">Clear</button>
+                <button type="button" class="page-option3" onclick="exitPage()">Exit</button>
+            </div>
+           
+           
+          
+
+               
+                       
+            
+            </div>
+        </div>
+    </div>
+  
+
+   
+
+    <script src="JsConsole.js"></script>
+</body>
+</html>
