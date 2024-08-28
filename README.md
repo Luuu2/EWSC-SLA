@@ -1,4 +1,10 @@
-Cust stat= internal customer satus page. 
-Imprv ac = managers status page. 
-Im still going to make few perfections on some other pages. 
-I havenot yet started on the dashboard maybe it'll be done by tommorow. 
+### Progress
+-> Completed database
+-> Authentication, password hashing, admin accounts
+-> Completed SLA entry
+-> Started SLA rating
+
+### Suggestions:
+-> Limit each department to add only 5 SLAs to the database
+-> Allow manager to edit department SLA after successfully adding them
+-> Missing rating values, ambiguous "Service Level" field??
