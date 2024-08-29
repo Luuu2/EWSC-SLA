@@ -1,6 +1,6 @@
 from django import forms
 
-from core.models import SlaEntry, SlaRating
+from core.models import SlaEntry, SlaRating, SlaImprovementPlanEntry, SlaCustomerStatusEntry
 
 
 class CreateSlaEntryItemForm(forms.ModelForm):
@@ -20,4 +20,16 @@ class CreateSlaEntryForm(forms.Form):
 class CreateSlaRatingForm(forms.ModelForm):
     class Meta:
         model = SlaRating
-        exclude = []
+        exclude = ['sla', ]
+
+
+class SlaImprovementPlanEntryForm(forms.ModelForm):
+    class Meta:
+        model = SlaImprovementPlanEntry
+        exclude = ['rating']
+
+
+class SlaCustomerStatusEntryForm(forms.ModelForm):
+    class Meta:
+        model = SlaCustomerStatusEntry
+        exclude = ['improvement_plan']

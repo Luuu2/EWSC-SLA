@@ -1,3 +1,5 @@
+{% load static %}
+
 <nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
     <div class="px-3 py-3 lg:px-5 lg:pl-3">
         <div class="flex items-center justify-between">
@@ -14,7 +16,7 @@
                 </button>
 
                 <a href="/" class="flex ms-2 md:me-24">
-                    <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 me-3" alt="FlowBite Logo"/>
+                    <img src="{% static "web/images/logo.jpg" %}" class="h-8 me-3" alt="FlowBite Logo"/>
                     <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">EWSC SLA App</span>
                 </a>
 
@@ -93,7 +95,7 @@
             </li>
             <li>
                 <a href="{% url 'web:sla-entry' %}"
-                   class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group {% if request.path == '/sla-entry' %}bg-gray-100{% endif %}">
+                   class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group {% if request.path == '/sla-entry/' %}bg-gray-100{% endif %}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                          class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900">
@@ -109,7 +111,7 @@
             </li>
             <li>
                 <a href="{% url 'web:rate-sla' %}"
-                   class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group {% if request.path == '/rate-sla' %}bg-gray-100{% endif %}">
+                   class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group {% if request.path == '/rate-sla/' %}bg-gray-100{% endif %}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                          class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 ">
@@ -121,8 +123,8 @@
                 </a>
             </li>
             <li>
-                <a href="#"
-                   class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group {% if request.path == '/customer-status' %}bg-gray-100{% endif %}">
+                <a href="{% url 'web:customer-status-select' %}"
+                   class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group {% if request.path == '/customer-status-select-department/' %}bg-gray-100{% elif "/customer-status-entry/" in request.path %}bg-gray-100{% endif %}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                          class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 ">
@@ -143,8 +145,8 @@
                 </a>
             </li>
             <li>
-                <a href="#"
-                   class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group {% if request.path == '/manager-status' %}bg-gray-100{% endif %}">
+                <a href="{% url 'web:impro-select-dept' %}"
+                   class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group {% if request.path == '/improvement-plan-select-department/' %}bg-gray-100{% elif "/improvement-plan-enter-action/" in request.path %}bg-gray-100{% endif %}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                          class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 ">
@@ -165,8 +167,8 @@
             </li>
 
             <li>
-                <a href="#"
-                   class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                <a href="{% url 'web:export-report' %}"
+                   class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group {% if request.path == '/reports/' %}bg-gray-100{% endif %}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                          class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 ">

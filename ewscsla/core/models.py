@@ -32,8 +32,43 @@ class SlaEntry(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        verbose_name_plural = "Sla entries"
+
 
 class SlaRating(models.Model):
     sla = models.ForeignKey(SlaEntry, on_delete=models.CASCADE, related_name="ratings")
     rating = models.DecimalField(max_digits=65, decimal_places=2)
     reason = models.TextField()
+
+    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+
+class SlaImprovementPlanEntry(models.Model):
+    rating = models.OneToOneField(SlaRating, on_delete=models.CASCADE, related_name="action_plan")
+    improvement_action = models.TextField()
+    due_date = models.DateField(null=False)
+    status = models.IntegerField(
+        choices=(
+            (0, "Resolved"),
+            (1, "Met All"),
+            (2, "In Progress"),
+            (3, "Not Actioned")
+        ), default=3
+    )
+
+
+class SlaCustomerStatusEntry(models.Model):
+    improvement_plan = models.OneToOneField(
+        SlaImprovementPlanEntry, on_delete=models.CASCADE,
+        related_name="customer_status"
+    )
+    status = models.IntegerField(
+        choices=(
+            (0, "Resolved"),
+            (1, "Met All"),
+            (2, "In Progress"),
+            (3, "Not Actioned")
+        ), default=3
+    )
