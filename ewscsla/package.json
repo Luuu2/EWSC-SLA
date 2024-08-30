@@ -5,13 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "npx tailwindcss -i ./web/static/web/input.css -o ./web/static/web/dist/main.css --watch"
+    "dev": "npx tailwindcss -i ./web/static/web/input.css -o ./web/static/web/dist/main.css --watch",
+    "build": "npx tailwindcss -i ./web/static/web/input.css -o ./web/static/web/dist/main.css --minify"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Luuu2/EWSC-SLA.git"
   },
-  "author": "Lusanda Vilane",
+  "author": "Lusanda Vilane, Dlamini Lindelwa",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Luuu2/EWSC-SLA/issues"
