@@ -4,7 +4,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView
 from django.core.paginator import Paginator
 from django.forms import formset_factory
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpRequest
 from django.shortcuts import render, redirect
 from django.utils import timezone
 from openpyxl.workbook import Workbook
@@ -288,3 +288,11 @@ def generate_report_excel(request):
         return response
 
     return render(request, "web/manager/generate-reports.html", {})
+
+
+def application(request: HttpRequest):
+    """
+    The main front-end website, that will bootstrap the ReactJs application.
+    Authentication is implemented on the front-end and also on the APIs.
+    """
+    return render(request, 'web/main.html', {})

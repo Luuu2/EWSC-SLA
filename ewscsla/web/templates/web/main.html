@@ -7,9 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-shrink-to-fit=yes"><!--,initial-scale=0"-->
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>{% block title %}Eswatini Water Services Corporation{% endblock %}</title>
-    <meta name="description"
-          content="{% block description %}EWSC SLA{% endblock %}">
+    <title>Eswatini Water Services Corporation</title>
 
     <link rel="apple-touch-icon" sizes="180x180" href="{% static 'web/favicon/apple-touch-icon.png' %}">
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'web/favicon/favicon-32x32.png' %}">
@@ -18,13 +16,11 @@
 
     <link rel="stylesheet" href="{% static 'web/dist/main.css' %}">
 
-    {% block css %}{% endblock %}
-
 </head>
-<body class="h-screen">
+<body>
+<noscript>You need to enable JavaScript to run this app.</noscript>
+<div id="root"></div>
 
-{% block auth %}{% endblock %}
-
-{% block js %}{% endblock %}
+<script src="{% static 'web/dist/main.bundle.js' %}" type="text/javascript"></script>
 </body>
 </html>

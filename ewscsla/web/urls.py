@@ -1,8 +1,8 @@
-from django.urls import path
+from django.urls import path, re_path
 
 from .views import dashboard, SignInView, logout, sla_entry, rate_sla_entry, improvement_action_plan_enter_action, \
     improvement_action_plan_select_department, customer_status_select_department, customer_status_enter_status, \
-    generate_report_excel
+    generate_report_excel, application
 
 app_name = "web"
 urlpatterns = [
@@ -26,4 +26,8 @@ urlpatterns = [
 
     # missing reports path
     path('reports/', generate_report_excel, name="export-report"),
+
+    # react application
+    re_path(r'^.*', application, name='app'),
+    re_path(r'^.*/$', application, name='_app'),
 ]
