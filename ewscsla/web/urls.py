@@ -28,6 +28,6 @@ urlpatterns = [
     path('reports/', generate_report_excel, name="export-report"),
 
     # react application
-    re_path(r'^.*', application, name='app'),
-    re_path(r'^.*/$', application, name='_app'),
+    # re_path(r'^(?!api).*', application, name='app'),
+    re_path(r'^(?!api).*/$', application, name='_app'),
 ]

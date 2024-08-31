@@ -1,11 +1,18 @@
+from django import forms
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserChangeForm
 
-from .models import AuthUser, SlaEntry, SlaRating, SlaImprovementPlanEntry, SlaCustomerStatusEntry
+from .models import AuthUser, SlaEntry, SlaRating, SlaImprovementPlanEntry, SlaCustomerStatusEntry, Department
 
 
 class AuthUserChangeForm(UserChangeForm):
+    class CustomModelChoiceField(forms.ModelChoiceField):
+        def label_from_instance(self, obj):
+            return f'{obj.name} - DEP'
+
+    department = CustomModelChoiceField(queryset=Department.objects.all())
+
     class Meta(UserChangeForm.Meta):
         model = AuthUser
 
@@ -25,6 +32,12 @@ class AuthUserAdmin(UserAdmin):
 
 
 admin.site.register(AuthUser, AuthUserAdmin)
+
+
+@admin.register(Department)
+class DepartmentAdmin(admin.ModelAdmin):
+    list_per_page = 50
+    list_display = ('name',)
 
 
 @admin.register(SlaEntry)

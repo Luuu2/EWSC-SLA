@@ -9,40 +9,57 @@ DEPARTMENT_CHOICES = (
 )
 
 
+class Department(models.Model):
+    name = models.CharField(max_length=255)
+
+    class Meta:
+        db_table = "core_sla_departments"
+
+
 class AuthUser(AbstractUser):
     """
     User model for company employees
     """
 
-    department = models.IntegerField(
-        choices=DEPARTMENT_CHOICES,
-        default=0
+    #: enforce this field, client side, force the user to select department if this is null
+    department = models.ForeignKey(
+        Department,
+        on_delete=models.SET_NULL,
+        related_name="employees",
+        null=True
     )
 
 
 class SlaEntry(models.Model):
-    department = models.IntegerField(
-        choices=DEPARTMENT_CHOICES,
-    )
-    service_description = models.TextField(max_length=2000, null=False)
-    customer_responsibility = models.TextField(max_length=1500, null=False)
-    service_level = models.TextField(max_length=1500, null=False)
+    department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name="sla_entries")
+    service_description = models.TextField()
+    customer_responsibility = models.TextField()
+    service_level = models.TextField()
     date = models.DateField(null=False)
 
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    added_by = models.ForeignKey(AuthUser, on_delete=models.CASCADE, related_name="sla_entries")
 
     class Meta:
-        verbose_name_plural = "Sla entries"
+        verbose_name_plural = "Sla Entries"
+        db_table = "core_sla_entries"
 
 
 class SlaRating(models.Model):
     sla = models.ForeignKey(SlaEntry, on_delete=models.CASCADE, related_name="ratings")
-    rating = models.DecimalField(max_digits=65, decimal_places=2)
+    rating = models.DecimalField(max_digits=30, decimal_places=2)
     reason = models.TextField()
 
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    rated_by = models.ForeignKey(AuthUser, on_delete=models.CASCADE, related_name="sla_ratings")
+
+    class Meta:
+        db_table = "core_sla_ratings"
+
+    def improvement_action_plan(self):
+        return self.action_plan or None
 
 
 class SlaImprovementPlanEntry(models.Model):
@@ -58,6 +75,9 @@ class SlaImprovementPlanEntry(models.Model):
         ), default=3
     )
 
+    class Meta:
+        db_table = "core_sla_improvement_plan_entries"
+
 
 class SlaCustomerStatusEntry(models.Model):
     improvement_plan = models.OneToOneField(
@@ -72,3 +92,6 @@ class SlaCustomerStatusEntry(models.Model):
             (3, "Not Actioned")
         ), default=3
     )
+
+    class Meta:
+        db_table = "core_sla_customer_status_entries"

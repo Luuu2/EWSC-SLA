@@ -27,13 +27,13 @@ def logout(request):
     return redirect(to="web:home")
 
 
-@login_required(login_url="/login")
+@login_required(login_url="/login/")
 def dashboard(request):
     """Website dashboard, HomePage"""
     return render(request, 'web/index.html', {})
 
 
-@login_required(login_url="/login")
+@login_required(login_url="/login/")
 def sla_entry(request):
     # this form validates the department and the date since it is common for all entries
     form = CreateSlaEntryForm(initial={"department": 0})
@@ -82,7 +82,7 @@ def sla_entry(request):
     })
 
 
-@login_required(login_url="/login")
+@login_required(login_url="/login/")
 def rate_sla_entry(request):
     if request.method == "POST":
         # default to searching
@@ -138,7 +138,7 @@ def rate_sla_entry(request):
     return render(request, "web/customer/rate-entry.html", {})
 
 
-@login_required(login_url="/login")
+@login_required(login_url="/login/")
 def improvement_action_plan_select_department(request):
     if request.method == "POST":
         department = request.POST.get('department', None)
@@ -147,7 +147,7 @@ def improvement_action_plan_select_department(request):
     return render(request, "web/manager/improvement-action-plan--select-department.html", {})
 
 
-@login_required(login_url="/login")
+@login_required(login_url="/login/")
 def improvement_action_plan_enter_action(request, department):
     # department as a string
     try:
@@ -197,7 +197,7 @@ def improvement_action_plan_enter_action(request, department):
         })
 
 
-@login_required(login_url="/login")
+@login_required(login_url="/login/")
 def customer_status_select_department(request):
     if request.method == "POST":
         department = request.POST.get('department', None)
@@ -206,7 +206,7 @@ def customer_status_select_department(request):
     return render(request, "web/customer/customer-status-select-department.html", {})
 
 
-@login_required(login_url="/login")
+@login_required(login_url="/login/")
 def customer_status_enter_status(request, department):
     # department as a string
     try:
@@ -252,7 +252,7 @@ def customer_status_enter_status(request, department):
         })
 
 
-@login_required(login_url="/login")
+@login_required(login_url="/login/")
 def generate_report_excel(request):
     if request.method == "POST":
         today = timezone.now().strftime("%Y-%m-%d %H:%M")
@@ -290,6 +290,7 @@ def generate_report_excel(request):
     return render(request, "web/manager/generate-reports.html", {})
 
 
+@login_required(login_url="/login/")
 def application(request: HttpRequest):
     """
     The main front-end website, that will bootstrap the ReactJs application.
