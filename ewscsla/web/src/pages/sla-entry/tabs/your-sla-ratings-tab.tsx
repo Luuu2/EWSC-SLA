@@ -21,12 +21,15 @@ import {API_GET_SLA_ENTRY_RATINGS_FOR_USER_URL} from "@/app/config";
 import {useState} from "react";
 import {toast} from "@/components/ui/use-toast";
 import {searchSlasFormSchema} from "@/pages/sla-entry";
+import ViewImprovementActionPlanDialog from "@/pages/improvement-action-plan/include/ViewImprovementActionPlanDialog";
+import ImprovementActionPlanDialog from "@/pages/improvement-action-plan/include/ImprovementActionPlanDialog";
+import CustomerStatusDialog from "@/pages/sla-entry/include/CustomerStatusDialog";
 
 type RatingBadgeProps = {
     rating: string;
 }
 
-function RatingBadge({rating}: RatingBadgeProps) {
+export function RatingBadge({rating}: RatingBadgeProps) {
     switch (rating) {
         case "1.00":
             return (
@@ -63,6 +66,36 @@ function RatingBadge({rating}: RatingBadgeProps) {
         default:
             return (
                 <Badge variant={"default"}>Unknown</Badge>
+            )
+    }
+}
+
+export function StatusBadge({status}: { status: number }) {
+    switch (status) {
+        case 0:
+            return (
+                <Badge
+                    className={"border-transparent bg-green-500 text-slate-50 shadow hover:bg-green-500/80 dark:bg-green-900 dark:text-slate-50 dark:hover:bg-green-900/80"}>
+                    Resolved
+                </Badge>
+            )
+        case 1:
+            return (
+                <Badge
+                    className={"border-transparent bg-green-500 text-slate-50 shadow hover:bg-green-500/80 dark:bg-green-900 dark:text-slate-50 dark:hover:bg-green-900/80"}>
+                    Met All
+                </Badge>
+            )
+        case 2:
+            return (
+                <Badge
+                    className={"border-transparent bg-orange-500 text-slate-50 shadow hover:bg-orange-500/80 dark:bg-orange-900 dark:text-slate-50 dark:hover:bg-orange-900/80"}>
+                    In Progress
+                </Badge>
+            )
+        default:
+            return (
+                <Badge variant={"destructive"}>Not Actioned</Badge>
             )
     }
 }
@@ -158,12 +191,15 @@ export default function YourSlaRatingsTab(
 
                     <TableHeader>
                         <TableRow>
-                            <TableHead>SLA</TableHead>
-                            <TableHead className="hidden sm:table-cell">Department</TableHead>
-                            <TableHead className="hidden sm:table-cell">Rating</TableHead>
-                            <TableHead className="hidden md:table-cell">Reason</TableHead>
-                            <TableHead className="hidden md:table-cell">Improvement Plan</TableHead>
-                            <TableHead>Actions</TableHead>
+                            <TableHead className={"border-x border-t w-[25%]"}>SLA</TableHead>
+                            <TableHead className="border-x border-t w-[10%]">Department</TableHead>
+                            <TableHead className="border-x border-t lg:w-[10%]">Rating</TableHead>
+                            <TableHead className="border-x border-t w-[15%]">Reason</TableHead>
+                            <TableHead className="border-x border-t w-[20%]">
+                                Improvement Plan
+                            </TableHead>
+                            <TableHead className="border-x border-t w-[10%]">Customer Status</TableHead>
+                            <TableHead className="border-x border-t w-[10%]">Actions</TableHead>
                         </TableRow>
                     </TableHeader>
 
@@ -174,22 +210,30 @@ export default function YourSlaRatingsTab(
                             Array.isArray(slaRatingEntries) && slaRatingEntries.length >= 1
                                 ? slaRatingEntries.map((rating, index) => (
                                     <TableRow key={index} className={cn(index % 2 === 0 && "bg-accent")}>
-                                        <TableCell className={"align-top"}>{rating?.sla?.service_description}</TableCell>
-                                        <TableCell className="hidden sm:table-cell align-top">
-                                            <Badge className="text-xs text-center" variant="outline">
+                                        <TableCell
+                                            className={"border-x align-top"}>{rating?.sla?.service_description}</TableCell>
+                                        <TableCell className="align-top">
+                                            <Badge className="text-xs" variant="outline">
                                                 {rating?.sla?.department?.name}
                                             </Badge>
                                         </TableCell>
-                                        <TableCell className="hidden sm:table-cell align-top">
+                                        <TableCell className="border-x align-top">
                                             <RatingBadge rating={rating.rating}/>
                                         </TableCell>
-                                        <TableCell className="hidden md:table-cell align-top">
+                                        <TableCell className="border-x align-top">
                                             {rating.reason || "N/A"}
                                         </TableCell>
-                                        <TableCell style={{textWrap: 'nowrap'}} className={"align-top"}>
-                                            {"N/A"}
+                                        <TableCell className={"border-x align-top"}>
+                                            {rating.improvement_action_plan?.improvement_action || "N/A"}
                                         </TableCell>
-                                        <TableCell className={"align-top"}>
+                                        <TableCell className={"border-x align-top"}>
+                                            {
+                                                rating.customer_feedback_status?.status
+                                                    ? <StatusBadge status={rating.customer_feedback_status?.status || 4}/>
+                                                    : "N/A"
+                                            }
+                                        </TableCell>
+                                        <TableCell className={"border-x align-top"}>
                                             <DropdownMenu>
                                                 <DropdownMenuTrigger asChild>
                                                     <Button
@@ -203,16 +247,30 @@ export default function YourSlaRatingsTab(
                                                 </DropdownMenuTrigger>
                                                 <DropdownMenuContent align="end">
                                                     <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                                                    <DropdownMenuItem>Set Customer Status</DropdownMenuItem>
-                                                    <DropdownMenuItem>Edit SLA Rating</DropdownMenuItem>
-                                                    <DropdownMenuItem>Delete SLA Rating</DropdownMenuItem>
+                                                    {
+                                                        rating.improvement_action_plan?.improvement_action
+                                                            ? <>
+                                                                <ViewImprovementActionPlanDialog sla_rating={rating}/>
+                                                                {
+                                                                    rating.customer_feedback_status?.status
+                                                                        ? <CustomerStatusDialog
+                                                                            sla_rating={rating}
+                                                                            isEdit={true}/>
+                                                                        : <CustomerStatusDialog sla_rating={rating}/>
+                                                                }
+                                                            </>
+                                                            : <>
+                                                                <DropdownMenuItem>Edit SLA Rating</DropdownMenuItem>
+                                                                <DropdownMenuItem>Delete SLA Rating</DropdownMenuItem>
+                                                            </>
+                                                    }
                                                 </DropdownMenuContent>
                                             </DropdownMenu>
                                         </TableCell>
                                     </TableRow>
                                 ))
                                 : <TableRow className="bg-accent">
-                                    <TableCell colSpan={7} className={"text-center"}>
+                                    <TableCell colSpan={7} className={"border-x border-t text-center"}>
                                         <div className="text-muted-foreground">
                                             No Data. You have not Rated any SLAs.
                                         </div>

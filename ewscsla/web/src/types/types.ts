@@ -15,6 +15,21 @@ export type SlaEntry = {
     added_by?: string;
 }
 
+export type SlaImprovementPlanAction = {
+    id: number;
+    improvement_action: string;
+    status: number;
+    rating: number;
+    due_date: string;
+}
+
+export type SlaCustomerStatus = {
+    id: number;
+    improvement_plan: number;
+    status: number;
+}
+
+
 export type SlaRatingEntry = {
     id: number;
     sla: SlaEntry;
@@ -23,4 +38,6 @@ export type SlaRatingEntry = {
     reason: string;
     updated_at: string;
     created_at: string;
+    improvement_action_plan: SlaImprovementPlanAction | null;
+    customer_feedback_status: SlaCustomerStatus | null;
 }

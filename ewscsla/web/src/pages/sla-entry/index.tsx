@@ -7,14 +7,14 @@ import axios from "axios";
 import {API_GET_DEPARTMENTS_URL, API_GET_SLA_ENTRIES_BY_DEPARTMENT_URL} from "@/app/config";
 import {toast} from "@/components/ui/use-toast";
 import {z} from "zod";
-import {zodResolver} from "@hookform/resolvers/zod"
-import {useForm} from "react-hook-form"
+import {zodResolver} from "@hookform/resolvers/zod";
+import {useForm} from "react-hook-form";
 import {
     Tabs,
     TabsContent,
     TabsList,
     TabsTrigger,
-} from "@/components/ui/tabs"
+} from "@/components/ui/tabs";
 
 import SlaEntriesTab from "@/pages/sla-entry/tabs/sla-entries-tab";
 import YourSlaRatingsTab from "@/pages/sla-entry/tabs/your-sla-ratings-tab";

@@ -1,9 +1,10 @@
 import {useRoutes} from "react-router";
 import DashboardPage from "@/pages/dashboard";
 import MainLayout from "@/layouts/MainLayout";
-import CategoriesPage from "@/pages/categories";
+import ImprovementActionPlan from "@/pages/improvement-action-plan";
 import SlaEntryPage from "@/pages/sla-entry";
-import {BASE_URL, CATEGORIES_URL, DASHBOARD_URL, ENTER_SLA_URL, RATE_SLA_URL} from "@/app/config";
+import {BASE_URL, IMPROVEMENT_ACTION_PLAN_URL, DASHBOARD_URL, ENTER_SLA_URL, REPORTS_URL} from "@/app/config";
+import Reports from "@/pages/reports";
 
 
 export default function ThemeRoutes() {
@@ -22,8 +23,13 @@ export default function ThemeRoutes() {
             },
 
             {
-                path: CATEGORIES_URL,
-                element: <CategoriesPage/>
+                path: IMPROVEMENT_ACTION_PLAN_URL,
+                element: <ImprovementActionPlan/>
+            },
+
+            {
+                path: REPORTS_URL,
+                element: <Reports/>
             },
         ]
     }])

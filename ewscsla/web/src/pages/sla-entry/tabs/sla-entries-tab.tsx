@@ -81,13 +81,13 @@ export default function SlaEntriesTab(
 
                     <TableHeader>
                         <TableRow>
-                            <TableHead>Service Description</TableHead>
-                            <TableHead className="hidden sm:table-cell">Customer Responsibility</TableHead>
-                            <TableHead className="hidden sm:table-cell">Service Level</TableHead>
-                            <TableHead className="hidden md:table-cell">Department</TableHead>
-                            <TableHead className="hidden md:table-cell">Added By</TableHead>
-                            <TableHead>Date</TableHead>
-                            <TableHead>Actions</TableHead>
+                            <TableHead className="border-x border-t sm:w-[25%]">Service Description</TableHead>
+                            <TableHead className="border-x border-t hidden sm:table-cell sm:w-[25%]">Customer Responsibility</TableHead>
+                            <TableHead className="border-x border-t hidden sm:table-cell sm:w-[15%]">Service Level</TableHead>
+                            <TableHead className="border-x border-t hidden md:table-cell md:w-[10%]">Department</TableHead>
+                            <TableHead className="border-x border-t hidden md:table-cell md:w-[8%]">Added By</TableHead>
+                            <TableHead className="border-x border-t md:w-[9%]">Date</TableHead>
+                            <TableHead className="border-x border-t md:w-[8%]">Actions</TableHead>
                         </TableRow>
                     </TableHeader>
 
@@ -98,23 +98,23 @@ export default function SlaEntriesTab(
                             Array.isArray(slaEntries) && slaEntries.length >= 1
                                 ? slaEntries.map((entry, index) => (
                                     <TableRow key={index} className={cn(index % 2 === 0 && "bg-accent")}>
-                                        <TableCell className={"align-top"}>{entry.service_description}</TableCell>
+                                        <TableCell className={"border-x align-top"}>{entry.service_description}</TableCell>
                                         <TableCell
-                                            className="hidden sm:table-cell align-top">{entry.customer_responsibility}</TableCell>
+                                            className="border-x hidden sm:table-cell align-top">{entry.customer_responsibility}</TableCell>
                                         <TableCell
-                                            className="hidden sm:table-cell align-top">{entry.service_level}</TableCell>
-                                        <TableCell className="hidden md:table-cell text-nowrap align-top">
+                                            className="border-x hidden sm:table-cell align-top">{entry.service_level}</TableCell>
+                                        <TableCell className="border-x hidden md:table-cell text-nowrap align-top">
                                             <Badge className="text-xs text-center" variant="outline">
                                                 {entry.department.name}
                                             </Badge>
                                         </TableCell>
-                                        <TableCell className="hidden md:table-cell align-top">
+                                        <TableCell className="border-x hidden md:table-cell align-top">
                                             {entry.added_by || "N/A"}
                                         </TableCell>
-                                        <TableCell style={{textWrap: 'nowrap'}} className={"align-top"}>
+                                        <TableCell style={{textWrap: 'nowrap'}} className={"border-x align-top"}>
                                             {entry.date}
                                         </TableCell>
-                                        <TableCell className={"align-top"}>
+                                        <TableCell className={"border-x align-top"}>
                                             <DropdownMenu>
                                                 <DropdownMenuTrigger asChild>
                                                     <Button
@@ -137,7 +137,7 @@ export default function SlaEntriesTab(
                                     </TableRow>
                                 ))
                                 : <TableRow className="bg-accent">
-                                    <TableCell colSpan={7} className={"text-center"}>
+                                    <TableCell colSpan={7} className={"border-x text-center"}>
                                         <div className="text-muted-foreground">
                                             No Data. No SLA entries for selected department.
                                         </div>

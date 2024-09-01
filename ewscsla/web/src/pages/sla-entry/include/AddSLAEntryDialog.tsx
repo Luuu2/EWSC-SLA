@@ -106,7 +106,6 @@ export default function AddSLAEntryDialog(props: AddSLAEntryDialogProps) {
                     description: `Failed to add SLA Entry. Each department can have a maximum of 5 SLA.`,
                 })
             } else {
-                // todo: generic error, handle individual errors later
                 toast({
                     variant: "destructive",
                     title: "Uh oh! Something went wrong.",

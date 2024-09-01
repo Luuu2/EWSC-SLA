@@ -1,7 +1,7 @@
 import React from "react";
 import {cn} from "@/lib/utils"
 import {Link, useLocation} from "react-router-dom";
-import {ENTER_SLA_URL, DASHBOARD_URL, CATEGORIES_URL} from "@/app/config";
+import {ENTER_SLA_URL, DASHBOARD_URL, IMPROVEMENT_ACTION_PLAN_URL, REPORTS_URL} from "@/app/config";
 import {Sheet, SheetContent, SheetTrigger} from "@/components/ui/sheet";
 import {Button} from "@/components/ui/button";
 import {Menu, Package2} from "lucide-react";
@@ -17,13 +17,14 @@ const routes = [
         route: "SLA-Entry",
     },
     {
-        url: CATEGORIES_URL,
-        route: "Manager-Status",
+        url: IMPROVEMENT_ACTION_PLAN_URL,
+        route: "Improv.-Act.-Plan",
     },
+
     {
-        url: CATEGORIES_URL,
-        route: "Customer-Status",
-    }
+        url: REPORTS_URL,
+        route: "Reports",
+    },
 ]
 
 export function MainNav({className, ...props}: React.HTMLAttributes<HTMLElement>) {
