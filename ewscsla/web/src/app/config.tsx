@@ -1,10 +1,10 @@
-export const BASE_URL = '/app/';
-export const DASHBOARD_URL = '/app/';
-export const ENTER_SLA_URL = '/app/sla-entry/';
-export const RATE_SLA_URL = '/app/sla-rating/';
-export const IMPROVEMENT_ACTION_PLAN_URL = '/app/improvement-action-plan/';
-export const REPORTS_URL = '/app/reports/';
-export const PROFILE_URL = '/app/profile/';
+export const BASE_URL = '/';
+export const DASHBOARD_URL = '/';
+export const ENTER_SLA_URL = '/sla-entry/';
+export const RATE_SLA_URL = '/sla-rating/';
+export const IMPROVEMENT_ACTION_PLAN_URL = '/improvement-action-plan/';
+export const REPORTS_URL = '/reports/';
+export const PROFILE_URL = '/profile/';
 
 export const API_GET_USER_PROFILE_URL = "/api/profile/";
 export const API_GET_LOGOUT_USER_URL = "/api/logout/";
