@@ -3,6 +3,21 @@ from rest_framework import serializers
 from core.models import Department, SlaEntry, SlaRating, SlaImprovementPlanEntry, SlaCustomerStatusEntry, AuthUser
 
 
+class AuthUserSerializer(serializers.ModelSerializer):
+    class UserDepartmentSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = Department
+            fields = '__all__'
+
+    department = UserDepartmentSerializer(many=False, read_only=True)
+
+    class Meta:
+        model = AuthUser
+        fields = ('id', 'last_login', 'username', 'get_full_name', 'email', 'department', 'initials')
+
+
+# ======================================================================
+
 class DepartmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Department

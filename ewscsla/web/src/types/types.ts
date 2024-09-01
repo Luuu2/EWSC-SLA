@@ -41,3 +41,20 @@ export type SlaRatingEntry = {
     improvement_action_plan: SlaImprovementPlanAction | null;
     customer_feedback_status: SlaCustomerStatus | null;
 }
+
+export type DashboardData = {
+    users: number;
+    sla_entries: number;
+    ratings: number;
+    action_plans: number;
+}
+
+export type UserProfile = {
+    id: number;
+    last_login: string;
+    username: string;
+    get_full_name: string | null;
+    initials: string;
+    email: string | null;
+    department: Department;
+}

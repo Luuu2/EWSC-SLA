@@ -29,6 +29,9 @@ class AuthUser(AbstractUser):
         null=True
     )
 
+    def initials(self):
+        return self.first_name[0].capitalize() if self.first_name else self.username[0].capitalize()
+
 
 class SlaEntry(models.Model):
     department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name="sla_entries")

@@ -9,10 +9,12 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework import generics
+from django.contrib.auth import logout
+from rest_framework.views import APIView
 
 from api.serializers import SlaEntrySerializer, DepartmentSerializer, ListSlaEntrySerializer, ListSlaRatingSerializer, \
-    SlaRatingSerializer, SlaImprovementPlanEntrySerializer, SlaCustomerStatusEntrySerializer
-from core.models import SlaEntry, Department, SlaRating, SlaImprovementPlanEntry, SlaCustomerStatusEntry
+    SlaRatingSerializer, SlaImprovementPlanEntrySerializer, SlaCustomerStatusEntrySerializer, AuthUserSerializer
+from core.models import SlaEntry, Department, SlaRating, SlaImprovementPlanEntry, SlaCustomerStatusEntry, AuthUser
 
 
 class DepartmentViewSet(viewsets.ModelViewSet):
@@ -178,3 +180,52 @@ def generate_report(request):
             'error': 'Failed to generate report',
             'debug': str(error)
         }, status=status.HTTP_400_BAD_REQUEST)
+
+
+# ======================================================================
+
+@api_view(['GET'])
+def dashboard(request):
+    try:
+        users = AuthUser.objects.count()
+        sla_entries = SlaEntry.objects.count()
+        ratings = SlaRating.objects.count()
+        action_plans = SlaImprovementPlanEntry.objects.count()
+
+        return Response({
+            'users': users,
+            'sla_entries': sla_entries,
+            'ratings': ratings,
+            'action_plans': action_plans
+        }, status=status.HTTP_200_OK)
+
+    except Exception as error:
+        return Response({
+            'error': str(error)
+        }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def profile(request):
+    try:
+        user = AuthUserSerializer(instance=request.user)
+        return Response(data=user.data, status=status.HTTP_200_OK)
+
+    except Exception as error:
+        return Response({
+            'error': str(error)
+        }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+# @api_view(['GET'])
+# @permission_classes([IsAuthenticated])
+# def logout(request):
+#     logout(request)
+#     return Response(data={}, status=status.HTTP_200_OK)
+
+
+class Logout(APIView):
+    def get(self, request, format=None):
+        logout(request)
+        return Response(status=status.HTTP_200_OK)

@@ -6,7 +6,9 @@ export const IMPROVEMENT_ACTION_PLAN_URL = '/app/improvement-action-plan/';
 export const REPORTS_URL = '/app/reports/';
 export const PROFILE_URL = '/app/profile/';
 
-
+export const API_GET_USER_PROFILE_URL = "/api/profile/";
+export const API_GET_LOGOUT_USER_URL = "/api/logout/";
+export const API_GET_DASHBOARD_DATA_URL = "/api/dashboard/";
 export const API_GET_DEPARTMENTS_URL = "/api/departments/";
 export const API_GET_SLA_ENTRIES_BY_DEPARTMENT_URL = "/api/sla/";
 export const API_ADD_SLA_ENTRY_FOR_DEPARTMENT_URL = "/api/add-sla/";
