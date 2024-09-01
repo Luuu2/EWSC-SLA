@@ -2,7 +2,8 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
 from api.views import DepartmentViewSet, SlaEntryViewSet, SlaRatingEntryViewSet, add_sla_entry, \
-    UserSlaRatingEntriesView, add_sla_rating_entry, SlaImprovementActionPlanViewSet, SlaCustomerStatusPlanViewSet
+    UserSlaRatingEntriesView, add_sla_rating_entry, SlaImprovementActionPlanViewSet, SlaCustomerStatusPlanViewSet, \
+    generate_report
 
 router = DefaultRouter()
 router.register(r'departments', DepartmentViewSet, basename='departments')
@@ -18,4 +19,6 @@ urlpatterns = [
 
     path('user-sla-ratings/', UserSlaRatingEntriesView.as_view()),
     path('add-sla-rating/', add_sla_rating_entry),
+
+    path('generate-report/', generate_report)
 ]

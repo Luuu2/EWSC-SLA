@@ -1,4 +1,8 @@
 import django_filters
+from django.http import HttpResponse
+from django.utils import timezone
+from openpyxl.workbook import Workbook
+from openpyxl.writer.excel import save_virtual_workbook
 from rest_framework import viewsets, status
 from rest_framework.decorators import permission_classes, api_view, authentication_classes
 from rest_framework.permissions import IsAuthenticated
@@ -125,3 +129,52 @@ class SlaCustomerStatusPlanViewSet(viewsets.ModelViewSet):
     queryset = SlaCustomerStatusEntry.objects.order_by('pk')
     permission_classes = [IsAuthenticated, ]
     serializer_class = SlaCustomerStatusEntrySerializer
+
+
+@api_view(['GET'])
+def generate_report(request):
+    try:
+        today = timezone.now().strftime("%Y_%m_%d_%H_%M")
+
+        workbook = Workbook()
+        worksheet = workbook.active
+
+        worksheet.append(["ESWATINI WATER SERVICES CORPORATION"])
+        worksheet.append([])
+        worksheet.append(["SLA's MONITORING TOOL"])
+
+        worksheet.append([
+            "Internal Service Provider", "Internal Customer", "Report Qrt Date",
+            "Rating", "Reason for rating", "Agreed Improvement Action", "Due Date",
+            "Manager Status (Service Provider)", "Internal Customer Status"
+        ])
+
+        sla_ratings = SlaRating.objects.order_by('updated_at')
+        for rating in sla_ratings:
+            service_provider = rating.sla.department.name
+            customer = rating.rated_by.department.name if (rating.rated_by and rating.rated_by.department) else "N/A"
+            sla_date = rating.sla.date.strftime("%Y-%m-%d")
+            rating_value = str(int(rating.rating))
+            reason = rating.reason
+            action_plan = rating.action_plan.improvement_action if hasattr(rating, 'action_plan') else "N/A"
+            due_date = rating.action_plan.due_date.strftime("%Y-%m-%d") if hasattr(rating, 'action_plan') else "N/A"
+            manager_status = rating.action_plan.get_status_display() if hasattr(rating, 'action_plan') else "N/A"
+            customer_status = rating.customer_status.get_status_display() \
+                if hasattr(rating, 'customer_status') else "N/A"
+
+            worksheet.append([
+                service_provider, customer, sla_date, rating_value, reason, action_plan, due_date, manager_status,
+                customer_status
+            ])
+
+        response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        response['Content-Disposition'] = f'attachment; filename=SLA_REPORT_{today}.xlsx'
+        response.write(save_virtual_workbook(workbook))
+
+        return response
+
+    except Exception as error:
+        return Response({
+            'error': 'Failed to generate report',
+            'debug': str(error)
+        }, status=status.HTTP_400_BAD_REQUEST)

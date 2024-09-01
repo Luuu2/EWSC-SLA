@@ -15,3 +15,4 @@ export const API_GET_SLA_RATING_ENTRIES_FOR_DEPARTMENT_URL = "/api/sla-ratings/"
 export const API_ADD_SLA_ENTRY_RATING_URL = "/api/add-sla-rating/";
 export const API_ADD_SLA_IMPROVEMENT_ACTION_PLAN_URL = "/api/improvement-action-plans/";
 export const API_SLA_CUSTOMER_STATUS_URL = "/api/customer-status/";
+export const API_SLA_GENERATE_REPORT_URL = "/api/generate-report/";
