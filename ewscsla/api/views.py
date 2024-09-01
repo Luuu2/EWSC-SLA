@@ -7,8 +7,8 @@ from rest_framework.response import Response
 from rest_framework import generics
 
 from api.serializers import SlaEntrySerializer, DepartmentSerializer, ListSlaEntrySerializer, ListSlaRatingSerializer, \
-    SlaRatingSerializer
-from core.models import SlaEntry, Department, SlaRating
+    SlaRatingSerializer, SlaImprovementPlanEntrySerializer, SlaCustomerStatusEntrySerializer
+from core.models import SlaEntry, Department, SlaRating, SlaImprovementPlanEntry, SlaCustomerStatusEntry
 
 
 class DepartmentViewSet(viewsets.ModelViewSet):
@@ -60,14 +60,15 @@ def add_sla_entry(request: Request):
 
 # ======================================================================
 
+class SlaRatingFilter(django_filters.FilterSet):
+    department = django_filters.CharFilter(field_name='sla__department', lookup_expr='exact')
+
+    class Meta:
+        model = SlaRating
+        fields = ('department',)
+
+
 class UserSlaRatingEntriesView(generics.ListAPIView):
-    class SlaRatingFilter(django_filters.FilterSet):
-        department = django_filters.CharFilter(field_name='sla__department', lookup_expr='exact')
-
-        class Meta:
-            model = SlaRating
-            fields = ('department',)
-
     permission_classes = [IsAuthenticated, ]
     filterset_class = SlaRatingFilter
     serializer_class = ListSlaRatingSerializer
@@ -81,7 +82,7 @@ class UserSlaRatingEntriesView(generics.ListAPIView):
 class SlaRatingEntryViewSet(viewsets.ModelViewSet):
     queryset = SlaRating.objects.order_by('pk')
     permission_classes = [IsAuthenticated, ]
-    filterset_fields = ['rated_by', ]
+    filterset_class = SlaRatingFilter
 
     def get_serializer_class(self):
         if self.action == 'list' or self.action == 'retrieve':
@@ -108,3 +109,19 @@ def add_sla_rating_entry(request: Request):
         data=form.errors,
         status=status.HTTP_400_BAD_REQUEST
     )
+
+
+# ======================================================================
+
+class SlaImprovementActionPlanViewSet(viewsets.ModelViewSet):
+    queryset = SlaImprovementPlanEntry.objects.order_by('pk')
+    permission_classes = [IsAuthenticated, ]
+    serializer_class = SlaImprovementPlanEntrySerializer
+
+
+# ======================================================================
+
+class SlaCustomerStatusPlanViewSet(viewsets.ModelViewSet):
+    queryset = SlaCustomerStatusEntry.objects.order_by('pk')
+    permission_classes = [IsAuthenticated, ]
+    serializer_class = SlaCustomerStatusEntrySerializer

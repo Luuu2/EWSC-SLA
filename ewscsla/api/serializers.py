@@ -34,9 +34,27 @@ class SlaEntrySerializer(serializers.ModelSerializer):
 
 # ======================================================================
 
+class SlaImprovementPlanEntrySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SlaImprovementPlanEntry
+        fields = "__all__"
+
+
+# ======================================================================
+
+class SlaCustomerStatusEntrySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SlaCustomerStatusEntry
+        fields = "__all__"
+
+
+# ======================================================================
+
 class ListSlaRatingSerializer(serializers.ModelSerializer):
     sla = ListSlaEntrySerializer(many=False, read_only=True)
     rated_by = serializers.SerializerMethodField()
+    improvement_action_plan = SlaImprovementPlanEntrySerializer(many=False, read_only=True)
+    customer_feedback_status = SlaCustomerStatusEntrySerializer(many=False, read_only=True)
 
     class Meta:
         model = SlaRating
@@ -54,18 +72,4 @@ class SlaRatingSerializer(serializers.ModelSerializer):
         model = SlaRating
         fields = "__all__"
 
-
 # ======================================================================
-
-class SlaImprovementPlanEntrySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = SlaImprovementPlanEntry
-        fields = "__all__"
-
-
-# ======================================================================
-
-class SlaCustomerStatusEntrySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = SlaCustomerStatusEntry
-        fields = "__all__"

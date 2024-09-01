@@ -32,6 +32,8 @@ class AuthUserAdmin(UserAdmin):
 
 
 admin.site.register(AuthUser, AuthUserAdmin)
+admin.site.site_header = 'ESWC SLA Administration'  # default: "Django Administration"
+admin.site.site_title = 'Eswatini Water Services Corporation'  # default: "Django site admin"
 
 
 @admin.register(Department)
@@ -61,4 +63,4 @@ class SlaImprovementPlanEntryAdmin(admin.ModelAdmin):
 @admin.register(SlaCustomerStatusEntry)
 class SlaCustomerStatusEntryAdmin(admin.ModelAdmin):
     list_per_page = 50
-    list_display = ('improvement_plan', 'status')
+    list_display = ('rating', 'status')

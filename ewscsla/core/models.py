@@ -59,7 +59,14 @@ class SlaRating(models.Model):
         db_table = "core_sla_ratings"
 
     def improvement_action_plan(self):
-        return self.action_plan or None
+        if hasattr(self, 'action_plan'):
+            return self.action_plan
+        return None
+
+    def customer_feedback_status(self):
+        if hasattr(self, 'customer_status'):
+            return self.customer_status
+        return None
 
 
 class SlaImprovementPlanEntry(models.Model):
@@ -80,8 +87,8 @@ class SlaImprovementPlanEntry(models.Model):
 
 
 class SlaCustomerStatusEntry(models.Model):
-    improvement_plan = models.OneToOneField(
-        SlaImprovementPlanEntry, on_delete=models.CASCADE,
+    rating = models.OneToOneField(
+        SlaRating, on_delete=models.CASCADE,
         related_name="customer_status"
     )
     status = models.IntegerField(
