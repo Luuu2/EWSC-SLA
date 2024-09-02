@@ -7,7 +7,7 @@ import {cn} from "@/lib/utils";
 import {Badge} from "@/components/ui/badge";
 import {
     DropdownMenu,
-    DropdownMenuContent,
+    DropdownMenuContent, DropdownMenuItem,
     DropdownMenuLabel,
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
@@ -261,6 +261,7 @@ export default function YourSlaRatingsTab(
                                                             </>
                                                             : <>
                                                                 <EditSlaRatingEntryDialog rating={rating}/>
+                                                                <DropdownMenuItem>Delete SLA</DropdownMenuItem>
                                                             </>
                                                     }
                                                 </DropdownMenuContent>

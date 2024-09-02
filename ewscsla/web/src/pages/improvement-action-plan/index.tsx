@@ -20,7 +20,7 @@ import {Department, SlaRatingEntry} from "@/types/types";
 import axios from "axios";
 import {
     API_GET_DEPARTMENTS_URL,
-    API_GET_SLA_RATING_ENTRIES_FOR_DEPARTMENT_URL
+    API_SLA_RATING_ENTRIES_FOR_DEPARTMENT_URL
 } from "@/app/config";
 import {toast} from "@/components/ui/use-toast";
 import {searchSlasFormSchema} from "@/pages/sla-entry";
@@ -56,7 +56,7 @@ export default function ImprovementActionPlan() {
     const [slaRatingEntries, setSlaRatingEntries] = useState<SlaRatingEntry[]>([]);
 
     async function onSearchSlaRatingEntries(values: z.infer<typeof searchSlasFormSchema>) {
-        await axios.get(API_GET_SLA_RATING_ENTRIES_FOR_DEPARTMENT_URL, {
+        await axios.get(API_SLA_RATING_ENTRIES_FOR_DEPARTMENT_URL, {
             params: {
                 'department': values.department
             }

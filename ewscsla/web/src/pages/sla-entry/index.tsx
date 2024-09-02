@@ -1,6 +1,6 @@
 import {Button} from "@/components/ui/button";
 import {File} from "lucide-react";
-import AddSLAEntryDialog from "@/pages/sla-entry/include/AddSLAEntryDialog";
+import AddSlaEntryDialog from "@/pages/sla-entry/include/AddSlaEntryDialog";
 import {useEffect, useState} from "react";
 import {Department, SlaEntry} from "@/types/types";
 import axios from "axios";
@@ -87,7 +87,7 @@ export default function SlaEntryPage() {
                     Export
                   </span>
                         </Button>
-                        <AddSLAEntryDialog departments={departments}/>
+                        <AddSlaEntryDialog departments={departments}/>
                     </div>
                 </div>
 
