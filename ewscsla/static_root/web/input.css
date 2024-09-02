@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer components {
+    .label-default {
+        @apply block mb-2 text-sm font-medium text-gray-900;
+    }
+
+    .textarea-default {
+        @apply block w-full min-h-max p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500;
+    }
+
+    .textarea-error {
+        @apply block w-full min-h-max p-4 text-red-900 border border-red-300 rounded-lg bg-red-50 text-base focus:ring-red-500 focus:border-red-500;
+    }
+
+    .label-error {
+        @apply block mb-2 text-sm font-medium text-red-700;
+    }
+
+    .input-default {
+        @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5;
+    }
+
+    .input-error {
+        @apply bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5;
+    }
+
+    .dropdown-default {
+        @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5;
+    }
+
+    .dropdown-error {
+        @apply bg-red-50 border border-red-500 text-red-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5;
+    }
+
+    .previous-btn {
+        @apply flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700;
+    }
+
+    .previous-btn-disabled {
+        @apply flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 cursor-not-allowed;
+    }
+
+    .next-btn {
+        @apply flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700;
+    }
+
+    .next-btn-disabled {
+        @apply next-btn cursor-not-allowed;
+    }
+}
