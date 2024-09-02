@@ -5,6 +5,7 @@ import ImprovementActionPlan from "@/pages/improvement-action-plan";
 import SlaEntryPage from "@/pages/sla-entry";
 import {BASE_URL, IMPROVEMENT_ACTION_PLAN_URL, DASHBOARD_URL, ENTER_SLA_URL, REPORTS_URL} from "@/app/config";
 import Reports from "@/pages/reports";
+import NotFoundLayout from "@/layouts/NotFoundLayout";
 
 
 export default function ThemeRoutes() {
@@ -32,5 +33,8 @@ export default function ThemeRoutes() {
                 element: <Reports/>
             },
         ]
+    }, {
+        path: '*',
+        element: <NotFoundLayout/>
     }])
 }
