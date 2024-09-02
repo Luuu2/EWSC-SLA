@@ -2,6 +2,15 @@
 
 Eswatini Water Services Corporation SLA Project.
 
+## Features
+
+- SLA Entries (unlimited)
+- SLA Rating
+- SLA Improvement Action Plans
+- SLA Customer Feedback (on SLA Ratings added)
+- Authentication (Session Authentication)
+- Excel reports
+
 ### Project Requirements & Setup
 
 - Python 3.11 (using virtual environment)
@@ -57,8 +66,3 @@ $ (venv) manage.py createsuperuser
 ```shell
 xhanka<rootroot>
 ```
-
-> no limit on SLAs
-> reports errors
-> login errors
-> pagination on sla improvement action
