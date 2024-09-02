@@ -13,6 +13,7 @@ from rest_framework import generics
 from django.contrib.auth import logout
 from rest_framework.views import APIView
 
+from api.pagination import ListPagination
 from api.serializers import SlaEntrySerializer, DepartmentSerializer, ListSlaEntrySerializer, ListSlaRatingSerializer, \
     SlaRatingSerializer, SlaImprovementPlanEntrySerializer, SlaCustomerStatusEntrySerializer, AuthUserSerializer, \
     AggregatedRatingsSerializer, AggregatedDepartmentDataSerializer
@@ -83,6 +84,7 @@ class UserSlaRatingEntriesView(generics.ListAPIView):
 class SlaRatingEntryViewSet(viewsets.ModelViewSet):
     queryset = SlaRating.objects.order_by('pk')
     permission_classes = [IsAuthenticated, ]
+    pagination_class = ListPagination
     filterset_class = SlaRatingFilter
 
     def get_serializer_class(self):

@@ -1,4 +1,4 @@
-import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
+import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
 import {LoadingButton} from "@/components/ui/loadingButton";
@@ -29,6 +29,24 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {RatingBadge} from "@/pages/sla-entry/tabs/your-sla-ratings-tab";
 import ViewImprovementActionPlanDialog from "@/pages/improvement-action-plan/include/ViewImprovementActionPlanDialog";
 import ImprovementActionPlanDialog from "@/pages/improvement-action-plan/include/ImprovementActionPlanDialog";
+import {
+    Pagination,
+    PaginationContent, PaginationEllipsis,
+    PaginationItem,
+    PaginationNext,
+    PaginationPrevious
+} from "@/components/ui/pagination";
+
+
+type SlaRatingsResponse = {
+    count: number;
+    next: string | null;
+    previous: string | null;
+    current_page: number;
+    per_page: number;
+    total_pages: number;
+    results: SlaRatingEntry[];
+}
 
 export default function ImprovementActionPlan() {
     const [departments, setDepartments] = useState<Department[]>([])
@@ -53,15 +71,39 @@ export default function ImprovementActionPlan() {
         },
     });
 
-    const [slaRatingEntries, setSlaRatingEntries] = useState<SlaRatingEntry[]>([]);
+    const [selectedDepartment, setSelectedDepartment] = useState<string>("");
+    const [slaRatingsResponse, setSlaRatingsResponse] = useState<SlaRatingsResponse | null>(null);
 
     async function onSearchSlaRatingEntries(values: z.infer<typeof searchSlasFormSchema>) {
+        setSelectedDepartment(values.department);
         await axios.get(API_SLA_RATING_ENTRIES_FOR_DEPARTMENT_URL, {
             params: {
                 'department': values.department
             }
         }).then((response) => {
-            setSlaRatingEntries(response.data || [])
+            setSlaRatingsResponse(response.data || [])
+            toast({
+                variant: "success",
+                title: "Request successful.",
+                description: "SLA Entry Ratings for selected department updated successfully.",
+            })
+        }).catch((error) => {
+            toast({
+                variant: "destructive",
+                title: "Uh oh! Something went wrong.",
+                description: "Failed to load SLA Entry Ratings. There was a problem with your request. ",
+            })
+        });
+    }
+
+    async function paginateRatingEntries(page: number) {
+        await axios.get(API_SLA_RATING_ENTRIES_FOR_DEPARTMENT_URL, {
+            params: {
+                'department': selectedDepartment,
+                'page': page
+            }
+        }).then((response) => {
+            setSlaRatingsResponse(response.data || [])
             toast({
                 variant: "success",
                 title: "Request successful.",
@@ -150,8 +192,8 @@ export default function ImprovementActionPlan() {
                     <TableBody>
 
                         {
-                            Array.isArray(slaRatingEntries) && slaRatingEntries.length >= 1
-                                ? slaRatingEntries.map((rating, index) => (
+                            Array.isArray(slaRatingsResponse?.results) && slaRatingsResponse?.results?.length >= 1
+                                ? slaRatingsResponse.results.map((rating, index) => (
                                     <TableRow key={index} className={cn(index % 2 === 0 && "bg-accent")}>
                                         <TableCell
                                             className={"border-x align-top"}>{rating?.sla?.service_description}</TableCell>
@@ -220,6 +262,42 @@ export default function ImprovementActionPlan() {
 
                 </Table>
             </CardContent>
+            <CardFooter>
+                {
+                    slaRatingsResponse?.results &&
+                    <Pagination>
+                        <PaginationContent>
+                            <div className="flex min-w-[100px] items-center justify-center text-sm font-medium">
+                                Page {slaRatingsResponse?.current_page || "--"} of{" "} {slaRatingsResponse?.total_pages || "--"}
+                            </div>
+
+                            {
+                                slaRatingsResponse?.previous
+                                    ? <PaginationItem>
+                                        <PaginationPrevious
+                                            onClick={() => paginateRatingEntries(slaRatingsResponse?.current_page - 1)}/>
+                                    </PaginationItem>
+                                    : <PaginationItem>
+                                        <PaginationPrevious/>
+                                    </PaginationItem>
+                            }
+                            <PaginationItem>
+                                <PaginationEllipsis/>
+                            </PaginationItem>
+                            {
+                                slaRatingsResponse?.next
+                                    ? <PaginationItem>
+                                        <PaginationNext
+                                            onClick={() => paginateRatingEntries(slaRatingsResponse?.current_page + 1)}/>
+                                    </PaginationItem>
+                                    : <PaginationItem>
+                                        <PaginationNext/>
+                                    </PaginationItem>
+                            }
+                        </PaginationContent>
+                    </Pagination>
+                }
+            </CardFooter>
         </Card>
     )
 }

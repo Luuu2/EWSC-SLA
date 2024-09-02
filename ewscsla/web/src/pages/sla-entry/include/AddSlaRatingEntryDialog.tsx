@@ -34,7 +34,7 @@ const addSlaRatingEntryFormSchema = z.object({
     }),
     reason: z.string({
         required_error: "Rating reason is required."
-    }).min(5),
+    }).min(2),
 })
 
 type AddSLARatingEntryDialogProps = {
