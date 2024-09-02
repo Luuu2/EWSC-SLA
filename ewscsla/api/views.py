@@ -179,6 +179,47 @@ def generate_report(request):
         }, status=status.HTTP_400_BAD_REQUEST)
 
 
+@api_view(['GET'])
+def export_sla_entries(request):
+    try:
+        today = timezone.now().strftime("%Y_%m_%d_%H_%M")
+
+        workbook = Workbook()
+        worksheet = workbook.active
+
+        worksheet.append(["ESWATINI WATER SERVICES CORPORATION"])
+        worksheet.append([])
+        worksheet.append(["SLA's MONITORING TOOL - SLA ENTRIES"])
+
+        worksheet.append([
+            "SLA Department", "Service Description", "Customer Responsibility",
+            "Service Level", "SLA Date", "Added By",
+        ])
+
+        sla_entries = SlaEntry.objects.order_by('department__name')
+        for sla in sla_entries:
+            worksheet.append([
+                sla.department.name,
+                sla.service_description,
+                sla.customer_responsibility,
+                sla.service_level,
+                sla.date.strftime("%Y-%m-%d"),
+                sla.added_by.get_full_name() or sla.added_by.username
+            ])
+
+        response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        response['Content-Disposition'] = f'attachment; filename=SLA_ENTRIES_REPORT_{today}.xlsx'
+        response.write(save_virtual_workbook(workbook))
+
+        return response
+
+    except Exception as error:
+        return Response({
+            'error': 'Failed to generate report',
+            'debug': str(error)
+        }, status=status.HTTP_400_BAD_REQUEST)
+
+
 # ======================================================================
 
 @api_view(['GET'])

@@ -4,7 +4,11 @@ import AddSlaEntryDialog from "@/pages/sla-entry/include/AddSlaEntryDialog";
 import {useEffect, useState} from "react";
 import {Department, SlaEntry} from "@/types/types";
 import axios from "axios";
-import {API_GET_DEPARTMENTS_URL, API_GET_SLA_ENTRIES_BY_DEPARTMENT_URL} from "@/app/config";
+import {
+    API_GET_DEPARTMENTS_URL,
+    API_GET_SLA_ENTRIES_BY_DEPARTMENT_URL,
+    API_SLA_GENERATE_SLA_ENTRIES_REPORT_URL
+} from "@/app/config";
 import {toast} from "@/components/ui/use-toast";
 import {z} from "zod";
 import {zodResolver} from "@hookform/resolvers/zod";
@@ -83,9 +87,9 @@ export default function SlaEntryPage() {
                     <div className="ml-auto flex items-center gap-2">
                         <Button size="sm" variant="outline" className="h-7 gap-1">
                             <File className="h-3.5 w-3.5"/>
-                            <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                    Export
-                  </span>
+                            <a href={API_SLA_GENERATE_SLA_ENTRIES_REPORT_URL} target="_blank" download className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                                Export
+                            </a>
                         </Button>
                         <AddSlaEntryDialog departments={departments}/>
                     </div>

@@ -3,7 +3,7 @@ from rest_framework.routers import DefaultRouter
 
 from api.views import DepartmentViewSet, SlaEntryViewSet, SlaRatingEntryViewSet, add_sla_entry, \
     UserSlaRatingEntriesView, add_sla_rating_entry, SlaImprovementActionPlanViewSet, SlaCustomerStatusPlanViewSet, \
-    generate_report, dashboard, profile, logout, Logout
+    generate_report, dashboard, profile, export_sla_entries, Logout
 
 router = DefaultRouter()
 router.register(r'departments', DepartmentViewSet, basename='departments')
@@ -21,6 +21,7 @@ urlpatterns = [
     path('add-sla-rating/', add_sla_rating_entry),
 
     path('generate-report/', generate_report),
+    path('generate-sla-entries-report/', export_sla_entries),
     path('dashboard/', dashboard),
     path('profile/', profile),
     path('logout/', Logout.as_view()),
