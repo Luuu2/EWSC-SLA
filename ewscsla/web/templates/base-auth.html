@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-shrink-to-fit=yes"><!--,initial-scale=0"-->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>{% block title %}Eswatini Water Services Corporation{% endblock %}</title>
+    <meta name="description"
+          content="{% block description %}EWSC SLA{% endblock %}">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'web/favicon/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'web/favicon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'web/favicon/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'web/favicon/site.webmanifest' %}">
+
+    <link rel="stylesheet" href="{% static 'web/dist/output.css' %}">
+
+    {% block css %}{% endblock %}
+
+</head>
+<body class="h-screen">
+
+{% block auth %}{% endblock %}
+
+{% block js %}{% endblock %}
+</body>
+</html>

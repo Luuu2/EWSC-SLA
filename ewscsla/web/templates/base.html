@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-shrink-to-fit=yes"><!--,initial-scale=0"-->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>{% block title %}Eswatini Water Services Corporation{% endblock %}</title>
+    <meta name="description"
+          content="{% block description %}EWSC SLA{% endblock %}">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'web/favicon/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'web/favicon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'web/favicon/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'web/favicon/site.webmanifest' %}">
+
+    <link rel="stylesheet" href="{% static 'web/dist/output.css' %}">
+
+    {% block css %}{% endblock %}
+
+    {#    <script src="{% static 'website/theme.js' %}" type="text/javascript"></script>#}
+
+</head>
+<body>
+
+{% include 'web/includes/side-navigation.html' %}
+
+<div class="max-w-screen-xl py-2 sm:py-2 px-4 md:px-6 sm:ml-64">
+    <div class="mt-14">
+        {% block content %}{% endblock %}
+    </div>
+</div>
+
+{#{% include 'web/includes/footer.html' %}#}
+
+<script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+
+
+{% block js %}{% endblock %}
+</body>
+</html>

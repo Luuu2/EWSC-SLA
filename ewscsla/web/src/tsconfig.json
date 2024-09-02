@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*",],
+    },
+    "jsx": "react-jsx",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    // not sure with the following configurations
+    "allowJs": true,
+    "module": "es6",
+    "target": "es5",
+    "outDir": "./dist/"
+  }
+}
