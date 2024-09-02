@@ -152,7 +152,9 @@ export default function EditSlaRatingEntryDialog({rating}: EditSlaRatingEntryDia
                         </div>
 
                         <DialogFooter className={"justify-start"}>
-                            <Button type="submit">Save changes</Button>
+                            <Button type="submit" disabled={editSlaRatingEntryForm.formState.isSubmitting}>
+                                Save changes
+                            </Button>
                         </DialogFooter>
 
                     </form>

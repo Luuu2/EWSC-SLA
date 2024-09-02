@@ -249,7 +249,9 @@ export default function ImprovementActionPlanDialog({sla_rating, isEdit}: Improv
                         </div>
 
                         <DialogFooter className={"justify-start"}>
-                            <Button type="submit">Save changes</Button>
+                            <Button type="submit" disabled={addSlaImprovementActionPlanForm.formState.isSubmitting}>
+                                Save changes
+                            </Button>
                         </DialogFooter>
 
                     </form>

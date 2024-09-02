@@ -274,7 +274,9 @@ export default function AddSLAEntryDialog(props: AddSLAEntryDialogProps) {
                             </div>
 
                             <DialogFooter className={"justify-start"}>
-                                <Button type="submit">Save changes</Button>
+                                <Button type="submit" disabled={addSlaEntryForm.formState.isSubmitting}>
+                                    Save changes
+                                </Button>
                             </DialogFooter>
 
                         </form>

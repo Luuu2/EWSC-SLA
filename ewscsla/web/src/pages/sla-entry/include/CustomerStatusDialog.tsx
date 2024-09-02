@@ -207,7 +207,9 @@ export default function CustomerStatusDialog({sla_rating, isEdit}: AddCustomerSt
                         </div>
 
                         <DialogFooter className={"justify-start"}>
-                            <Button type="submit">Save changes</Button>
+                            <Button type="submit" disabled={addSlaCustomerStatusForm.formState.isSubmitting}>
+                                Save changes
+                            </Button>
                         </DialogFooter>
 
                     </form>

@@ -152,7 +152,9 @@ export default function AddSlaRatingEntryDialog(props: AddSLARatingEntryDialogPr
                         </div>
 
                         <DialogFooter className={"justify-start"}>
-                            <Button type="submit">Save changes</Button>
+                            <Button type="submit" disabled={addSlaRatingEntryForm.formState.isSubmitting}>
+                                Save changes
+                            </Button>
                         </DialogFooter>
 
                     </form>
