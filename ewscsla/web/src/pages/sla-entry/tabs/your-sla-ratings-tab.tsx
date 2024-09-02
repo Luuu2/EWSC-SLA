@@ -8,7 +8,6 @@ import {Badge} from "@/components/ui/badge";
 import {
     DropdownMenu,
     DropdownMenuContent,
-    DropdownMenuItem,
     DropdownMenuLabel,
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
@@ -22,8 +21,8 @@ import {useState} from "react";
 import {toast} from "@/components/ui/use-toast";
 import {searchSlasFormSchema} from "@/pages/sla-entry";
 import ViewImprovementActionPlanDialog from "@/pages/improvement-action-plan/include/ViewImprovementActionPlanDialog";
-import ImprovementActionPlanDialog from "@/pages/improvement-action-plan/include/ImprovementActionPlanDialog";
 import CustomerStatusDialog from "@/pages/sla-entry/include/CustomerStatusDialog";
+import EditSlaRatingEntryDialog from "@/pages/sla-entry/include/EditSlaRatingEntryDialog";
 
 type RatingBadgeProps = {
     rating: string;
@@ -70,7 +69,7 @@ export function RatingBadge({rating}: RatingBadgeProps) {
     }
 }
 
-export function StatusBadge({status}: { status: number }) {
+export function StatusBadge({status}: { status: number | null }) {
     switch (status) {
         case 0:
             return (
@@ -118,6 +117,7 @@ export default function YourSlaRatingsTab(
                 'department': values.department
             }
         }).then((response) => {
+            console.log("response", response.data)
             setSlaRatingEntries(response.data || [])
             toast({
                 variant: "success",
@@ -228,8 +228,8 @@ export default function YourSlaRatingsTab(
                                         </TableCell>
                                         <TableCell className={"border-x align-top"}>
                                             {
-                                                rating.customer_feedback_status?.status
-                                                    ? <StatusBadge status={rating.customer_feedback_status?.status || 4}/>
+                                                rating.customer_feedback_status
+                                                    ? <StatusBadge status={rating.customer_feedback_status.status}/>
                                                     : "N/A"
                                             }
                                         </TableCell>
@@ -252,7 +252,7 @@ export default function YourSlaRatingsTab(
                                                             ? <>
                                                                 <ViewImprovementActionPlanDialog sla_rating={rating}/>
                                                                 {
-                                                                    rating.customer_feedback_status?.status
+                                                                    rating.customer_feedback_status
                                                                         ? <CustomerStatusDialog
                                                                             sla_rating={rating}
                                                                             isEdit={true}/>
@@ -260,8 +260,7 @@ export default function YourSlaRatingsTab(
                                                                 }
                                                             </>
                                                             : <>
-                                                                <DropdownMenuItem>Edit SLA Rating</DropdownMenuItem>
-                                                                <DropdownMenuItem>Delete SLA Rating</DropdownMenuItem>
+                                                                <EditSlaRatingEntryDialog rating={rating}/>
                                                             </>
                                                     }
                                                 </DropdownMenuContent>

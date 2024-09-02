@@ -8,27 +8,18 @@ import {
     DialogTrigger
 } from "@/components/ui/dialog";
 import {Button} from "@/components/ui/button";
-import {format} from "date-fns";
-import {PlusCircle} from "lucide-react";
 import {z} from "zod";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import axios from "axios";
 import {
-    API_ADD_SLA_ENTRY_FOR_DEPARTMENT_URL,
     API_ADD_SLA_ENTRY_RATING_URL,
-    API_GET_SLA_ENTRIES_BY_DEPARTMENT_URL
 } from "@/app/config";
-import {Department, SlaEntry} from "@/types/types";
+import {SlaEntry} from "@/types/types";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
-import {toast, useToast} from "@/components/ui/use-toast";
+import {toast} from "@/components/ui/use-toast";
 import {Textarea} from "@/components/ui/textarea";
-import {cn} from "@/lib/utils";
-import {CalendarIcon} from "@radix-ui/react-icons";
-import {Calendar} from "@/components/ui/calendar";
-import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
-import {ScrollArea} from "@/components/ui/scroll-area";
 import {useState} from "react";
 import getCookie from "@/lib/csrf";
 import {DropdownMenuItem} from "@/components/ui/dropdown-menu";
@@ -51,7 +42,7 @@ type AddSLARatingEntryDialogProps = {
 }
 
 
-export default function AddSLARatingEntryDialog(props: AddSLARatingEntryDialogProps) {
+export default function AddSlaRatingEntryDialog(props: AddSLARatingEntryDialogProps) {
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const addSlaRatingEntryForm = useForm<z.infer<typeof addSlaRatingEntryFormSchema>>({

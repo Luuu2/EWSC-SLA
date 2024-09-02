@@ -15,7 +15,7 @@ import {
 import {Button} from "@/components/ui/button";
 import {MoreHorizontal} from "lucide-react";
 import {Department, SlaEntry} from "@/types/types";
-import AddSLARatingEntryDialog from "@/pages/sla-entry/include/AddSLARatingEntryDialog";
+import AddSlaRatingEntryDialog from "@/pages/sla-entry/include/AddSlaRatingEntryDialog";
 
 
 type SlaEntriesTabProps = {
@@ -128,9 +128,8 @@ export default function SlaEntriesTab(
                                                 </DropdownMenuTrigger>
                                                 <DropdownMenuContent align="end">
                                                     <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                                                    <AddSLARatingEntryDialog sla={entry}/>
+                                                    <AddSlaRatingEntryDialog sla={entry}/>
                                                     <DropdownMenuItem>Edit SLA</DropdownMenuItem>
-                                                    <DropdownMenuItem>Delete SLA</DropdownMenuItem>
                                                 </DropdownMenuContent>
                                             </DropdownMenu>
                                         </TableCell>

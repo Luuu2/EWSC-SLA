@@ -56,7 +56,7 @@ export default function ViewImprovementActionPlanDialog({sla_rating}: ViewImprov
                                 {format(sla_rating.improvement_action_plan?.due_date || new Date(), "yyyy-MM-dd")}
                             </TableCell>
                             <TableCell className={"border-x border-b align-top"}>
-                                <StatusBadge status={sla_rating.improvement_action_plan?.status || 3}/>
+                                <StatusBadge status={sla_rating.improvement_action_plan?.status}/>
                             </TableCell>
                             <TableCell
                                 className={"border-x border-b align-top"}>{sla_rating.improvement_action_plan?.improvement_action}</TableCell>
