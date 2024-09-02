@@ -54,7 +54,7 @@ module.exports = {
             "@/app": path.resolve(__dirname, "app/"),
             "@/lib": path.resolve(__dirname, "lib/"),
             "@/pages": path.resolve(__dirname, "pages/"),
-            "@/store": path.resolve(__dirname, "store/"),
+            "@/hooks": path.resolve(__dirname, "hooks/"),
             "@/routes": path.resolve(__dirname, "routes/"),
             "@/layouts": path.resolve(__dirname, "layouts/"),
         },

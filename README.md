@@ -24,6 +24,10 @@ project for the frontend to consume the Django APIs.
 > [!NOTE]
 > The ReactJS projects sits inside the Django application, such that Django serves the ReactJS generated static files.
 
+> [!WARNING]  
+> The frontend application is not responsive. The tables are too long for mobile devices, consider using a table library
+> for this functionality. For now, the application can not be viewed on small devices.
+
 # How to install and run application
 
 Follow this guide to install and run the application:

@@ -21,7 +21,7 @@ const initialState: ThemeProviderState = {
 const ThemeProviderContext = createContext<ThemeProviderState>(initialState)
 
 export function ThemeProvider(
-    {children, defaultTheme = "system", storageKey = "store-theme", ...props}: ThemeProviderProps
+    {children, defaultTheme = "system", storageKey = "hooks-theme", ...props}: ThemeProviderProps
 ) {
 
     const [theme, setTheme] = useState<Theme>(
