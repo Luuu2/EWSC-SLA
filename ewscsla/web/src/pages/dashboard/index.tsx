@@ -12,7 +12,7 @@ import {
     TabsTrigger,
 } from "@/components/ui/tabs"
 import {Overview} from "./utils/overview"
-import {RecentSales} from "./utils/recent-sales"
+import {Departments} from "./utils/departments"
 import {useEffect, useState} from "react";
 import {DashboardData} from "@/types/types";
 import axios from "axios";
@@ -22,9 +22,7 @@ import {toast} from "@/components/ui/use-toast";
 
 export default function DashboardPage() {
 
-    const [dashboardData, setDashboardData] = useState<DashboardData>({
-        users: 0, sla_entries: 0, ratings: 0, action_plans: 0
-    })
+    const [dashboardData, setDashboardData] = useState<DashboardData | null>(null)
 
     useEffect(() => {
         axios.get(API_GET_DASHBOARD_DATA_URL)
@@ -89,7 +87,7 @@ export default function DashboardPage() {
                                     </svg>
                                 </CardHeader>
                                 <CardContent>
-                                    <div className="text-2xl font-bold">{dashboardData.users}</div>
+                                    <div className="text-2xl font-bold">{dashboardData?.users || "--"}</div>
                                     <p className="text-xs text-muted-foreground">
                                         +20.1% from last month
                                     </p>
@@ -115,7 +113,7 @@ export default function DashboardPage() {
                                     </svg>
                                 </CardHeader>
                                 <CardContent>
-                                    <div className="text-2xl font-bold">{dashboardData.sla_entries}</div>
+                                    <div className="text-2xl font-bold">{dashboardData?.sla_entries || "--"}</div>
                                     <p className="text-xs text-muted-foreground">
                                         +180.1% from last month
                                     </p>
@@ -135,7 +133,7 @@ export default function DashboardPage() {
                                     </svg>
                                 </CardHeader>
                                 <CardContent>
-                                    <div className="text-2xl font-bold">{dashboardData.ratings}</div>
+                                    <div className="text-2xl font-bold">{dashboardData?.ratings || "--"}</div>
                                     <p className="text-xs text-muted-foreground">
                                         +19% from last month
                                     </p>
@@ -157,7 +155,7 @@ export default function DashboardPage() {
                                     </svg>
                                 </CardHeader>
                                 <CardContent>
-                                    <div className="text-2xl font-bold">{dashboardData.action_plans}</div>
+                                    <div className="text-2xl font-bold">{dashboardData?.action_plans || "--"}</div>
                                     <p className="text-xs text-muted-foreground">
                                         +201 since last hour
                                     </p>
@@ -170,25 +168,21 @@ export default function DashboardPage() {
                                     <CardTitle>Overview</CardTitle>
                                 </CardHeader>
                                 <CardContent className="pl-2">
-                                    <Overview/>
+                                    <Overview aggregated_ratings={dashboardData?.aggregated_ratings || []}/>
                                 </CardContent>
                             </Card>
                             <Card className="col-span-3">
                                 <CardHeader>
-                                    <CardTitle>Recent Sales</CardTitle>
+                                    <CardTitle>Company Departments</CardTitle>
                                     <CardDescription>
-                                        You made 265 sales this month.
+                                        Departments in your organization
                                     </CardDescription>
                                 </CardHeader>
                                 <CardContent>
-                                    <RecentSales/>
+                                    <Departments department_data={dashboardData?.department_data || []}/>
                                 </CardContent>
                             </Card>
                         </div>
-                    </TabsContent>
-
-                    <TabsContent value="invoices" className="space-y-4">
-                        <h1 className="text-lg">Invoices Tab</h1>
                     </TabsContent>
 
                 </Tabs>

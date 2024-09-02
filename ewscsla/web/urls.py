@@ -8,7 +8,6 @@ urlpatterns = [
     path('login/', SignInView.as_view(), name='login'),
 
     # react application
-    # re_path(r'^(?!api).*', application, name='app'),
-    re_path(r'', application),
+    re_path(r'^(?!api).*', application, name='app'),
     re_path(r'^(?!api).*/$', application, name='_app'),
 ]

@@ -87,4 +87,27 @@ class SlaRatingSerializer(serializers.ModelSerializer):
         model = SlaRating
         fields = "__all__"
 
+
+# ======================================================================
+
+class AggregatedRatingsSerializer(serializers.Serializer):
+    class RatingsSerializer(serializers.Serializer):
+        poor = serializers.IntegerField(default=0)
+        fair = serializers.IntegerField(default=0)
+        good = serializers.IntegerField(default=0)
+        very_good = serializers.IntegerField(default=0)
+        excellent = serializers.IntegerField(default=0)
+
+    ratings = RatingsSerializer(many=False, read_only=True)
+    department = serializers.CharField(max_length=100)
+
+
+class AggregatedDepartmentDataSerializer(serializers.ModelSerializer):
+    employees_count = serializers.IntegerField()
+    sla_entries_count = serializers.IntegerField()
+
+    class Meta:
+        model = Department
+        fields = '__all__'
+
 # ======================================================================

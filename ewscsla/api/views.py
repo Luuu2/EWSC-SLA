@@ -1,10 +1,11 @@
 import django_filters
+from django.db.models import Count
 from django.http import HttpResponse
 from django.utils import timezone
 from openpyxl.workbook import Workbook
 from openpyxl.writer.excel import save_virtual_workbook
 from rest_framework import viewsets, status
-from rest_framework.decorators import permission_classes, api_view, authentication_classes
+from rest_framework.decorators import permission_classes, api_view
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.request import Request
 from rest_framework.response import Response
@@ -13,7 +14,8 @@ from django.contrib.auth import logout
 from rest_framework.views import APIView
 
 from api.serializers import SlaEntrySerializer, DepartmentSerializer, ListSlaEntrySerializer, ListSlaRatingSerializer, \
-    SlaRatingSerializer, SlaImprovementPlanEntrySerializer, SlaCustomerStatusEntrySerializer, AuthUserSerializer
+    SlaRatingSerializer, SlaImprovementPlanEntrySerializer, SlaCustomerStatusEntrySerializer, AuthUserSerializer, \
+    AggregatedRatingsSerializer, AggregatedDepartmentDataSerializer
 from core.models import SlaEntry, Department, SlaRating, SlaImprovementPlanEntry, SlaCustomerStatusEntry, AuthUser
 
 
@@ -45,13 +47,6 @@ def add_sla_entry(request: Request):
     }
     form = SlaEntrySerializer(data=data, many=False)
     if form.is_valid():
-
-        if SlaEntry.objects.filter(department=form.validated_data['department']).count() >= 5:
-            return Response(
-                data={'error': 'Can only add a maximum of 5 SLA entries per department.'},
-                status=status.HTTP_400_BAD_REQUEST
-            )
-
         entry = form.save()
         return Response(
             data=SlaEntrySerializer(instance=entry).data,
@@ -192,11 +187,53 @@ def dashboard(request):
         ratings = SlaRating.objects.count()
         action_plans = SlaImprovementPlanEntry.objects.count()
 
+        departments = Department.objects.order_by("pk")
+        departments_data = departments.annotate(
+            employees_count=Count('employees', distinct=True),
+            sla_entries_count=Count('sla_entries', distinct=True)
+        )
+
+        aggregated_ratings = []
+        for department in departments:
+            department_ratings = SlaRating.objects.filter(
+                sla__department=department
+            ).values('rating').annotate(rating_count=Count("rating"))
+
+            _grouped_ratings = {}
+            for _rating in department_ratings:
+                if _rating["rating"] == 1:
+                    _grouped_ratings.update({
+                        "poor": _rating["rating_count"],
+                    })
+                elif _rating["rating"] == 2:
+                    _grouped_ratings.update({
+                        "fair": _rating["rating_count"],
+                    })
+                elif _rating["rating"] == 3:
+                    _grouped_ratings.update({
+                        "good": _rating["rating_count"],
+                    })
+                elif _rating["rating"] == 4:
+                    _grouped_ratings.update({
+                        "very_good": _rating["rating_count"],
+                    })
+                elif _rating["rating"] == 5:
+                    _grouped_ratings.update({
+                        "excellent": _rating["rating_count"],
+                    })
+
+            aggregated_ratings.append({
+                'department': department.name,
+                "ratings": _grouped_ratings
+            })
+
         return Response({
             'users': users,
             'sla_entries': sla_entries,
             'ratings': ratings,
-            'action_plans': action_plans
+            'action_plans': action_plans,
+            'aggregated_ratings': AggregatedRatingsSerializer(aggregated_ratings, many=True).data,
+            'department_data': AggregatedDepartmentDataSerializer(departments_data, many=True).data
         }, status=status.HTTP_200_OK)
 
     except Exception as error:
@@ -218,14 +255,7 @@ def profile(request):
         }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-# @api_view(['GET'])
-# @permission_classes([IsAuthenticated])
-# def logout(request):
-#     logout(request)
-#     return Response(data={}, status=status.HTTP_200_OK)
-
-
 class Logout(APIView):
-    def get(self, request, format=None):
+    def get(self, request):
         logout(request)
         return Response(status=status.HTTP_200_OK)

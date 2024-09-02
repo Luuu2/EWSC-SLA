@@ -42,11 +42,33 @@ export type SlaRatingEntry = {
     customer_feedback_status: SlaCustomerStatus | null;
 }
 
+export type Rating = {
+    poor: number;
+    fair: number;
+    good: number;
+    very_good: number;
+    excellent: number;
+}
+
+export type AggregatedRating = {
+    ratings: Rating[];
+    department: string;
+}
+
+export type DepartmentData = {
+    id: number;
+    name: string;
+    employees_count: number;
+    sla_entries_count: number;
+}
+
 export type DashboardData = {
     users: number;
     sla_entries: number;
     ratings: number;
     action_plans: number;
+    aggregated_ratings: AggregatedRating[];
+    department_data: DepartmentData[];
 }
 
 export type UserProfile = {

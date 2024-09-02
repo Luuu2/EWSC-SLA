@@ -1,13 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
-DEPARTMENT_CHOICES = (
-    (0, "Human Resources"),
-    (1, "Finance"),
-    (2, "IT"),
-    (3, "Marketing")
-)
-
 
 class Department(models.Model):
     name = models.CharField(max_length=255)
