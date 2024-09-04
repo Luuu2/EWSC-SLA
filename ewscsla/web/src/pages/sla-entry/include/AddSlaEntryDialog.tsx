@@ -130,7 +130,7 @@ export default function AddSlaEntryDialog(props: AddSLAEntryDialogProps) {
                     <DialogTitle>Add New SLA Entry</DialogTitle>
                     <DialogDescription>
                         Fill in the required fields to enter a new SLA Entry.
-                        Please note each department can only have a maximum of 5 SLA entries.
+                        Please note each department can have an unlimited number of SLA entries.
                         Click save when you're done.
                     </DialogDescription>
                 </DialogHeader>

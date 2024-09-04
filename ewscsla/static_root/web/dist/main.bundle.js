@@ -77472,7 +77472,7 @@ function AddSlaEntryDialog(props) {
             });
         });
     }
-    return ((0,jsx_runtime.jsxs)(Dialog, { open: isOpen, onOpenChange: setIsOpen, children: [(0,jsx_runtime.jsx)(DialogTrigger, { asChild: true, children: (0,jsx_runtime.jsxs)(Button, { size: "sm", className: "h-7 gap-1", children: [(0,jsx_runtime.jsx)(CirclePlus, { className: "h-3.5 w-3.5" }), (0,jsx_runtime.jsx)("span", { className: "sr-only sm:not-sr-only sm:whitespace-nowrap", children: "Add SLA Entry" })] }) }), (0,jsx_runtime.jsxs)(DialogContent, { className: "min-w-[650px]", children: [(0,jsx_runtime.jsxs)(DialogHeader, { children: [(0,jsx_runtime.jsx)(DialogTitle, { children: "Add New SLA Entry" }), (0,jsx_runtime.jsx)(DialogDescription, { children: "Fill in the required fields to enter a new SLA Entry. Please note each department can only have a maximum of 5 SLA entries. Click save when you're done." })] }), (0,jsx_runtime.jsx)(ScrollArea, { className: "max-h-[60vh] ", children: (0,jsx_runtime.jsx)(form_Form, AddSlaEntryDialog_assign({}, addSlaEntryForm, { children: (0,jsx_runtime.jsxs)("form", { onSubmit: addSlaEntryForm.handleSubmit(onAddSlaEntryFormSubmit), className: "px-3", children: [(0,jsx_runtime.jsxs)("div", { className: "grid gap-4 py-2", children: [(0,jsx_runtime.jsxs)("div", { className: "grid grid-cols-1 md:grid-cols-2 items-start gap-4", children: [(0,jsx_runtime.jsx)(FormField, { control: addSlaEntryForm.control, name: "department", render: function (_a) {
+    return ((0,jsx_runtime.jsxs)(Dialog, { open: isOpen, onOpenChange: setIsOpen, children: [(0,jsx_runtime.jsx)(DialogTrigger, { asChild: true, children: (0,jsx_runtime.jsxs)(Button, { size: "sm", className: "h-7 gap-1", children: [(0,jsx_runtime.jsx)(CirclePlus, { className: "h-3.5 w-3.5" }), (0,jsx_runtime.jsx)("span", { className: "sr-only sm:not-sr-only sm:whitespace-nowrap", children: "Add SLA Entry" })] }) }), (0,jsx_runtime.jsxs)(DialogContent, { className: "min-w-[650px]", children: [(0,jsx_runtime.jsxs)(DialogHeader, { children: [(0,jsx_runtime.jsx)(DialogTitle, { children: "Add New SLA Entry" }), (0,jsx_runtime.jsx)(DialogDescription, { children: "Fill in the required fields to enter a new SLA Entry. Please note each department can have an unlimited number of SLA entries. Click save when you're done." })] }), (0,jsx_runtime.jsx)(ScrollArea, { className: "max-h-[60vh] ", children: (0,jsx_runtime.jsx)(form_Form, AddSlaEntryDialog_assign({}, addSlaEntryForm, { children: (0,jsx_runtime.jsxs)("form", { onSubmit: addSlaEntryForm.handleSubmit(onAddSlaEntryFormSubmit), className: "px-3", children: [(0,jsx_runtime.jsxs)("div", { className: "grid gap-4 py-2", children: [(0,jsx_runtime.jsxs)("div", { className: "grid grid-cols-1 md:grid-cols-2 items-start gap-4", children: [(0,jsx_runtime.jsx)(FormField, { control: addSlaEntryForm.control, name: "department", render: function (_a) {
                                                             var field = _a.field;
                                                             return ((0,jsx_runtime.jsxs)(FormItem, { children: [(0,jsx_runtime.jsx)(FormLabel, { htmlFor: "role", className: "leading-1", children: "Department" }), (0,jsx_runtime.jsx)(FormControl, { children: (0,jsx_runtime.jsxs)(Select, { onValueChange: field.onChange, children: [(0,jsx_runtime.jsx)(SelectTrigger, { children: (0,jsx_runtime.jsx)(SelectValue, { placeholder: "Select department" }) }), (0,jsx_runtime.jsx)(SelectContent, { children: props.departments.map(function (department, index) { return ((0,jsx_runtime.jsx)(SelectItem, { value: "".concat(department.id), children: department.name }, index)); }) })] }) }), (0,jsx_runtime.jsx)(FormMessage, {})] }));
                                                         } }), (0,jsx_runtime.jsx)(FormField, { control: addSlaEntryForm.control, name: "date", render: function (_a) {
@@ -77611,13 +77611,172 @@ function AddSlaRatingEntryDialog(props) {
             });
         });
     }
-    return ((0,jsx_runtime.jsxs)(Dialog, { open: isOpen, onOpenChange: setIsOpen, children: [(0,jsx_runtime.jsx)(DialogTrigger, { asChild: true, children: (0,jsx_runtime.jsx)(DropdownMenuItem, { onSelect: function (e) { return e.preventDefault(); }, children: "Rate SLA" }) }), (0,jsx_runtime.jsxs)(DialogContent, { className: "min-w-[650px]", children: [(0,jsx_runtime.jsxs)(DialogHeader, { children: [(0,jsx_runtime.jsx)(DialogTitle, { children: "Rate SLA Entry" }), (0,jsx_runtime.jsxs)(DialogDescription, { children: ["Fill in the required fields to rate the selected SLA Entry. If the Rating is Good, you can add `N/A` for the reason.", (0,jsx_runtime.jsx)("br", {}), (0,jsx_runtime.jsxs)("p", { className: "font-bold", children: ["SLA: ", props.sla.service_description] }), (0,jsx_runtime.jsxs)("p", { className: "font-bold", children: ["DEPARTMENT: ", props.sla.department.name] })] })] }), (0,jsx_runtime.jsx)(form_Form, AddSlaRatingEntryDialog_assign({}, addSlaRatingEntryForm, { children: (0,jsx_runtime.jsxs)("form", { onSubmit: addSlaRatingEntryForm.handleSubmit(onAddSlaEntryFormSubmit), children: [(0,jsx_runtime.jsxs)("div", { className: "grid gap-4 py-2", children: [(0,jsx_runtime.jsx)(FormField, { control: addSlaRatingEntryForm.control, name: "rating", render: function (_a) {
+    return ((0,jsx_runtime.jsxs)(Dialog, { open: isOpen, onOpenChange: setIsOpen, children: [(0,jsx_runtime.jsx)(DialogTrigger, { asChild: true, children: (0,jsx_runtime.jsx)(DropdownMenuItem, { onSelect: function (e) { return e.preventDefault(); }, children: "Rate SLA Entry" }) }), (0,jsx_runtime.jsxs)(DialogContent, { className: "min-w-[650px]", children: [(0,jsx_runtime.jsxs)(DialogHeader, { children: [(0,jsx_runtime.jsx)(DialogTitle, { children: "Rate SLA Entry" }), (0,jsx_runtime.jsxs)(DialogDescription, { children: ["Fill in the required fields to rate the selected SLA Entry. If the Rating is Good, you can add `N/A` for the reason.", (0,jsx_runtime.jsx)("br", {}), (0,jsx_runtime.jsxs)("p", { className: "font-bold", children: ["SLA: ", props.sla.service_description] }), (0,jsx_runtime.jsxs)("p", { className: "font-bold", children: ["DEPARTMENT: ", props.sla.department.name] })] })] }), (0,jsx_runtime.jsx)(form_Form, AddSlaRatingEntryDialog_assign({}, addSlaRatingEntryForm, { children: (0,jsx_runtime.jsxs)("form", { onSubmit: addSlaRatingEntryForm.handleSubmit(onAddSlaEntryFormSubmit), children: [(0,jsx_runtime.jsxs)("div", { className: "grid gap-4 py-2", children: [(0,jsx_runtime.jsx)(FormField, { control: addSlaRatingEntryForm.control, name: "rating", render: function (_a) {
                                                 var field = _a.field;
                                                 return ((0,jsx_runtime.jsxs)(FormItem, { children: [(0,jsx_runtime.jsx)(FormLabel, { htmlFor: "role", children: "Rating:" }), (0,jsx_runtime.jsx)(FormControl, { children: (0,jsx_runtime.jsxs)(Select, { onValueChange: field.onChange, children: [(0,jsx_runtime.jsx)(SelectTrigger, { children: (0,jsx_runtime.jsx)(SelectValue, { placeholder: "Select rating" }) }), (0,jsx_runtime.jsxs)(SelectContent, { children: [(0,jsx_runtime.jsx)(SelectItem, { value: "1", children: "1 - Poor" }), (0,jsx_runtime.jsx)(SelectItem, { value: "2", children: "2 - Fair" }), (0,jsx_runtime.jsx)(SelectItem, { value: "3", children: "3 - Good" }), (0,jsx_runtime.jsx)(SelectItem, { value: "4", children: "4 - Very Good" }), (0,jsx_runtime.jsx)(SelectItem, { value: "5", children: "5 - Excellent" })] })] }) }), (0,jsx_runtime.jsx)(FormMessage, {})] }));
                                             } }), (0,jsx_runtime.jsx)(FormField, { control: addSlaRatingEntryForm.control, name: "reason", render: function (_a) {
                                                 var field = _a.field;
                                                 return ((0,jsx_runtime.jsxs)(FormItem, { children: [(0,jsx_runtime.jsx)(FormLabel, { children: "Rating Reason:" }), (0,jsx_runtime.jsx)(FormControl, { children: (0,jsx_runtime.jsx)(Textarea, AddSlaRatingEntryDialog_assign({ placeholder: "Describe your rating reason.......", className: "resize-none" }, field)) }), (0,jsx_runtime.jsx)(FormMessage, {})] }));
                                             } })] }), (0,jsx_runtime.jsx)(DialogFooter, { className: "justify-start", children: (0,jsx_runtime.jsx)(Button, { type: "submit", disabled: addSlaRatingEntryForm.formState.isSubmitting, children: "Save changes" }) })] }) }))] })] }));
+}
+
+;// CONCATENATED MODULE: ./pages/sla-entry/include/EditSlaEntryDialog.tsx
+var EditSlaEntryDialog_assign = (undefined && undefined.__assign) || function () {
+    EditSlaEntryDialog_assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return EditSlaEntryDialog_assign.apply(this, arguments);
+};
+var EditSlaEntryDialog_awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var EditSlaEntryDialog_generator = (undefined && undefined.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var editSlaEntryFormSchema = z.object({
+    department: z.string({
+        required_error: "Department field is required."
+    }).min(1, {
+        message: "Select a valid option."
+    }),
+    service_description: z.string({
+        required_error: "Service description is required."
+    }).min(5),
+    customer_responsibility: z.string({
+        required_error: "Customer responsibility is required."
+    }).min(5),
+    service_level: z.string({
+        required_error: "Service level is required."
+    }).min(5),
+    date: z.date({
+        required_error: "Date is required."
+    }),
+});
+function EditSlaEntryDialog(_a) {
+    var sla = _a.sla, departments = _a.departments;
+    var _b = (0,react.useState)(false), isOpen = _b[0], setIsOpen = _b[1];
+    var editSlaEntryForm = useForm({
+        resolver: zod_t(editSlaEntryFormSchema),
+        defaultValues: {
+            department: "".concat(sla.department.id),
+            service_description: sla.service_description,
+            customer_responsibility: sla.customer_responsibility,
+            service_level: sla.service_level,
+            date: new Date(sla.date)
+        },
+    });
+    function onEditSlaEntryFormSubmit(values) {
+        return EditSlaEntryDialog_awaiter(this, void 0, void 0, function () {
+            var updatedValues;
+            return EditSlaEntryDialog_generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        updatedValues = EditSlaEntryDialog_assign(EditSlaEntryDialog_assign({}, values), { department: parseInt(values.department), date: format_format(values.date, "yyyy-MM-dd") });
+                        return [4 /*yield*/, lib_axios.patch("".concat(API_GET_SLA_ENTRIES_BY_DEPARTMENT_URL).concat(sla.id, "/"), JSON.stringify(updatedValues), {
+                                headers: {
+                                    'Accept': 'application/json',
+                                    'Content-Type': 'application/json',
+                                    'X-CSRFToken': getCookie('csrftoken')
+                                }
+                            }).then(function (response) {
+                                toast({
+                                    variant: "success",
+                                    title: "Request successful.",
+                                    description: "SLA Entry successfully modified.",
+                                });
+                                setIsOpen(false);
+                                editSlaEntryForm.reset();
+                            }).catch(function (error) {
+                                var _a;
+                                toast({
+                                    variant: "destructive",
+                                    title: "Uh oh! Something went wrong.",
+                                    description: "Failed to edit SLA Entry. There was a problem with your request. Code: ".concat((_a = error === null || error === void 0 ? void 0 : error.response) === null || _a === void 0 ? void 0 : _a.status),
+                                });
+                            })];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    }
+    return ((0,jsx_runtime.jsxs)(Dialog, { open: isOpen, onOpenChange: setIsOpen, children: [(0,jsx_runtime.jsx)(DialogTrigger, { asChild: true, children: (0,jsx_runtime.jsx)(DropdownMenuItem, { onSelect: function (e) { return e.preventDefault(); }, children: "Edit SLA Entry" }) }), (0,jsx_runtime.jsxs)(DialogContent, { className: "min-w-[650px]", children: [(0,jsx_runtime.jsxs)(DialogHeader, { children: [(0,jsx_runtime.jsx)(DialogTitle, { children: "Add New SLA Entry" }), (0,jsx_runtime.jsx)(DialogDescription, { children: "Fill in the required fields to enter a new SLA Entry. Please note each department can have an unlimited number of SLA entries. Click save when you're done." })] }), (0,jsx_runtime.jsx)(ScrollArea, { className: "max-h-[60vh] ", children: (0,jsx_runtime.jsx)(form_Form, EditSlaEntryDialog_assign({}, editSlaEntryForm, { children: (0,jsx_runtime.jsxs)("form", { onSubmit: editSlaEntryForm.handleSubmit(onEditSlaEntryFormSubmit), className: "px-3", children: [(0,jsx_runtime.jsxs)("div", { className: "grid gap-4 py-2", children: [(0,jsx_runtime.jsxs)("div", { className: "grid grid-cols-1 md:grid-cols-2 items-start gap-4", children: [(0,jsx_runtime.jsx)(FormField, { control: editSlaEntryForm.control, name: "department", render: function (_a) {
+                                                            var field = _a.field;
+                                                            return ((0,jsx_runtime.jsxs)(FormItem, { children: [(0,jsx_runtime.jsx)(FormLabel, { htmlFor: "role", className: "leading-1", children: "Department" }), (0,jsx_runtime.jsx)(FormControl, { children: (0,jsx_runtime.jsxs)(Select, { onValueChange: field.onChange, defaultValue: field.value, children: [(0,jsx_runtime.jsx)(SelectTrigger, { children: (0,jsx_runtime.jsx)(SelectValue, { placeholder: "Select department" }) }), (0,jsx_runtime.jsx)(SelectContent, { children: departments.map(function (department, index) { return ((0,jsx_runtime.jsx)(SelectItem, { value: "".concat(department.id), children: department.name }, index)); }) })] }) }), (0,jsx_runtime.jsx)(FormMessage, {})] }));
+                                                        } }), (0,jsx_runtime.jsx)(FormField, { control: editSlaEntryForm.control, name: "date", render: function (_a) {
+                                                            var field = _a.field;
+                                                            return ((0,jsx_runtime.jsxs)(FormItem, { className: "flex flex-col", children: [(0,jsx_runtime.jsx)(FormLabel, { className: "leading-2", children: "Date:" }), (0,jsx_runtime.jsxs)(Popover, { children: [(0,jsx_runtime.jsx)(PopoverTrigger, { asChild: true, children: (0,jsx_runtime.jsx)(FormControl, { children: (0,jsx_runtime.jsxs)(Button, { variant: "outline", className: cn("w-full pl-3 text-left font-normal", !field.value && "text-muted-foreground"), children: [field.value ? (format_format(field.value, "PPP")) : ((0,jsx_runtime.jsx)("span", { children: "Pick a date" })), (0,jsx_runtime.jsx)(CalendarIcon, { className: "ml-auto h-4 w-4 opacity-50" })] }) }) }), (0,jsx_runtime.jsx)(PopoverContent, { className: "w-auto p-0", align: "start", children: (0,jsx_runtime.jsx)(Calendar, { mode: "single", selected: field.value, onSelect: field.onChange, disabled: function (date) {
+                                                                                        var _date = new Date();
+                                                                                        _date.setDate(_date.getDate() - 1);
+                                                                                        return date < _date || date < new Date("1900-01-01");
+                                                                                    }, initialFocus: true }) })] }), (0,jsx_runtime.jsx)(FormMessage, {})] }));
+                                                        } })] }), (0,jsx_runtime.jsx)(FormField, { control: editSlaEntryForm.control, name: "service_description", render: function (_a) {
+                                                    var field = _a.field;
+                                                    return ((0,jsx_runtime.jsxs)(FormItem, { children: [(0,jsx_runtime.jsx)(FormLabel, { children: "Service description:" }), (0,jsx_runtime.jsx)(FormControl, { children: (0,jsx_runtime.jsx)(Textarea, EditSlaEntryDialog_assign({ placeholder: "Explain your service description", className: "resize-none" }, field)) }), (0,jsx_runtime.jsx)(FormMessage, {})] }));
+                                                } }), (0,jsx_runtime.jsx)(FormField, { control: editSlaEntryForm.control, name: "customer_responsibility", render: function (_a) {
+                                                    var field = _a.field;
+                                                    return ((0,jsx_runtime.jsxs)(FormItem, { children: [(0,jsx_runtime.jsx)(FormLabel, { children: "Customer responsibility:" }), (0,jsx_runtime.jsx)(FormControl, { children: (0,jsx_runtime.jsx)(Textarea, EditSlaEntryDialog_assign({ placeholder: "Explain the customer responsibility", className: "resize-none" }, field)) }), (0,jsx_runtime.jsx)(FormMessage, {})] }));
+                                                } }), (0,jsx_runtime.jsx)(FormField, { control: editSlaEntryForm.control, name: "service_level", render: function (_a) {
+                                                    var field = _a.field;
+                                                    return ((0,jsx_runtime.jsxs)(FormItem, { children: [(0,jsx_runtime.jsx)(FormLabel, { children: "Service level:" }), (0,jsx_runtime.jsx)(FormControl, { children: (0,jsx_runtime.jsx)(Textarea, EditSlaEntryDialog_assign({ placeholder: "Explain the service level", className: "resize-none" }, field)) }), (0,jsx_runtime.jsx)(FormMessage, {})] }));
+                                                } })] }), (0,jsx_runtime.jsx)(DialogFooter, { className: "justify-start", children: (0,jsx_runtime.jsx)(Button, { type: "submit", disabled: editSlaEntryForm.formState.isSubmitting, children: "Save changes" }) })] }) })) })] })] }));
 }
 
 ;// CONCATENATED MODULE: ./pages/sla-entry/tabs/sla-entries-tab.tsx
@@ -77644,13 +77803,16 @@ var sla_entries_tab_assign = (undefined && undefined.__assign) || function () {
 
 
 
+
 function SlaEntriesTab(_a) {
     var searchSlasForm = _a.searchSlasForm, onSearchSlaEntries = _a.onSearchSlaEntries, departments = _a.departments, slaEntries = _a.slaEntries;
     return ((0,jsx_runtime.jsxs)(Card, { className: "min-h-[300px] mb-5", children: [(0,jsx_runtime.jsxs)(CardHeader, { className: "flex flex-col md:flex-row justify-between md:items-center px-7", children: [(0,jsx_runtime.jsxs)("div", { className: "flex-1 grid gap-2", children: [(0,jsx_runtime.jsx)(CardTitle, { className: "text-3xl font-semibold tracking-tight", children: "SLA Entries" }), (0,jsx_runtime.jsx)(CardDescription, { children: "Browse, add and modify SLA entries for each department." })] }), (0,jsx_runtime.jsx)(form_Form, sla_entries_tab_assign({}, searchSlasForm, { children: (0,jsx_runtime.jsxs)("form", { onSubmit: searchSlasForm.handleSubmit(onSearchSlaEntries), className: "flex flex-col md:flex-row gap-2", children: [(0,jsx_runtime.jsx)(FormField, { control: searchSlasForm.control, name: "department", render: function (_a) {
                                         var field = _a.field;
                                         return ((0,jsx_runtime.jsxs)(FormItem, { className: "min-w-[200px]", children: [(0,jsx_runtime.jsx)(FormLabel, { htmlFor: "role", children: "Department" }), (0,jsx_runtime.jsx)(FormControl, { children: (0,jsx_runtime.jsxs)(Select, { onValueChange: field.onChange, children: [(0,jsx_runtime.jsx)(SelectTrigger, { children: (0,jsx_runtime.jsx)(SelectValue, { placeholder: "Select department" }) }), (0,jsx_runtime.jsx)(SelectContent, { children: departments.map(function (department, index) { return ((0,jsx_runtime.jsx)(SelectItem, { value: "".concat(department.id), children: department.name }, index)); }) })] }) }), (0,jsx_runtime.jsx)(FormMessage, {})] }));
                                     } }), (0,jsx_runtime.jsx)(LoadingButton, { loading: searchSlasForm.formState.isSubmitting, size: "default", className: "md:mt-8", type: "submit", children: "Search SLA Entries" })] }) }))] }), (0,jsx_runtime.jsx)(CardContent, { children: (0,jsx_runtime.jsxs)(Table, { children: [(0,jsx_runtime.jsx)(TableHeader, { children: (0,jsx_runtime.jsxs)(TableRow, { children: [(0,jsx_runtime.jsx)(TableHead, { className: "border-x border-t sm:w-[25%]", children: "Service Description" }), (0,jsx_runtime.jsx)(TableHead, { className: "border-x border-t hidden sm:table-cell sm:w-[25%]", children: "Customer Responsibility" }), (0,jsx_runtime.jsx)(TableHead, { className: "border-x border-t hidden sm:table-cell sm:w-[15%]", children: "Service Level" }), (0,jsx_runtime.jsx)(TableHead, { className: "border-x border-t hidden md:table-cell md:w-[10%]", children: "Department" }), (0,jsx_runtime.jsx)(TableHead, { className: "border-x border-t hidden md:table-cell md:w-[8%]", children: "Added By" }), (0,jsx_runtime.jsx)(TableHead, { className: "border-x border-t md:w-[9%]", children: "Date" }), (0,jsx_runtime.jsx)(TableHead, { className: "border-x border-t md:w-[8%]", children: "Actions" })] }) }), (0,jsx_runtime.jsx)(TableBody, { children: Array.isArray(slaEntries) && slaEntries.length >= 1
-                                ? slaEntries.map(function (entry, index) { return ((0,jsx_runtime.jsxs)(TableRow, { className: cn(index % 2 === 0 && "bg-accent"), children: [(0,jsx_runtime.jsx)(TableCell, { className: "border-x align-top", children: entry.service_description }), (0,jsx_runtime.jsx)(TableCell, { className: "border-x hidden sm:table-cell align-top", children: entry.customer_responsibility }), (0,jsx_runtime.jsx)(TableCell, { className: "border-x hidden sm:table-cell align-top", children: entry.service_level }), (0,jsx_runtime.jsx)(TableCell, { className: "border-x hidden md:table-cell text-nowrap align-top", children: (0,jsx_runtime.jsx)(Badge, { className: "text-xs text-center", variant: "outline", children: entry.department.name }) }), (0,jsx_runtime.jsx)(TableCell, { className: "border-x hidden md:table-cell align-top", children: entry.added_by || "N/A" }), (0,jsx_runtime.jsx)(TableCell, { style: { textWrap: 'nowrap' }, className: "border-x align-top", children: entry.date }), (0,jsx_runtime.jsx)(TableCell, { className: "border-x align-top", children: (0,jsx_runtime.jsxs)(DropdownMenu, { children: [(0,jsx_runtime.jsx)(DropdownMenuTrigger, { asChild: true, children: (0,jsx_runtime.jsxs)(Button, { "aria-haspopup": "true", size: "icon", variant: "ghost", children: [(0,jsx_runtime.jsx)(Ellipsis, { className: "h-4 w-4" }), (0,jsx_runtime.jsx)("span", { className: "sr-only", children: "Toggle menu" })] }) }), (0,jsx_runtime.jsxs)(DropdownMenuContent, { align: "end", children: [(0,jsx_runtime.jsx)(DropdownMenuLabel, { children: "Actions" }), (0,jsx_runtime.jsx)(AddSlaRatingEntryDialog, { sla: entry }), (0,jsx_runtime.jsx)(DropdownMenuItem, { children: "Edit SLA" })] })] }) })] }, index)); })
+                                ? slaEntries.map(function (entry, index) { return ((0,jsx_runtime.jsxs)(TableRow, { className: cn(index % 2 === 0 && "bg-accent"), children: [(0,jsx_runtime.jsx)(TableCell, { className: "border-x align-top", children: entry.service_description }), (0,jsx_runtime.jsx)(TableCell, { className: "border-x hidden sm:table-cell align-top", children: entry.customer_responsibility }), (0,jsx_runtime.jsx)(TableCell, { className: "border-x hidden sm:table-cell align-top", children: entry.service_level }), (0,jsx_runtime.jsx)(TableCell, { className: "border-x hidden md:table-cell text-nowrap align-top", children: (0,jsx_runtime.jsx)(Badge, { className: "text-xs text-center", variant: "outline", children: entry.department.name }) }), (0,jsx_runtime.jsx)(TableCell, { className: "border-x hidden md:table-cell align-top", children: entry.added_by || "N/A" }), (0,jsx_runtime.jsx)(TableCell, { style: { textWrap: 'nowrap' }, className: "border-x align-top", children: entry.date }), (0,jsx_runtime.jsx)(TableCell, { className: "border-x align-top", children: (0,jsx_runtime.jsxs)(DropdownMenu, { children: [(0,jsx_runtime.jsx)(DropdownMenuTrigger, { asChild: true, children: (0,jsx_runtime.jsxs)(Button, { "aria-haspopup": "true", size: "icon", variant: "ghost", children: [(0,jsx_runtime.jsx)(Ellipsis, { className: "h-4 w-4" }), (0,jsx_runtime.jsx)("span", { className: "sr-only", children: "Toggle menu" })] }) }), (0,jsx_runtime.jsxs)(DropdownMenuContent, { align: "end", children: [(0,jsx_runtime.jsx)(DropdownMenuLabel, { children: "Actions" }), (0,jsx_runtime.jsx)(AddSlaRatingEntryDialog, { sla: entry }), entry.is_author
+                                                                ? (0,jsx_runtime.jsx)(EditSlaEntryDialog, { departments: departments, sla: entry })
+                                                                : ((0,jsx_runtime.jsx)(DropdownMenuItem, { disabled: true, children: "Edit SLA Entry" }))] })] }) })] }, index)); })
                                 : (0,jsx_runtime.jsx)(TableRow, { className: "bg-accent", children: (0,jsx_runtime.jsx)(TableCell, { colSpan: 7, className: "border-x text-center", children: (0,jsx_runtime.jsx)("div", { className: "text-muted-foreground", children: "No Data. No SLA entries for selected department." }) }) }) })] }) })] }));
 }
 
@@ -77941,7 +78103,7 @@ function EditSlaRatingEntryDialog(_a) {
             });
         });
     }
-    return ((0,jsx_runtime.jsxs)(Dialog, { open: isOpen, onOpenChange: setIsOpen, children: [(0,jsx_runtime.jsx)(DialogTrigger, { asChild: true, children: (0,jsx_runtime.jsx)(DropdownMenuItem, { onSelect: function (e) { return e.preventDefault(); }, children: "Edit SLA" }) }), (0,jsx_runtime.jsxs)(DialogContent, { className: "min-w-[650px]", children: [(0,jsx_runtime.jsxs)(DialogHeader, { children: [(0,jsx_runtime.jsx)(DialogTitle, { children: "Edit SLA Rating Entry" }), (0,jsx_runtime.jsxs)(DialogDescription, { children: ["Fill in the required fields to rate the selected SLA Entry. If the Rating is Good, you can add `N/A` for the reason", (0,jsx_runtime.jsx)("br", {}), (0,jsx_runtime.jsxs)("p", { className: "font-bold", children: ["SLA: ", rating.sla.service_description] }), (0,jsx_runtime.jsxs)("p", { className: "font-bold", children: ["DEPARTMENT: ", rating.sla.department.name] })] })] }), (0,jsx_runtime.jsx)(form_Form, EditSlaRatingEntryDialog_assign({}, editSlaRatingEntryForm, { children: (0,jsx_runtime.jsxs)("form", { onSubmit: editSlaRatingEntryForm.handleSubmit(onEditSlaRatingEntryFormSubmit), children: [(0,jsx_runtime.jsxs)("div", { className: "grid gap-4 py-2", children: [(0,jsx_runtime.jsx)(FormField, { control: editSlaRatingEntryForm.control, name: "rating", render: function (_a) {
+    return ((0,jsx_runtime.jsxs)(Dialog, { open: isOpen, onOpenChange: setIsOpen, children: [(0,jsx_runtime.jsx)(DialogTrigger, { asChild: true, children: (0,jsx_runtime.jsx)(DropdownMenuItem, { onSelect: function (e) { return e.preventDefault(); }, children: "Edit SLA Rating" }) }), (0,jsx_runtime.jsxs)(DialogContent, { className: "min-w-[650px]", children: [(0,jsx_runtime.jsxs)(DialogHeader, { children: [(0,jsx_runtime.jsx)(DialogTitle, { children: "Edit SLA Rating Entry" }), (0,jsx_runtime.jsxs)(DialogDescription, { children: ["Fill in the required fields to rate the selected SLA Entry. If the Rating is Good, you can add `N/A` for the reason", (0,jsx_runtime.jsx)("br", {}), (0,jsx_runtime.jsxs)("p", { className: "font-bold", children: ["SLA: ", rating.sla.service_description] }), (0,jsx_runtime.jsxs)("p", { className: "font-bold", children: ["DEPARTMENT: ", rating.sla.department.name] })] })] }), (0,jsx_runtime.jsx)(form_Form, EditSlaRatingEntryDialog_assign({}, editSlaRatingEntryForm, { children: (0,jsx_runtime.jsxs)("form", { onSubmit: editSlaRatingEntryForm.handleSubmit(onEditSlaRatingEntryFormSubmit), children: [(0,jsx_runtime.jsxs)("div", { className: "grid gap-4 py-2", children: [(0,jsx_runtime.jsx)(FormField, { control: editSlaRatingEntryForm.control, name: "rating", render: function (_a) {
                                                 var field = _a.field;
                                                 return ((0,jsx_runtime.jsxs)(FormItem, { children: [(0,jsx_runtime.jsx)(FormLabel, { htmlFor: "role", children: "Rating:" }), (0,jsx_runtime.jsx)(FormControl, { children: (0,jsx_runtime.jsxs)(Select, { onValueChange: field.onChange, defaultValue: field.value, children: [(0,jsx_runtime.jsx)(SelectTrigger, { children: (0,jsx_runtime.jsx)(SelectValue, { placeholder: "Select rating" }) }), (0,jsx_runtime.jsxs)(SelectContent, { children: [(0,jsx_runtime.jsx)(SelectItem, { value: "1.00", children: "1 - Poor" }), (0,jsx_runtime.jsx)(SelectItem, { value: "2.00", children: "2 - Fair" }), (0,jsx_runtime.jsx)(SelectItem, { value: "3.00", children: "3 - Good" }), (0,jsx_runtime.jsx)(SelectItem, { value: "4.00", children: "4 - Very Good" }), (0,jsx_runtime.jsx)(SelectItem, { value: "5.00", children: "5 - Excellent" })] })] }) }), (0,jsx_runtime.jsx)(FormMessage, {})] }));
                                             } }), (0,jsx_runtime.jsx)(FormField, { control: editSlaRatingEntryForm.control, name: "reason", render: function (_a) {
@@ -78091,7 +78253,12 @@ function YourSlaRatingsTab(_a) {
                                                                     ? (0,jsx_runtime.jsxs)(jsx_runtime.Fragment, { children: [(0,jsx_runtime.jsx)(ViewImprovementActionPlanDialog, { sla_rating: rating }), rating.customer_feedback_status
                                                                                 ? (0,jsx_runtime.jsx)(CustomerStatusDialog, { sla_rating: rating, isEdit: true })
                                                                                 : (0,jsx_runtime.jsx)(CustomerStatusDialog, { sla_rating: rating })] })
-                                                                    : (0,jsx_runtime.jsxs)(jsx_runtime.Fragment, { children: [(0,jsx_runtime.jsx)(EditSlaRatingEntryDialog, { rating: rating }), (0,jsx_runtime.jsx)(DropdownMenuItem, { children: "Delete SLA" })] })] })] }) })] }, index));
+                                                                    : (0,jsx_runtime.jsxs)(jsx_runtime.Fragment, { children: [(0,jsx_runtime.jsx)(EditSlaRatingEntryDialog, { rating: rating }), (0,jsx_runtime.jsx)(DropdownMenuItem, { onClick: function () {
+                                                                                    toast({
+                                                                                        title: "Coming soon.",
+                                                                                        description: "Not yet implemented. Coming soon."
+                                                                                    });
+                                                                                }, children: "Delete SLA Rating" })] })] })] }) })] }, index));
                                 })
                                 : (0,jsx_runtime.jsx)(TableRow, { className: "bg-accent", children: (0,jsx_runtime.jsx)(TableCell, { colSpan: 7, className: "border-x border-t text-center", children: (0,jsx_runtime.jsx)("div", { className: "text-muted-foreground", children: "No Data. You have not Rated any SLAs." }) }) }) })] }) })] }));
 }

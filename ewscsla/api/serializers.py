@@ -29,6 +29,7 @@ class DepartmentSerializer(serializers.ModelSerializer):
 class ListSlaEntrySerializer(serializers.ModelSerializer):
     department = DepartmentSerializer(many=False, read_only=True)
     added_by = serializers.SerializerMethodField()
+    is_author = serializers.SerializerMethodField()
 
     class Meta:
         model = SlaEntry
@@ -39,6 +40,12 @@ class ListSlaEntrySerializer(serializers.ModelSerializer):
             full_name = obj.added_by.get_full_name()
             return full_name if full_name else f"@{obj.added_by.username}"
         return None
+
+    def get_is_author(self, obj: SlaEntry):
+        request = self.context.get('request', None)
+        if request:
+            return request.user == obj.added_by
+        return False
 
 
 class SlaEntrySerializer(serializers.ModelSerializer):

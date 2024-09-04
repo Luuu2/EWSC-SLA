@@ -13,6 +13,8 @@ export type SlaEntry = {
     updated_at: Date;
     created_at: Date;
     added_by?: string;
+    // if the currently logged-in user is the author of the SLA
+    is_author: boolean;
 }
 
 export type SlaImprovementPlanAction = {
