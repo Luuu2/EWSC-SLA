@@ -88,7 +88,7 @@ export default function EditSlaRatingEntryDialog({rating}: EditSlaRatingEntryDia
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
-                <DropdownMenuItem onSelect={(e) => e.preventDefault()}>Edit SLA</DropdownMenuItem>
+                <DropdownMenuItem onSelect={(e) => e.preventDefault()}>Edit SLA Rating</DropdownMenuItem>
             </DialogTrigger>
             <DialogContent className="min-w-[650px]">
                 <DialogHeader>

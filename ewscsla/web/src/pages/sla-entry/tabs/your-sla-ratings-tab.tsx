@@ -261,7 +261,12 @@ export default function YourSlaRatingsTab(
                                                             </>
                                                             : <>
                                                                 <EditSlaRatingEntryDialog rating={rating}/>
-                                                                <DropdownMenuItem>Delete SLA</DropdownMenuItem>
+                                                                <DropdownMenuItem onClick={() => {
+                                                                    toast({
+                                                                        title: "Coming soon.",
+                                                                        description: "Not yet implemented. Coming soon."
+                                                                    })
+                                                                }}>Delete SLA Rating</DropdownMenuItem>
                                                             </>
                                                     }
                                                 </DropdownMenuContent>
