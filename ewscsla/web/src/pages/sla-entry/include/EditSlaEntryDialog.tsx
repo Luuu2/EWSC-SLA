@@ -9,16 +9,15 @@ import {
 } from "@/components/ui/dialog";
 import {Button} from "@/components/ui/button";
 import {format} from "date-fns";
-import {PlusCircle} from "lucide-react";
 import {z} from "zod";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import axios from "axios";
-import {API_ADD_SLA_ENTRY_FOR_DEPARTMENT_URL, API_GET_SLA_ENTRIES_BY_DEPARTMENT_URL} from "@/app/config";
-import {Department} from "@/types/types";
+import {API_GET_SLA_ENTRIES_BY_DEPARTMENT_URL} from "@/app/config";
+import {Department, SlaEntry} from "@/types/types";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
-import {useToast} from "@/components/ui/use-toast";
+import {toast} from "@/components/ui/use-toast";
 import {Textarea} from "@/components/ui/textarea";
 import {cn} from "@/lib/utils";
 import {CalendarIcon} from "@radix-ui/react-icons";
@@ -27,9 +26,10 @@ import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
 import {ScrollArea} from "@/components/ui/scroll-area";
 import {useState} from "react";
 import getCookie from "@/lib/csrf";
+import {DropdownMenuItem} from "@/components/ui/dropdown-menu";
 
 
-const addSlaEntryFormSchema = z.object({
+const editSlaEntryFormSchema = z.object({
     department: z.string({
         required_error: "Department field is required."
     }).min(1, {
@@ -49,37 +49,34 @@ const addSlaEntryFormSchema = z.object({
     }),
 })
 
-type AddSLAEntryDialogProps = {
+type EditSlaEntryDialogProps = {
     departments: Department[];
+    sla: SlaEntry;
 }
 
 
-export default function AddSLAEntryDialog(props: AddSLAEntryDialogProps) {
-    const {toast} = useToast();
-    const _date = new Date();
-    _date.setDate(_date.getDate() + 1);
-
+export default function EditSlaEntryDialog({sla, departments}: EditSlaEntryDialogProps) {
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
-    const addSlaEntryForm = useForm<z.infer<typeof addSlaEntryFormSchema>>({
-        resolver: zodResolver(addSlaEntryFormSchema),
+    const editSlaEntryForm = useForm<z.infer<typeof editSlaEntryFormSchema>>({
+        resolver: zodResolver(editSlaEntryFormSchema),
         defaultValues: {
-            department: '',
-            service_description: '',
-            customer_responsibility: '',
-            service_level: '',
-            date: _date
+            department: `${sla.department.id}`,
+            service_description: sla.service_description,
+            customer_responsibility: sla.customer_responsibility,
+            service_level: sla.service_level,
+            date: new Date(sla.date)
         },
     });
 
-    async function onAddSlaEntryFormSubmit(values: z.infer<typeof addSlaEntryFormSchema>) {
+    async function onEditSlaEntryFormSubmit(values: z.infer<typeof editSlaEntryFormSchema>) {
         const updatedValues = {
             ...values,
             department: parseInt(values.department),
             date: format(values.date, "yyyy-MM-dd")
         }
-        await axios.post(
-            API_ADD_SLA_ENTRY_FOR_DEPARTMENT_URL,
+        await axios.patch(
+            `${API_GET_SLA_ENTRIES_BY_DEPARTMENT_URL}${sla.id}/`,
             JSON.stringify(updatedValues),
             {
                 headers: {
@@ -92,26 +89,16 @@ export default function AddSLAEntryDialog(props: AddSLAEntryDialogProps) {
             toast({
                 variant: "success",
                 title: "Request successful.",
-                description: "SLA Entry successfully added.",
+                description: "SLA Entry successfully modified.",
             })
             setIsOpen(false);
-            addSlaEntryForm.reset();
+            editSlaEntryForm.reset();
         }).catch((error) => {
-
-            if (error?.response?.data?.error) {
-                // handle a maximum of 5 SLA per department
-                toast({
-                    variant: "destructive",
-                    title: "Uh oh! Maximum SLAs Reached.",
-                    description: `Failed to add SLA Entry. Each department can have a maximum of 5 SLA.`,
-                })
-            } else {
-                toast({
-                    variant: "destructive",
-                    title: "Uh oh! Something went wrong.",
-                    description: `Failed to add SLA Entry. There was a problem with your request. Code: ${error?.response?.status}`,
-                })
-            }
+            toast({
+                variant: "destructive",
+                title: "Uh oh! Something went wrong.",
+                description: `Failed to edit SLA Entry. There was a problem with your request. Code: ${error?.response?.status}`,
+            })
         });
     }
 
@@ -119,46 +106,41 @@ export default function AddSLAEntryDialog(props: AddSLAEntryDialogProps) {
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
-                <Button size="sm" className="h-7 gap-1">
-                    <PlusCircle className="h-3.5 w-3.5"/>
-                    <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                    Add SLA Entry
-                  </span>
-                </Button>
+                <DropdownMenuItem onSelect={(e) => e.preventDefault()}>Edit SLA Entry</DropdownMenuItem>
             </DialogTrigger>
             <DialogContent className="min-w-[650px]">
                 <DialogHeader>
                     <DialogTitle>Add New SLA Entry</DialogTitle>
                     <DialogDescription>
                         Fill in the required fields to enter a new SLA Entry.
-                        Please note each department can only have a maximum of 5 SLA entries.
+                        Please note each department can have an unlimited number of SLA entries.
                         Click save when you're done.
                     </DialogDescription>
                 </DialogHeader>
 
                 <ScrollArea className="max-h-[60vh] ">
 
-                    <Form {...addSlaEntryForm}>
-                        <form onSubmit={addSlaEntryForm.handleSubmit(onAddSlaEntryFormSubmit)} className={"px-3"}>
+                    <Form {...editSlaEntryForm}>
+                        <form onSubmit={editSlaEntryForm.handleSubmit(onEditSlaEntryFormSubmit)} className={"px-3"}>
 
                             <div className="grid gap-4 py-2">
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 items-start gap-4">
                                     <FormField
-                                        control={addSlaEntryForm.control}
+                                        control={editSlaEntryForm.control}
                                         name="department"
                                         render={({field}) => (
                                             <FormItem>
                                                 <FormLabel htmlFor={"role"}
                                                            className={"leading-1"}>Department</FormLabel>
                                                 <FormControl>
-                                                    <Select onValueChange={field.onChange}>
+                                                    <Select onValueChange={field.onChange} defaultValue={field.value}>
                                                         <SelectTrigger>
                                                             <SelectValue placeholder="Select department"/>
                                                         </SelectTrigger>
                                                         <SelectContent>
                                                             {
-                                                                props.departments.map((department, index) => (
+                                                                departments.map((department, index) => (
                                                                     <SelectItem
                                                                         key={index}
                                                                         value={`${department.id}`}
@@ -174,7 +156,7 @@ export default function AddSLAEntryDialog(props: AddSLAEntryDialogProps) {
 
 
                                     <FormField
-                                        control={addSlaEntryForm.control}
+                                        control={editSlaEntryForm.control}
                                         name="date"
                                         render={({field}) => (
                                             <FormItem className="flex flex-col">
@@ -221,7 +203,7 @@ export default function AddSLAEntryDialog(props: AddSLAEntryDialogProps) {
 
 
                                 <FormField
-                                    control={addSlaEntryForm.control}
+                                    control={editSlaEntryForm.control}
                                     name="service_description"
                                     render={({field}) => (
                                         <FormItem>
@@ -238,7 +220,7 @@ export default function AddSLAEntryDialog(props: AddSLAEntryDialogProps) {
                                     )}/>
 
                                 <FormField
-                                    control={addSlaEntryForm.control}
+                                    control={editSlaEntryForm.control}
                                     name="customer_responsibility"
                                     render={({field}) => (
                                         <FormItem>
@@ -255,7 +237,7 @@ export default function AddSLAEntryDialog(props: AddSLAEntryDialogProps) {
                                     )}/>
 
                                 <FormField
-                                    control={addSlaEntryForm.control}
+                                    control={editSlaEntryForm.control}
                                     name="service_level"
                                     render={({field}) => (
                                         <FormItem>
@@ -274,7 +256,7 @@ export default function AddSLAEntryDialog(props: AddSLAEntryDialogProps) {
                             </div>
 
                             <DialogFooter className={"justify-start"}>
-                                <Button type="submit" disabled={addSlaEntryForm.formState.isSubmitting}>
+                                <Button type="submit" disabled={editSlaEntryForm.formState.isSubmitting}>
                                     Save changes
                                 </Button>
                             </DialogFooter>

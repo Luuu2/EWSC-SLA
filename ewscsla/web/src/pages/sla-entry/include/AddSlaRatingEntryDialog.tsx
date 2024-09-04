@@ -88,7 +88,7 @@ export default function AddSlaRatingEntryDialog(props: AddSLARatingEntryDialogPr
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
-                <DropdownMenuItem onSelect={(e) => e.preventDefault()}>Rate SLA</DropdownMenuItem>
+                <DropdownMenuItem onSelect={(e) => e.preventDefault()}>Rate SLA Entry</DropdownMenuItem>
             </DialogTrigger>
             <DialogContent className="min-w-[650px]">
                 <DialogHeader>

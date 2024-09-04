@@ -16,6 +16,7 @@ import {Button} from "@/components/ui/button";
 import {MoreHorizontal} from "lucide-react";
 import {Department, SlaEntry} from "@/types/types";
 import AddSlaRatingEntryDialog from "@/pages/sla-entry/include/AddSlaRatingEntryDialog";
+import EditSlaEntryDialog from "@/pages/sla-entry/include/EditSlaEntryDialog";
 
 
 type SlaEntriesTabProps = {
@@ -82,9 +83,12 @@ export default function SlaEntriesTab(
                     <TableHeader>
                         <TableRow>
                             <TableHead className="border-x border-t sm:w-[25%]">Service Description</TableHead>
-                            <TableHead className="border-x border-t hidden sm:table-cell sm:w-[25%]">Customer Responsibility</TableHead>
-                            <TableHead className="border-x border-t hidden sm:table-cell sm:w-[15%]">Service Level</TableHead>
-                            <TableHead className="border-x border-t hidden md:table-cell md:w-[10%]">Department</TableHead>
+                            <TableHead className="border-x border-t hidden sm:table-cell sm:w-[25%]">Customer
+                                Responsibility</TableHead>
+                            <TableHead className="border-x border-t hidden sm:table-cell sm:w-[15%]">Service
+                                Level</TableHead>
+                            <TableHead
+                                className="border-x border-t hidden md:table-cell md:w-[10%]">Department</TableHead>
                             <TableHead className="border-x border-t hidden md:table-cell md:w-[8%]">Added By</TableHead>
                             <TableHead className="border-x border-t md:w-[9%]">Date</TableHead>
                             <TableHead className="border-x border-t md:w-[8%]">Actions</TableHead>
@@ -129,7 +133,15 @@ export default function SlaEntriesTab(
                                                 <DropdownMenuContent align="end">
                                                     <DropdownMenuLabel>Actions</DropdownMenuLabel>
                                                     <AddSlaRatingEntryDialog sla={entry}/>
-                                                    <DropdownMenuItem>Edit SLA</DropdownMenuItem>
+                                                    {
+                                                        entry.is_author
+                                                            ? <EditSlaEntryDialog departments={departments} sla={entry}/>
+                                                            : (
+                                                                <DropdownMenuItem disabled={true}>
+                                                                    Edit SLA Entry
+                                                                </DropdownMenuItem>
+                                                            )
+                                                    }
                                                 </DropdownMenuContent>
                                             </DropdownMenu>
                                         </TableCell>
