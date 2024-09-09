@@ -144,7 +144,7 @@ def generate_report(request):
 
         worksheet.append([
             "Internal Service Provider", "Internal Customer", "Report Qrt Date",
-            "Rating", "Reason for rating", "Agreed Improvement Action", "Due Date",
+            "Rating", "SLA", "Reason for rating", "Agreed Improvement Action", "Due Date",
             "Manager Status (Service Provider)", "Internal Customer Status"
         ])
 
@@ -154,6 +154,7 @@ def generate_report(request):
             customer = rating.rated_by.department.name if (rating.rated_by and rating.rated_by.department) else "N/A"
             sla_date = rating.sla.date.strftime("%Y-%m-%d")
             rating_value = str(int(rating.rating))
+            sla_description = rating.sla.service_description
             reason = rating.reason
             action_plan = rating.action_plan.improvement_action if hasattr(rating, 'action_plan') else "N/A"
             due_date = rating.action_plan.due_date.strftime("%Y-%m-%d") if hasattr(rating, 'action_plan') else "N/A"
@@ -162,8 +163,8 @@ def generate_report(request):
                 if hasattr(rating, 'customer_status') else "N/A"
 
             worksheet.append([
-                service_provider, customer, sla_date, rating_value, reason, action_plan, due_date, manager_status,
-                customer_status
+                service_provider, customer, sla_date, rating_value, sla_description, reason,
+                action_plan, due_date, manager_status, customer_status
             ])
 
         response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
