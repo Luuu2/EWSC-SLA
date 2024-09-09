@@ -78182,15 +78182,15 @@ function RatingBadge(_a) {
     var rating = _a.rating;
     switch (rating) {
         case "1.00":
-            return ((0,jsx_runtime.jsx)(Badge, { variant: "destructive", children: "Poor" }));
+            return ((0,jsx_runtime.jsx)(Badge, { variant: "destructive", children: "1.0" }));
         case "2.00":
-            return ((0,jsx_runtime.jsx)(Badge, { className: "border-transparent bg-orange-500 text-slate-50 shadow hover:bg-orange-500/80 dark:bg-orange-900 dark:text-slate-50 dark:hover:bg-orange-900/80", children: "Fair" }));
+            return ((0,jsx_runtime.jsx)(Badge, { className: "border-transparent bg-orange-500 text-slate-50 shadow hover:bg-orange-500/80 dark:bg-orange-900 dark:text-slate-50 dark:hover:bg-orange-900/80", children: "2.0" }));
         case "3.00":
-            return ((0,jsx_runtime.jsx)(Badge, { className: "border-transparent bg-yellow-500 text-slate-50 shadow hover:bg-yellow-500/80 dark:bg-yellow-900 dark:text-slate-50 dark:hover:bg-yellow-900/80", children: "Good" }));
+            return ((0,jsx_runtime.jsx)(Badge, { className: "border-transparent bg-yellow-500 text-slate-50 shadow hover:bg-yellow-500/80 dark:bg-yellow-900 dark:text-slate-50 dark:hover:bg-yellow-900/80", children: "3.0" }));
         case "4.00":
-            return ((0,jsx_runtime.jsx)(Badge, { className: "border-transparent bg-blue-500 text-slate-50 shadow hover:bg-blue-500/80 dark:bg-blue-900 dark:text-slate-50 dark:hover:bg-blue-900/80", children: "Very Good" }));
+            return ((0,jsx_runtime.jsx)(Badge, { className: "border-transparent bg-blue-500 text-slate-50 shadow hover:bg-blue-500/80 dark:bg-blue-900 dark:text-slate-50 dark:hover:bg-blue-900/80", children: "4.0" }));
         case "5.00":
-            return ((0,jsx_runtime.jsx)(Badge, { className: "border-transparent bg-green-500 text-slate-50 shadow hover:bg-green-500/80 dark:bg-green-900 dark:text-slate-50 dark:hover:bg-green-900/80", children: "Excellent" }));
+            return ((0,jsx_runtime.jsx)(Badge, { className: "border-transparent bg-green-500 text-slate-50 shadow hover:bg-green-500/80 dark:bg-green-900 dark:text-slate-50 dark:hover:bg-green-900/80", children: "5.0" }));
         default:
             return ((0,jsx_runtime.jsx)(Badge, { variant: "default", children: "Unknown" }));
     }
