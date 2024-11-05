@@ -96,8 +96,12 @@ export default function AddSlaRatingEntryDialog(props: AddSLARatingEntryDialogPr
                     <DialogDescription>
                         Fill in the required fields to rate the selected SLA Entry. If the Rating is Good, you can add
                         `N/A` for the reason.<br/>
-                        <p className={"font-bold"}>SLA: {props.sla.service_description}</p>
-                        <p className={"font-bold"}>DEPARTMENT: {props.sla.department.name}</p>
+                        <p className={"font-bold whitespace-pre-line"}>
+                            <span className="text-blue-600">SLA:</span> {props.sla.key_performance_area}
+                        </p>
+                        <p className={"font-bold"}>
+                            <span className="text-blue-600">DEPARTMENT:</span> {props.sla.department.name}
+                        </p>
                     </DialogDescription>
                 </DialogHeader>
 

@@ -82,15 +82,16 @@ export default function SlaEntriesTab(
 
                     <TableHeader>
                         <TableRow>
-                            <TableHead className="border-x border-t sm:w-[25%]">Service Description</TableHead>
-                            <TableHead className="border-x border-t hidden sm:table-cell sm:w-[25%]">Customer
+                            <TableHead className="border-x border-t sm:w-[20%]">Key Performance Area</TableHead>
+                            <TableHead className="border-x border-t sm:w-[20%]">Ser. Provider Responsibility</TableHead>
+                            <TableHead className="border-x border-t hidden sm:table-cell sm:w-[20%]">Customer
                                 Responsibility</TableHead>
-                            <TableHead className="border-x border-t hidden sm:table-cell sm:w-[15%]">Service
+                            <TableHead className="border-x border-t hidden sm:table-cell sm:w-[10%]">Service
                                 Level</TableHead>
                             <TableHead
-                                className="border-x border-t hidden md:table-cell md:w-[10%]">Department</TableHead>
-                            <TableHead className="border-x border-t hidden md:table-cell md:w-[8%]">Added By</TableHead>
-                            <TableHead className="border-x border-t md:w-[9%]">Date</TableHead>
+                                className="border-x border-t hidden md:table-cell md:w-[7%]">Department</TableHead>
+                            <TableHead className="border-x border-t hidden md:table-cell md:w-7%]">Added By</TableHead>
+                            <TableHead className="border-x border-t md:w-[8%]">Date</TableHead>
                             <TableHead className="border-x border-t md:w-[8%]">Actions</TableHead>
                         </TableRow>
                     </TableHeader>
@@ -102,9 +103,12 @@ export default function SlaEntriesTab(
                             Array.isArray(slaEntries) && slaEntries.length >= 1
                                 ? slaEntries.map((entry, index) => (
                                     <TableRow key={index} className={cn(index % 2 === 0 && "bg-accent")}>
-                                        <TableCell className={"border-x align-top"}>{entry.service_description}</TableCell>
+                                        <TableCell className={"border-x align-top whitespace-pre-line"}>{entry.key_performance_area}</TableCell>
+                                        <TableCell className="border-x hidden sm:table-cell align-top whitespace-pre-line">
+                                            {entry.service_provider_responsibility}
+                                        </TableCell>
                                         <TableCell
-                                            className="border-x hidden sm:table-cell align-top">{entry.customer_responsibility}</TableCell>
+                                            className="border-x hidden sm:table-cell align-top whitespace-pre-line">{entry.customer_responsibility}</TableCell>
                                         <TableCell
                                             className="border-x hidden sm:table-cell align-top">{entry.service_level}</TableCell>
                                         <TableCell className="border-x hidden md:table-cell text-nowrap align-top">

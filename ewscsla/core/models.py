@@ -28,7 +28,8 @@ class AuthUser(AbstractUser):
 
 class SlaEntry(models.Model):
     department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name="sla_entries")
-    service_description = models.TextField()
+    key_performance_area = models.TextField()
+    service_provider_responsibility = models.TextField(default="", blank=True)
     customer_responsibility = models.TextField()
     service_level = models.TextField()
     date = models.DateField(null=False)

@@ -196,7 +196,7 @@ export default function ImprovementActionPlan() {
                                 ? slaRatingsResponse.results.map((rating, index) => (
                                     <TableRow key={index} className={cn(index % 2 === 0 && "bg-accent")}>
                                         <TableCell
-                                            className={"border-x align-top"}>{rating?.sla?.service_description}</TableCell>
+                                            className={"border-x align-top whitespace-pre-line"}>{rating?.sla?.key_performance_area}</TableCell>
                                         <TableCell className="align-top">
                                             <Badge className="text-xs" variant="outline">
                                                 {rating?.sla?.department?.name}

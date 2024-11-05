@@ -6,7 +6,8 @@ export type Department = {
 export type SlaEntry = {
     id: number;
     department: Department;
-    service_description: string;
+    key_performance_area: string;
+    service_provider_responsibility: string;
     customer_responsibility: string;
     service_level: string;
     date: string;
