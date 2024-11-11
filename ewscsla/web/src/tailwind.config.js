@@ -10,6 +10,9 @@ module.exports = {
     ],
     prefix: "",
     theme: {
+        fontFamily: {
+            sans: ['"Open Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif', '"Apple Color Emoji"', '"Segoe UI Emoji"', '"Segoe UI Symbol"', '"Noto Color Emoji"']
+        },
         container: {
             center: true,
             padding: "2rem",
@@ -19,6 +22,7 @@ module.exports = {
         },
         extend: {
             colors: {
+                lusanda: "#196F96",
                 border: "hsl(var(--border))",
                 input: "hsl(var(--input))",
                 ring: "hsl(var(--ring))",
