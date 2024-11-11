@@ -46,8 +46,8 @@ export function MainNav({className, ...props}: React.HTMLAttributes<HTMLElement>
                                 key={index}
                                 to={route.url}
                                 className={cn(
-                                    "hidden lg:block text-sm font-medium text-muted-foreground transition-colors hover:text-primary",
-                                    (pathname === route.url) && "text-primary"
+                                    "hidden lg:block text-sm font-medium text-muted-foreground transition-colors hover:text-lusanda",
+                                    (pathname === route.url) && "text-lusanda"
                                 )}
                             >
                                 {route.route}
@@ -86,7 +86,7 @@ export function MainNav({className, ...props}: React.HTMLAttributes<HTMLElement>
                                         to={route.url}
                                         className={cn(
                                             "text-muted-foreground hover:text-foreground",
-                                            (pathname === route.url) && "text-primary"
+                                            (pathname === route.url) && "text-lusanda"
                                         )}
                                     >
                                         {route.route}

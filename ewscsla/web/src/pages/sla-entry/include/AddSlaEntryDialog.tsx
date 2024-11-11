@@ -35,8 +35,11 @@ const addSlaEntryFormSchema = z.object({
     }).min(1, {
         message: "Select a valid option."
     }),
-    service_description: z.string({
-        required_error: "Service description is required."
+    key_performance_area: z.string({
+        required_error: "Key performance area is required."
+    }).min(5),
+    service_provider_responsibility: z.string({
+        required_error: "Service provider responsibility is required."
     }).min(5),
     customer_responsibility: z.string({
         required_error: "Customer responsibility is required."
@@ -64,7 +67,8 @@ export default function AddSlaEntryDialog(props: AddSLAEntryDialogProps) {
         resolver: zodResolver(addSlaEntryFormSchema),
         defaultValues: {
             department: '',
-            service_description: '',
+            key_performance_area: '',
+            service_provider_responsibility: '',
             customer_responsibility: '',
             service_level: '',
             date: _date
@@ -221,13 +225,30 @@ export default function AddSlaEntryDialog(props: AddSLAEntryDialogProps) {
 
                                 <FormField
                                     control={addSlaEntryForm.control}
-                                    name="service_description"
+                                    name="key_performance_area"
                                     render={({field}) => (
                                         <FormItem>
-                                            <FormLabel>Service description:</FormLabel>
+                                            <FormLabel>Key performance area:</FormLabel>
                                             <FormControl>
                                                 <Textarea
-                                                    placeholder="Explain your service description"
+                                                    placeholder="Explain your performance area..."
+                                                    className="resize-none"
+                                                    {...field}
+                                                />
+                                            </FormControl>
+                                            <FormMessage/>
+                                        </FormItem>
+                                    )}/>
+
+                                <FormField
+                                    control={addSlaEntryForm.control}
+                                    name="service_provider_responsibility"
+                                    render={({field}) => (
+                                        <FormItem>
+                                            <FormLabel>Service Provider Responsibility:</FormLabel>
+                                            <FormControl>
+                                                <Textarea
+                                                    placeholder="Explain the service provider responsibility."
                                                     className="resize-none"
                                                     {...field}
                                                 />
@@ -244,7 +265,7 @@ export default function AddSlaEntryDialog(props: AddSLAEntryDialogProps) {
                                             <FormLabel>Customer responsibility:</FormLabel>
                                             <FormControl>
                                                 <Textarea
-                                                    placeholder="Explain the customer responsibility"
+                                                    placeholder="Explain the customer's responsibility"
                                                     className="resize-none"
                                                     {...field}
                                                 />

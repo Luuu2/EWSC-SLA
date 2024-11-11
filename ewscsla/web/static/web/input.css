@@ -51,4 +51,11 @@
     .next-btn-disabled {
         @apply next-btn cursor-not-allowed;
     }
+
+    .text-border {
+        text-shadow: 2px 2px 0 #196F96,
+        -2px -2px 0 #196F96,
+        2px -2px 0 #196F96,
+        -2px 2px #196F96;
+    }
 }

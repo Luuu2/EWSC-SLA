@@ -35,8 +35,11 @@ const editSlaEntryFormSchema = z.object({
     }).min(1, {
         message: "Select a valid option."
     }),
-    service_description: z.string({
-        required_error: "Service description is required."
+    key_performance_area: z.string({
+        required_error: "Key performance area is required."
+    }).min(5),
+    service_provider_responsibility: z.string({
+        required_error: "Service provider responsibility is required."
     }).min(5),
     customer_responsibility: z.string({
         required_error: "Customer responsibility is required."
@@ -62,7 +65,8 @@ export default function EditSlaEntryDialog({sla, departments}: EditSlaEntryDialo
         resolver: zodResolver(editSlaEntryFormSchema),
         defaultValues: {
             department: `${sla.department.id}`,
-            service_description: sla.service_description,
+            key_performance_area: sla.key_performance_area,
+            service_provider_responsibility: sla.service_provider_responsibility,
             customer_responsibility: sla.customer_responsibility,
             service_level: sla.service_level,
             date: new Date(sla.date)
@@ -204,13 +208,30 @@ export default function EditSlaEntryDialog({sla, departments}: EditSlaEntryDialo
 
                                 <FormField
                                     control={editSlaEntryForm.control}
-                                    name="service_description"
+                                    name="key_performance_area"
                                     render={({field}) => (
                                         <FormItem>
-                                            <FormLabel>Service description:</FormLabel>
+                                            <FormLabel>Key Performance Area:</FormLabel>
                                             <FormControl>
                                                 <Textarea
-                                                    placeholder="Explain your service description"
+                                                    placeholder="Explain your performance area...."
+                                                    className="resize-none"
+                                                    {...field}
+                                                />
+                                            </FormControl>
+                                            <FormMessage/>
+                                        </FormItem>
+                                    )}/>
+
+                                <FormField
+                                    control={editSlaEntryForm.control}
+                                    name="service_provider_responsibility"
+                                    render={({field}) => (
+                                        <FormItem>
+                                            <FormLabel>Service Provider Responsibility:</FormLabel>
+                                            <FormControl>
+                                                <Textarea
+                                                    placeholder="Explain the service provider responsibility."
                                                     className="resize-none"
                                                     {...field}
                                                 />

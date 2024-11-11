@@ -154,7 +154,7 @@ def generate_report(request):
             customer = rating.rated_by.department.name if (rating.rated_by and rating.rated_by.department) else "N/A"
             sla_date = rating.sla.date.strftime("%Y-%m-%d")
             rating_value = str(int(rating.rating))
-            sla_description = rating.sla.service_description
+            key_performance_area = rating.sla.key_performance_area
             reason = rating.reason
             action_plan = rating.action_plan.improvement_action if hasattr(rating, 'action_plan') else "N/A"
             due_date = rating.action_plan.due_date.strftime("%Y-%m-%d") if hasattr(rating, 'action_plan') else "N/A"
@@ -163,7 +163,7 @@ def generate_report(request):
                 if hasattr(rating, 'customer_status') else "N/A"
 
             worksheet.append([
-                service_provider, customer, sla_date, rating_value, sla_description, reason,
+                service_provider, customer, sla_date, rating_value, key_performance_area, reason,
                 action_plan, due_date, manager_status, customer_status
             ])
 
@@ -201,7 +201,7 @@ def export_sla_entries(request):
         for sla in sla_entries:
             worksheet.append([
                 sla.department.name,
-                sla.service_description,
+                sla.key_performance_area,
                 sla.customer_responsibility,
                 sla.service_level,
                 sla.date.strftime("%Y-%m-%d"),

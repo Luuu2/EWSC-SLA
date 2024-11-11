@@ -6,6 +6,9 @@ module.exports = {
         './node_modules/flowbite/**/*.js'
     ],
     theme: {
+        fontFamily: {
+            sans: ['"Open Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif', '"Apple Color Emoji"', '"Segoe UI Emoji"', '"Segoe UI Symbol"', '"Noto Color Emoji"']
+        },
         extend: {},
     },
     plugins: ["tailwindcss ,autoprefixer", require('flowbite/plugin')],

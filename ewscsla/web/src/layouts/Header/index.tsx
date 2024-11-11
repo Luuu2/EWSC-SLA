@@ -1,10 +1,11 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {MainNav} from "@/layouts/Header/main-nav";
 import {Search} from "@/pages/dashboard/utils/search";
 import {Button} from "@/components/ui/button";
 import {MoonIcon, SunIcon} from "@radix-ui/react-icons";
 import {UserNav} from "@/layouts/Header/user-nav";
 import {useTheme} from "@/components/theme/theme-provider";
+import Banner from "@/layouts/Header/banner";
 
 
 export default function Header() {
@@ -19,6 +20,7 @@ export default function Header() {
 
     return (
         <header className="border-b sticky z-[50] top-0 backdrop-blur-xl">
+            <Banner/>
             <div className="flex h-16 items-center px-4">
                 <MainNav/>
                 <div className="ml-auto flex items-center space-x-4">
