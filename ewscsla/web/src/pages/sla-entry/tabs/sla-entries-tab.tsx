@@ -152,7 +152,7 @@ export default function SlaEntriesTab(
                                     </TableRow>
                                 ))
                                 : <TableRow className="bg-accent">
-                                    <TableCell colSpan={7} className={"border-x text-center"}>
+                                    <TableCell colSpan={8} className={"border-x text-center"}>
                                         <div className="text-muted-foreground">
                                             No Data. No SLA entries for selected department.
                                         </div>
