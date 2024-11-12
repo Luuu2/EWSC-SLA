@@ -32,7 +32,7 @@ export function MainNav({className, ...props}: React.HTMLAttributes<HTMLElement>
     const {pathname} = useLocation();
 
     return (
-        <header className="sticky top-0 z-50">
+        <>
             <nav
                 className={cn("hidden md:flex items-center space-x-4 lg:space-x-6", className)}
                 {...props}
@@ -98,6 +98,6 @@ export function MainNav({className, ...props}: React.HTMLAttributes<HTMLElement>
                 </SheetContent>
             </Sheet>
 
-        </header>
+        </>
     )
 }
