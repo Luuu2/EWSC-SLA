@@ -36,6 +36,7 @@ import {
     PaginationNext,
     PaginationPrevious
 } from "@/components/ui/pagination";
+import {SelectGroup} from "@radix-ui/react-select";
 
 
 type SlaRatingsResponse = {
@@ -148,14 +149,16 @@ export default function ImprovementActionPlan() {
                                                 <SelectValue placeholder="Select department"/>
                                             </SelectTrigger>
                                             <SelectContent>
-                                                {
-                                                    departments.map((department, index) => (
-                                                        <SelectItem
-                                                            key={index}
-                                                            value={`${department.id}`}
-                                                        >{department.name}</SelectItem>
-                                                    ))
-                                                }
+                                                <SelectGroup className="overflow-y-auto max-h-[15rem]">
+                                                    {
+                                                        departments.map((department, index) => (
+                                                            <SelectItem
+                                                                key={index}
+                                                                value={`${department.id}`}
+                                                            >{department.name}</SelectItem>
+                                                        ))
+                                                    }
+                                                </SelectGroup>
                                             </SelectContent>
                                         </Select>
                                     </FormControl>

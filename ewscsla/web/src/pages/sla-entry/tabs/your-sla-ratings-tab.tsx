@@ -23,6 +23,7 @@ import {searchSlasFormSchema} from "@/pages/sla-entry";
 import ViewImprovementActionPlanDialog from "@/pages/improvement-action-plan/include/ViewImprovementActionPlanDialog";
 import CustomerStatusDialog from "@/pages/sla-entry/include/CustomerStatusDialog";
 import EditSlaRatingEntryDialog from "@/pages/sla-entry/include/EditSlaRatingEntryDialog";
+import {SelectGroup} from "@radix-ui/react-select";
 
 type RatingBadgeProps = {
     rating: string;
@@ -162,14 +163,16 @@ export default function YourSlaRatingsTab(
                                                 <SelectValue placeholder="Select department"/>
                                             </SelectTrigger>
                                             <SelectContent>
-                                                {
-                                                    departments.map((department, index) => (
-                                                        <SelectItem
-                                                            key={index}
-                                                            value={`${department.id}`}
-                                                        >{department.name}</SelectItem>
-                                                    ))
-                                                }
+                                                <SelectGroup className="overflow-y-auto max-h-[15rem]">
+                                                    {
+                                                        departments.map((department, index) => (
+                                                            <SelectItem
+                                                                key={index}
+                                                                value={`${department.id}`}
+                                                            >{department.name}</SelectItem>
+                                                        ))
+                                                    }
+                                                </SelectGroup>
                                             </SelectContent>
                                         </Select>
                                     </FormControl>

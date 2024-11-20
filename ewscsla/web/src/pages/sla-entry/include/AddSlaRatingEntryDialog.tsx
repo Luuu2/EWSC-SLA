@@ -123,11 +123,11 @@ export default function AddSlaRatingEntryDialog(props: AddSLARatingEntryDialogPr
                                                     <SelectValue placeholder="Select rating"/>
                                                 </SelectTrigger>
                                                 <SelectContent>
-                                                    <SelectItem value="1">1 - Poor</SelectItem>
-                                                    <SelectItem value="2">2 - Fair</SelectItem>
-                                                    <SelectItem value="3">3 - Good</SelectItem>
-                                                    <SelectItem value="4">4 - Very Good</SelectItem>
-                                                    <SelectItem value="5">5 - Excellent</SelectItem>
+                                                    <SelectItem value="1">1 - Met Once</SelectItem>
+                                                    <SelectItem value="2">2 - Met Some</SelectItem>
+                                                    <SelectItem value="3">3 - Met All</SelectItem>
+                                                    <SelectItem value="4">4 - Exceeded Some</SelectItem>
+                                                    <SelectItem value="5">5 - Exceeded All</SelectItem>
                                                 </SelectContent>
                                             </Select>
                                         </FormControl>

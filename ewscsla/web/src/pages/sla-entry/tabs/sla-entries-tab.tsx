@@ -17,6 +17,7 @@ import {MoreHorizontal} from "lucide-react";
 import {Department, SlaEntry} from "@/types/types";
 import AddSlaRatingEntryDialog from "@/pages/sla-entry/include/AddSlaRatingEntryDialog";
 import EditSlaEntryDialog from "@/pages/sla-entry/include/EditSlaEntryDialog";
+import {SelectGroup} from "@radix-ui/react-select";
 
 
 type SlaEntriesTabProps = {
@@ -53,14 +54,16 @@ export default function SlaEntriesTab(
                                                 <SelectValue placeholder="Select department"/>
                                             </SelectTrigger>
                                             <SelectContent>
-                                                {
-                                                    departments.map((department, index) => (
-                                                        <SelectItem
-                                                            key={index}
-                                                            value={`${department.id}`}
-                                                        >{department.name}</SelectItem>
-                                                    ))
-                                                }
+                                                <SelectGroup className="overflow-y-auto max-h-[15rem]">
+                                                    {
+                                                        departments.map((department, index) => (
+                                                            <SelectItem
+                                                                key={index}
+                                                                value={`${department.id}`}
+                                                            >{department.name}</SelectItem>
+                                                        ))
+                                                    }
+                                                </SelectGroup>
                                             </SelectContent>
                                         </Select>
                                     </FormControl>
@@ -103,14 +106,15 @@ export default function SlaEntriesTab(
                             Array.isArray(slaEntries) && slaEntries.length >= 1
                                 ? slaEntries.map((entry, index) => (
                                     <TableRow key={index} className={cn(index % 2 === 0 && "bg-accent")}>
-                                        <TableCell className={"border-x align-top whitespace-pre-line"}>{entry.key_performance_area}</TableCell>
+                                        <TableCell
+                                            className={"border-x align-top whitespace-pre-line"}>{entry.key_performance_area}</TableCell>
                                         <TableCell className="border-x hidden sm:table-cell align-top whitespace-pre-line">
                                             {entry.service_provider_responsibility}
                                         </TableCell>
                                         <TableCell
                                             className="border-x hidden sm:table-cell align-top whitespace-pre-line">{entry.customer_responsibility}</TableCell>
                                         <TableCell
-                                            className="border-x hidden sm:table-cell align-top">{entry.service_level}</TableCell>
+                                            className="border-x hidden sm:table-cell align-top whitespace-pre-line">{entry.service_level}</TableCell>
                                         <TableCell className="border-x hidden md:table-cell text-nowrap align-top">
                                             <Badge className="text-xs text-center" variant="outline">
                                                 {entry.department.name}
