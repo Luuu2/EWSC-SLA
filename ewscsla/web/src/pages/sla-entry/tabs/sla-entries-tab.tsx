@@ -18,6 +18,7 @@ import {Department, SlaEntry} from "@/types/types";
 import AddSlaRatingEntryDialog from "@/pages/sla-entry/include/AddSlaRatingEntryDialog";
 import EditSlaEntryDialog from "@/pages/sla-entry/include/EditSlaEntryDialog";
 import {SelectGroup} from "@radix-ui/react-select";
+import LineClampWithDialog from "@/components/LineClampWithDialog";
 
 
 type SlaEntriesTabProps = {
@@ -85,11 +86,11 @@ export default function SlaEntriesTab(
 
                     <TableHeader>
                         <TableRow>
-                            <TableHead className="border-x border-t sm:w-[20%]">Key Performance Area</TableHead>
-                            <TableHead className="border-x border-t sm:w-[20%]">Ser. Provider Responsibility</TableHead>
-                            <TableHead className="border-x border-t hidden sm:table-cell sm:w-[20%]">Customer
+                            <TableHead className="border-x border-t sm:w-[19%]">Key Performance Area</TableHead>
+                            <TableHead className="border-x border-t sm:w-[17%]">Ser. Provider Responsibility</TableHead>
+                            <TableHead className="border-x border-t hidden sm:table-cell sm:w-[17%]">Customer
                                 Responsibility</TableHead>
-                            <TableHead className="border-x border-t hidden sm:table-cell sm:w-[10%]">Service
+                            <TableHead className="border-x border-t hidden sm:table-cell sm:w-[17%]">Service
                                 Level</TableHead>
                             <TableHead
                                 className="border-x border-t hidden md:table-cell md:w-[7%]">Department</TableHead>
@@ -113,8 +114,9 @@ export default function SlaEntriesTab(
                                         </TableCell>
                                         <TableCell
                                             className="border-x hidden sm:table-cell align-top whitespace-pre-line">{entry.customer_responsibility}</TableCell>
-                                        <TableCell
-                                            className="border-x hidden sm:table-cell align-top whitespace-pre-line">{entry.service_level}</TableCell>
+                                        <TableCell className="border-x hidden sm:table-cell align-top whitespace-pre-line">
+                                            <LineClampWithDialog title="Service Level" content={entry.service_level} />
+                                        </TableCell>
                                         <TableCell className="border-x hidden md:table-cell text-nowrap align-top">
                                             <Badge className="text-xs text-center" variant="outline">
                                                 {entry.department.name}
