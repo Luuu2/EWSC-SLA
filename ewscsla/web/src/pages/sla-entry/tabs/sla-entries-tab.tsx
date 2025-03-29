@@ -110,10 +110,12 @@ export default function SlaEntriesTab(
                                         <TableCell
                                             className={"border-x align-top whitespace-pre-line"}>{entry.key_performance_area}</TableCell>
                                         <TableCell className="border-x hidden sm:table-cell align-top whitespace-pre-line">
-                                            {entry.service_provider_responsibility}
+                                            <LineClampWithDialog title="Service Provider Responsibility" content={entry.service_provider_responsibility} />
                                         </TableCell>
                                         <TableCell
-                                            className="border-x hidden sm:table-cell align-top whitespace-pre-line">{entry.customer_responsibility}</TableCell>
+                                            className="border-x hidden sm:table-cell align-top whitespace-pre-line">
+                                            <LineClampWithDialog title="Customer Responsibility" content={entry.customer_responsibility} />
+                                        </TableCell>
                                         <TableCell className="border-x hidden sm:table-cell align-top whitespace-pre-line">
                                             <LineClampWithDialog title="Service Level" content={entry.service_level} />
                                         </TableCell>
