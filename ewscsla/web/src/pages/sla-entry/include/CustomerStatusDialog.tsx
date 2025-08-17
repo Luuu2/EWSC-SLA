@@ -23,7 +23,7 @@ import {useState} from "react";
 import getCookie from "@/lib/csrf";
 import {DropdownMenuItem} from "@/components/ui/dropdown-menu";
 import {format} from "date-fns";
-import {StatusBadge} from "@/pages/sla-entry/tabs/your-sla-ratings-tab";
+import {RatingBadge, StatusBadge} from "@/pages/sla-entry/tabs/your-sla-ratings-tab";
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
 
 
@@ -136,7 +136,7 @@ export default function CustomerStatusDialog({sla_rating, isEdit}: AddCustomerSt
                     <DialogDescription>
                         Fill in the required fields to set the customer status for the given SLA rating and improvement
                         action plan.<br/>
-                        <p className={"font-bold"}>Rating: {sla_rating.rating}</p>
+                        <p className={"font-bold"}>Rating: <RatingBadge rating={sla_rating.rating} /></p>
                         <p className={"font-bold"}>Reason: {sla_rating.reason}</p>
                     </DialogDescription>
                 </DialogHeader>

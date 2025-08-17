@@ -160,25 +160,22 @@ export default function AddSlaRatingEntryDialog(props: AddSLARatingEntryDialogPr
                                     </FormItem>
                                 )}/>
 
-                            {/* Conditionally render the Reason field */}
-                            {isReasonRequired && (
-                                <FormField
-                                    control={addSlaRatingEntryForm.control}
-                                    name="reason"
-                                    render={({field}) => (
-                                        <FormItem>
-                                            <FormLabel>Rating Reason: {isReasonRequired && <span className="text-red-500">*</span>}</FormLabel>
-                                            <FormControl>
-                                                <Textarea
-                                                    placeholder="Describe your rating reason......."
-                                                    className="resize-none"
-                                                    {...field}
-                                                />
-                                            </FormControl>
-                                            <FormMessage/>
-                                        </FormItem>
-                                    )}/>
-                            )}
+                            <FormField
+                                control={addSlaRatingEntryForm.control}
+                                name="reason"
+                                render={({field}) => (
+                                    <FormItem>
+                                        <FormLabel>Rating Reason: {isReasonRequired && <span className="text-red-500">*</span>}</FormLabel>
+                                        <FormControl>
+                                            <Textarea
+                                                placeholder="Describe your rating reason......."
+                                                className="resize-none"
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                        <FormMessage/>
+                                    </FormItem>
+                                )}/>   
 
                         </div>
 

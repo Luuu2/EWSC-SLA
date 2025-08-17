@@ -33,34 +33,34 @@ export function RatingBadge({rating}: RatingBadgeProps) {
     switch (rating) {
         case "1.00":
             return (
-                <Badge variant="destructive">1.0</Badge>
+                <Badge variant="destructive">1.0-Met None</Badge>
             )
         case "2.00":
             return (
                 <Badge
                     className={"border-transparent bg-orange-500 text-slate-50 shadow hover:bg-orange-500/80 dark:bg-orange-900 dark:text-slate-50 dark:hover:bg-orange-900/80"}>
-                    2.0
+                    2.0-Met Some
                 </Badge>
             )
         case "3.00":
             return (
                 <Badge
                     className={"border-transparent bg-yellow-500 text-slate-50 shadow hover:bg-yellow-500/80 dark:bg-yellow-900 dark:text-slate-50 dark:hover:bg-yellow-900/80"}>
-                    3.0
+                    3.0-Met All
                 </Badge>
             )
         case "4.00":
             return (
                 <Badge
                     className={"border-transparent bg-blue-500 text-slate-50 shadow hover:bg-blue-500/80 dark:bg-blue-900 dark:text-slate-50 dark:hover:bg-blue-900/80"}>
-                    4.0
+                    4.0-Exceeded Some
                 </Badge>
             )
         case "5.00":
             return (
                 <Badge
                     className={"border-transparent bg-green-500 text-slate-50 shadow hover:bg-green-500/80 dark:bg-green-900 dark:text-slate-50 dark:hover:bg-green-900/80"}>
-                    5.0
+                    5.0-Exceeded All
                 </Badge>
             )
         default:

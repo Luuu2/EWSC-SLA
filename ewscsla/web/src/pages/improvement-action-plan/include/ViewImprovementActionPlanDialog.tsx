@@ -10,7 +10,7 @@ import {SlaRatingEntry} from "@/types/types";
 import {DropdownMenuItem} from "@/components/ui/dropdown-menu";
 import {format} from "date-fns";
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
-import {StatusBadge} from "@/pages/sla-entry/tabs/your-sla-ratings-tab";
+import {RatingBadge, StatusBadge} from "@/pages/sla-entry/tabs/your-sla-ratings-tab";
 
 
 type ViewImprovementActionPlanDialogProps = {
@@ -29,7 +29,7 @@ export default function ViewImprovementActionPlanDialog({sla_rating}: ViewImprov
                     <DialogTitle>View Improvement Action Plan</DialogTitle>
                     <DialogDescription>
                         <p className={"font-bold"}>
-                            Rating: {sla_rating.rating}
+                            Rating: <RatingBadge rating={sla_rating.rating} />
                         </p>
                         <p className={"font-bold"}>Reason: {sla_rating.reason}</p>
                     </DialogDescription>

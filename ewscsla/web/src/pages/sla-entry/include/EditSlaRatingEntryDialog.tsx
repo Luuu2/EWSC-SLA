@@ -31,10 +31,21 @@ const editSlaRatingEntryFormSchema = z.object({
     }),
     rating: z.string({
         required_error: "Rating is required."
-    }),
-    reason: z.string({
-        required_error: "Rating reason is required."
-    }).min(2),
+    }).min(1),
+    reason: z.string().optional(),
+}).superRefine((data, ctx) => {
+    // Check if the rating is a string and can be parsed to a number
+    const ratingValue = parseInt(data.rating, 10);
+    // If the rating is less than 3, we require the reason field.
+    if (ratingValue < 3) {
+        if (!data.reason || data.reason.trim() === '') {
+            ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: "Rating reason is required for ratings below 3.",
+                path: ['reason'],
+            });
+        }
+    }
 })
 
 type EditSlaRatingEntryDialogProps = {
@@ -74,6 +85,17 @@ export default function EditSlaRatingEntryDialog({rating}: EditSlaRatingEntryDia
             setIsOpen(false);
             editSlaRatingEntryForm.reset();
         }).catch((error) => {
+            const data = error?.response?.data;
+            if (data?.reason) {
+                editSlaRatingEntryForm.setError('reason',{
+                    message:  data?.reason?.[0]
+                })
+            }
+            if (data?.rating) {
+                editSlaRatingEntryForm.setError('rating', {
+                    message: data?.rating?.[0]
+                })
+            }
 
             toast({
                 variant: "destructive",
@@ -123,11 +145,11 @@ export default function EditSlaRatingEntryDialog({rating}: EditSlaRatingEntryDia
                                                     <SelectValue placeholder="Select rating"/>
                                                 </SelectTrigger>
                                                 <SelectContent>
-                                                    <SelectItem value="1.00">1 - Poor</SelectItem>
-                                                    <SelectItem value="2.00">2 - Fair</SelectItem>
-                                                    <SelectItem value="3.00">3 - Good</SelectItem>
-                                                    <SelectItem value="4.00">4 - Very Good</SelectItem>
-                                                    <SelectItem value="5.00">5 - Excellent</SelectItem>
+                                                    <SelectItem value="1.00">1 - Met Once</SelectItem>
+                                                    <SelectItem value="2.00">2 - Met Some</SelectItem>
+                                                    <SelectItem value="3.00">3 - Met All</SelectItem>
+                                                    <SelectItem value="4.00">4 - Exceeded Some</SelectItem>
+                                                    <SelectItem value="5.00">5 - Exceeded All</SelectItem>
                                                 </SelectContent>
                                             </Select>
                                         </FormControl>

@@ -28,6 +28,7 @@ import {cn} from "@/lib/utils";
 import {format} from "date-fns";
 import {CalendarIcon} from "@radix-ui/react-icons";
 import {Calendar} from "@/components/ui/calendar";
+import { RatingBadge } from "@/pages/sla-entry/tabs/your-sla-ratings-tab";
 
 
 const addSlaImprovementActionPlanFormSchema = z.object({
@@ -144,7 +145,7 @@ export default function ImprovementActionPlanDialog({sla_rating, isEdit}: Improv
                     <DialogDescription>
                         Fill in the required fields to add/edit an improvement action plan.<br/>
                         <p className={"font-bold"}>
-                            Rating: {sla_rating.rating}
+                            Rating: <RatingBadge rating={sla_rating.rating} />
                         </p>
                         <p className={"font-bold"}>Reason: {sla_rating.reason}</p>
                     </DialogDescription>
