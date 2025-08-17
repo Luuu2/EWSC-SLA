@@ -66,14 +66,25 @@ export default function AllSlaRatingsTab({
     SlaRatingEntry[]
   >([]);
 
+  const [filterBy, setFilterBy] = useState<string>("all");
+
   async function onSearchAllSlaEntryRatings(
     values: z.infer<typeof searchSlasFormSchema>
   ) {
+    const params: { department?: string; filter_by?: string } = {};
+
+    if (values.department) {
+      params.department = values.department;
+    }
+
+    // Check if the user wants to filter by their own SLA entries
+    if (filterBy === "my_entries") {
+      params.filter_by = "my_entries";
+    }
+
     await axios
       .get(API_SLA_RATING_ENTRIES_FOR_DEPARTMENT_URL, {
-        params: {
-          department: values.department,
-        },
+        params: params,
       })
       .then((response) => {
         console.log("All SLA ratings response:", response.data);
@@ -100,12 +111,27 @@ export default function AllSlaRatingsTab({
     <Card className="min-h-[300px] mb-5">
       <CardHeader className="flex flex-col md:flex-row justify-between md:items-center px-7">
         <div className={"flex-1 grid gap-2"}>
-          <CardTitle className={"text-3xl font-semibold tracking-tight"}>
-            All SLA Ratings
-          </CardTitle>
-          <CardDescription className={"max-w-lg"}>
-            Browse and filter all SLA ratings in the system.
-          </CardDescription>
+          {/* Conditional rendering for the title and description */}
+          {filterBy === "my_entries" ? (
+            <>
+              <CardTitle className={"text-3xl font-semibold tracking-tight"}>
+                All SLA Ratings | Related to your entries
+              </CardTitle>
+              <CardDescription className={"max-w-lg"}>
+                Browse all ratings on the SLA entries you have created. This shows all the ratings related to the SLA entries you have entered.
+                Ratings for all the SLA Entries you OWN.
+              </CardDescription>
+            </>
+          ) : (
+            <>
+              <CardTitle className={"text-3xl font-semibold tracking-tight"}>
+                All SLA Ratings
+              </CardTitle>
+              <CardDescription className={"max-w-lg"}>
+                Browse and filter all SLA ratings in the system.
+              </CardDescription>
+            </>
+          )}
         </div>
 
         <Form {...searchSlasForm}>
@@ -142,6 +168,31 @@ export default function AllSlaRatingsTab({
                 </FormItem>
               )}
             />
+
+            {/* New filter for ratings related to user's SLA entries */}
+            <FormItem className={"min-w-[200px]"}>
+              <FormLabel>Filter</FormLabel>
+              <FormControl>
+                <Select
+                  onValueChange={(value) => setFilterBy(value)}
+                  defaultValue={filterBy}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select filter option" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="all">All Ratings</SelectItem>
+                      <SelectItem value="my_entries">
+                        Ratings on My Entries
+                      </SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+
             <LoadingButton
               loading={searchSlasForm.formState.isSubmitting}
               size={"default"}

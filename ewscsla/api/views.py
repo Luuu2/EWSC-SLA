@@ -86,6 +86,14 @@ class SlaRatingEntryViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated, ]
     pagination_class = ListPagination
     filterset_class = SlaRatingFilter
+    
+    def get_queryset(self):
+        queryset = self.queryset
+        filter_by = self.request.query_params.get('filter_by')
+        if filter_by == 'my_entries':
+            # Filter by the current user's SLA entries
+            queryset = queryset.filter(sla__added_by=self.request.user)
+        return queryset.order_by('pk')
 
     def get_serializer_class(self):
         if self.action == 'list' or self.action == 'retrieve':
