@@ -31,10 +31,21 @@ const addSlaRatingEntryFormSchema = z.object({
     }),
     rating: z.string({
         required_error: "Rating is required."
-    }),
-    reason: z.string({
-        required_error: "Rating reason is required."
-    }).min(2),
+    }).min(1),
+    reason: z.string().optional(),
+}).superRefine((data, ctx) => {
+    // Check if the rating is a string and can be parsed to a number
+    const ratingValue = parseInt(data.rating, 10);
+    // If the rating is less than 3, we require the reason field.
+    if (ratingValue < 3) {
+        if (!data.reason || data.reason.trim() === '') {
+            ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: "Rating reason is required for ratings below 3.",
+                path: ['reason'],
+            });
+        }
+    }
 })
 
 type AddSLARatingEntryDialogProps = {
@@ -49,7 +60,7 @@ export default function AddSlaRatingEntryDialog(props: AddSLARatingEntryDialogPr
         resolver: zodResolver(addSlaRatingEntryFormSchema),
         defaultValues: {
             sla: props.sla.id,
-            rating: '5',
+            rating: '',
             reason: ''
         },
     });
@@ -74,6 +85,17 @@ export default function AddSlaRatingEntryDialog(props: AddSLARatingEntryDialogPr
             setIsOpen(false);
             addSlaRatingEntryForm.reset();
         }).catch((error) => {
+            const data = error?.response?.data;
+            if (data?.reason) {
+                addSlaRatingEntryForm.setError('reason',{
+                    message:  data?.reason?.[0]
+                })
+            }
+            if (data?.rating) {
+                addSlaRatingEntryForm.setError('rating', {
+                    message: data?.rating?.[0]
+                })
+            }
 
             toast({
                 variant: "destructive",
@@ -84,6 +106,9 @@ export default function AddSlaRatingEntryDialog(props: AddSLARatingEntryDialogPr
         });
     }
 
+    // A small change to conditionally update the FormLabel for the reason field
+    const selectedRating = addSlaRatingEntryForm.watch("rating");
+    const isReasonRequired = parseInt(selectedRating, 10) < 3;
 
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -135,23 +160,25 @@ export default function AddSlaRatingEntryDialog(props: AddSLARatingEntryDialogPr
                                     </FormItem>
                                 )}/>
 
-
-                            <FormField
-                                control={addSlaRatingEntryForm.control}
-                                name="reason"
-                                render={({field}) => (
-                                    <FormItem>
-                                        <FormLabel>Rating Reason:</FormLabel>
-                                        <FormControl>
-                                            <Textarea
-                                                placeholder="Describe your rating reason......."
-                                                className="resize-none"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage/>
-                                    </FormItem>
-                                )}/>
+                            {/* Conditionally render the Reason field */}
+                            {isReasonRequired && (
+                                <FormField
+                                    control={addSlaRatingEntryForm.control}
+                                    name="reason"
+                                    render={({field}) => (
+                                        <FormItem>
+                                            <FormLabel>Rating Reason: {isReasonRequired && <span className="text-red-500">*</span>}</FormLabel>
+                                            <FormControl>
+                                                <Textarea
+                                                    placeholder="Describe your rating reason......."
+                                                    className="resize-none"
+                                                    {...field}
+                                                />
+                                            </FormControl>
+                                            <FormMessage/>
+                                        </FormItem>
+                                    )}/>
+                            )}
 
                         </div>
 

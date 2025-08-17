@@ -46,7 +46,7 @@ class SlaEntry(models.Model):
 class SlaRating(models.Model):
     sla = models.ForeignKey(SlaEntry, on_delete=models.CASCADE, related_name="ratings")
     rating = models.DecimalField(max_digits=30, decimal_places=2)
-    reason = models.TextField()
+    reason = models.TextField(blank=True, null=True)
 
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)

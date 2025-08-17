@@ -93,6 +93,23 @@ class SlaRatingSerializer(serializers.ModelSerializer):
     class Meta:
         model = SlaRating
         fields = "__all__"
+    
+    def validate(self, data):
+        """
+        Custom validation to make the reason field optional for ratings 3 and above.
+        """
+        rating = data.get('rating')
+        reason = data.get('reason')
+
+        # Check if the rating is provided and is a number less than 3
+        if rating is not None and rating < 3:
+            # If a rating is less than 3, the reason field is required.
+            if not reason or reason.strip() == "":
+                raise serializers.ValidationError(
+                    {"reason": "Rating reason is required for ratings below 3."}
+                )
+
+        return data
 
 
 # ======================================================================
