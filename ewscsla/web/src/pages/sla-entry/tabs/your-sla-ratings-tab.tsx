@@ -118,7 +118,6 @@ export default function YourSlaRatingsTab(
                 'department': values.department
             }
         }).then((response) => {
-            console.log("response", response.data)
             setSlaRatingEntries(response.data || [])
             toast({
                 variant: "success",

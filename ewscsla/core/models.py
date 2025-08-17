@@ -27,7 +27,8 @@ class AuthUser(AbstractUser):
 
 
 class SlaEntry(models.Model):
-    department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name="sla_entries")
+    department = models.ForeignKey(
+        Department, on_delete=models.CASCADE, related_name="sla_entries")
     key_performance_area = models.TextField()
     service_provider_responsibility = models.TextField(default="", blank=True)
     customer_responsibility = models.TextField()
@@ -36,7 +37,8 @@ class SlaEntry(models.Model):
 
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    added_by = models.ForeignKey(AuthUser, on_delete=models.CASCADE, related_name="sla_entries")
+    added_by = models.ForeignKey(
+        AuthUser, on_delete=models.CASCADE, related_name="sla_entries")
 
     class Meta:
         verbose_name_plural = "Sla Entries"
@@ -44,13 +46,15 @@ class SlaEntry(models.Model):
 
 
 class SlaRating(models.Model):
-    sla = models.ForeignKey(SlaEntry, on_delete=models.CASCADE, related_name="ratings")
+    sla = models.ForeignKey(
+        SlaEntry, on_delete=models.CASCADE, related_name="ratings")
     rating = models.DecimalField(max_digits=30, decimal_places=2)
     reason = models.TextField(blank=True, null=True)
 
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    rated_by = models.ForeignKey(AuthUser, on_delete=models.CASCADE, related_name="sla_ratings")
+    rated_by = models.ForeignKey(
+        AuthUser, on_delete=models.CASCADE, related_name="sla_ratings")
 
     class Meta:
         db_table = "core_sla_ratings"
@@ -67,7 +71,8 @@ class SlaRating(models.Model):
 
 
 class SlaImprovementPlanEntry(models.Model):
-    rating = models.OneToOneField(SlaRating, on_delete=models.CASCADE, related_name="action_plan")
+    rating = models.OneToOneField(
+        SlaRating, on_delete=models.CASCADE, related_name="action_plan")
     improvement_action = models.TextField()
     due_date = models.DateField(null=False)
     status = models.IntegerField(

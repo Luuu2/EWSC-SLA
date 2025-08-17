@@ -1,0 +1,17 @@
+Dear Team ({{ department }}),
+
+An SLA entry in your department has received a new rating.
+
+Rating: {{ rating_value }}
+Reason: {{ rating_reason }}
+
+This SLA was rated by {{ rated_by_name }}.
+
+SLA Entry: {{ sla_entry }}
+SLA Entry Dated: {{ sla_entry_date|date:"F j, Y" }}
+SLA Entry Added By: {{ sla_entry_added_by }}
+
+Thank you for your contribution.
+
+Best regards,
+The EWSCA | Team
