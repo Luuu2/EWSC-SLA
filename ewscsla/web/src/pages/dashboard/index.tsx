@@ -88,9 +88,9 @@ export default function DashboardPage() {
                                 </CardHeader>
                                 <CardContent>
                                     <div className="text-2xl font-bold">{dashboardData?.users || "--"}</div>
-                                    <p className="text-xs text-muted-foreground">
+                                    {/* <p className="text-xs text-muted-foreground">
                                         +20.1% from last month
-                                    </p>
+                                    </p> */}
                                 </CardContent>
                             </Card>
                             <Card>
@@ -114,9 +114,9 @@ export default function DashboardPage() {
                                 </CardHeader>
                                 <CardContent>
                                     <div className="text-2xl font-bold">{dashboardData?.sla_entries || "--"}</div>
-                                    <p className="text-xs text-muted-foreground">
+                                    {/* <p className="text-xs text-muted-foreground">
                                         +180.1% from last month
-                                    </p>
+                                    </p> */}
                                 </CardContent>
                             </Card>
                             <Card>
@@ -134,9 +134,9 @@ export default function DashboardPage() {
                                 </CardHeader>
                                 <CardContent>
                                     <div className="text-2xl font-bold">{dashboardData?.ratings || "--"}</div>
-                                    <p className="text-xs text-muted-foreground">
+                                    {/* <p className="text-xs text-muted-foreground">
                                         +19% from last month
-                                    </p>
+                                    </p> */}
                                 </CardContent>
                             </Card>
                             <Card>
@@ -156,9 +156,9 @@ export default function DashboardPage() {
                                 </CardHeader>
                                 <CardContent>
                                     <div className="text-2xl font-bold">{dashboardData?.action_plans || "--"}</div>
-                                    <p className="text-xs text-muted-foreground">
+                                    {/* <p className="text-xs text-muted-foreground">
                                         +201 since last hour
-                                    </p>
+                                    </p> */}
                                 </CardContent>
                             </Card>
                         </div>
