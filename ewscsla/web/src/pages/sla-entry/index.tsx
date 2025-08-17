@@ -22,6 +22,7 @@ import {
 
 import SlaEntriesTab from "@/pages/sla-entry/tabs/sla-entries-tab";
 import YourSlaRatingsTab from "@/pages/sla-entry/tabs/your-sla-ratings-tab";
+import AllSlaRatingsTab from "./tabs/all-sla-ratings-tab";
 
 export const searchSlasFormSchema = z.object({
     department: z.string({
@@ -83,6 +84,7 @@ export default function SlaEntryPage() {
                     <TabsList>
                         <TabsTrigger value="sla-entries">SLA Entries</TabsTrigger>
                         <TabsTrigger value="sla-ratings">Your SLA Ratings</TabsTrigger>
+                        <TabsTrigger value="all-sla-ratings">All SLA Ratings</TabsTrigger>
                     </TabsList>
                     <div className="ml-auto flex items-center gap-2">
                         <Button size="sm" variant="outline" className="h-7 gap-1">
@@ -105,6 +107,12 @@ export default function SlaEntryPage() {
 
                 <TabsContent value="sla-ratings">
                     <YourSlaRatingsTab
+                        searchSlasForm={searchSlasForm}
+                        departments={departments}/>
+                </TabsContent>
+
+                <TabsContent value="all-sla-ratings">
+                    <AllSlaRatingsTab
                         searchSlasForm={searchSlasForm}
                         departments={departments}/>
                 </TabsContent>
