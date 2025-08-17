@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
 
+    "django_microsoft_sso",  # microsoft auth
+
     # custom models
     'core',
     'web'
@@ -163,3 +165,12 @@ EMAIL_USE_SSL = False
 EMAIL_HOST_USER = 'no-reply@example.com'  # Your email address
 EMAIL_HOST_PASSWORD = 'your_email_password'
 DEFAULT_FROM_EMAIL = 'EWSCE <no-reply@example.com>'  # Sender's email address
+
+
+MICROSOFT_SSO_APPLICATION_ID = "your Application ID here"
+MICROSOFT_SSO_CLIENT_SECRET = "your Client Secret Value here"
+MICROSOFT_SSO_SCOPES = ["User.Read.All"]
+
+# Add the callback uri http://localhost:8000/microsoft_sso/callback/ in your Microsoft Console, on the "Authorized Redirect URL".
+
+MICROSOFT_SSO_ALLOWABLE_DOMAINS = ["contoso.com"]

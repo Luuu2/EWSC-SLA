@@ -2,7 +2,10 @@ from django import forms
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserChangeForm
-
+from django.contrib.auth.admin import UserAdmin
+from django_microsoft_sso.admin import (
+    MicrosoftSSOInlineAdmin, get_current_user_and_admin
+)
 from .models import AuthUser, SlaEntry, SlaRating, SlaImprovementPlanEntry, SlaCustomerStatusEntry, Department
 
 
@@ -31,9 +34,25 @@ class AuthUserAdmin(UserAdmin):
     )
 
 
-admin.site.register(AuthUser, AuthUserAdmin)
-admin.site.site_header = 'ESWC SLA Administration'  # default: "Django Administration"
-admin.site.site_title = 'Eswatini Water Services Corporation'  # default: "Django site admin"
+CurrentUserModel, last_admin, LastUserAdmin = get_current_user_and_admin()
+if admin.site.is_registered(CurrentUserModel):
+    admin.site.unregister(CurrentUserModel)
+
+
+@admin.register(CurrentUserModel)
+class CustomUserAdmin(LastUserAdmin):
+    inlines = (
+        tuple(set(list(last_admin.inlines) + [MicrosoftSSOInlineAdmin]))
+        if last_admin
+        else (MicrosoftSSOInlineAdmin,)
+    )
+
+
+# admin.site.register(AuthUser, AuthUserAdmin)
+# default: "Django Administration"
+admin.site.site_header = 'ESWC SLA Administration'
+# default: "Django site admin"
+admin.site.site_title = 'Eswatini Water Services Corporation'
 
 
 @admin.register(Department)

@@ -20,5 +20,9 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("api/", include("api.urls"), name="api"),
+    path(
+        "microsoft_sso/",
+        include("django_microsoft_sso.urls", namespace="django_microsoft_sso")
+    ),
     path('', include('web.urls'), name='web'),
 ]
