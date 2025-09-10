@@ -14,7 +14,7 @@ export function Overview({aggregated_ratings}: OverViewProps) {
         }
     })
 
-    console.log("data", data)
+    // console.log("data", data)
 
     return (
         <ResponsiveContainer width="100%" height={350}>
@@ -37,31 +37,31 @@ export function Overview({aggregated_ratings}: OverViewProps) {
                     tickFormatter={(value) => `${value}`}
                 />
                 <Bar
-                    dataKey="poor"
+                    dataKey="Met_None"
                     fill="#dc2626"
                     stackId="a" radius={[4, 4, 0, 0]}
                 />
 
                 <Bar
-                    dataKey="fair"
+                    dataKey="Met_Some"
                     fill="#ea580c"
                     stackId="a" radius={[4, 4, 0, 0]}
                 />
 
                 <Bar
-                    dataKey="good"
+                    dataKey="Met_All"
                     fill="#16a34a"
                     stackId="a" radius={[4, 4, 0, 0]}
                 />
 
                 <Bar
-                    dataKey="very_good"
+                    dataKey="Exceeded_Some"
                     fill="#2563eb"
                     stackId="a" radius={[4, 4, 0, 0]}
                 />
 
                 <Bar
-                    dataKey="excellent"
+                    dataKey="Exceeded_All"
                     stackId="a"
                     fill="#7c3aed" radius={[4, 4, 0, 0]}
                 />

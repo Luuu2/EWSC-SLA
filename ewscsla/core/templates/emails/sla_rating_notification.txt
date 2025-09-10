@@ -1,17 +1,8 @@
 Dear Team ({{ department }}),
 
-An SLA entry in your department has received a new rating.
+SLA entries in your department have received new ratings from ({{ rating_department }}).
 
-Rating: {{ rating_value }}
-Reason: {{ rating_reason }}
-
-This SLA was rated by {{ rated_by_name }}.
-
-SLA Entry: {{ sla_entry }}
-SLA Entry Dated: {{ sla_entry_date|date:"F j, Y" }}
-SLA Entry Added By: {{ sla_entry_added_by }}
-
-Thank you for your contribution.
+Remember to fill in your improvement action plans on this link http://192.168.255.35:8080/
 
 Best regards,
-The EWSCA | Team
+The EWSC SLA Support Team

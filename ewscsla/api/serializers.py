@@ -13,7 +13,8 @@ class AuthUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = AuthUser
-        fields = ('id', 'last_login', 'username', 'get_full_name', 'email', 'department', 'initials')
+        fields = ('id', 'last_login', 'username', 'get_full_name',
+                  'email', 'department', 'initials')
 
 
 # ======================================================================
@@ -75,8 +76,10 @@ class SlaCustomerStatusEntrySerializer(serializers.ModelSerializer):
 class ListSlaRatingSerializer(serializers.ModelSerializer):
     sla = ListSlaEntrySerializer(many=False, read_only=True)
     rated_by = serializers.SerializerMethodField()
-    improvement_action_plan = SlaImprovementPlanEntrySerializer(many=False, read_only=True)
-    customer_feedback_status = SlaCustomerStatusEntrySerializer(many=False, read_only=True)
+    improvement_action_plan = SlaImprovementPlanEntrySerializer(
+        many=False, read_only=True)
+    customer_feedback_status = SlaCustomerStatusEntrySerializer(
+        many=False, read_only=True)
 
     class Meta:
         model = SlaRating
@@ -84,8 +87,9 @@ class ListSlaRatingSerializer(serializers.ModelSerializer):
 
     def get_rated_by(self, obj: SlaRating):
         if obj:
-            full_name = obj.rated_by.get_full_name()
-            return full_name if full_name else f"@{obj.rated_by.username}"
+            # full_name = obj.rated_by.get_full_name()
+            # return full_name if full_name else f"@{obj.rated_by.username}"
+            return obj.rated_by.department.name if obj.rated_by.department else obj.rated_by.username
         return None
 
 
@@ -93,7 +97,7 @@ class SlaRatingSerializer(serializers.ModelSerializer):
     class Meta:
         model = SlaRating
         fields = "__all__"
-    
+
     def validate(self, data):
         """
         Custom validation to make the reason field optional for ratings 3 and above.
@@ -116,11 +120,11 @@ class SlaRatingSerializer(serializers.ModelSerializer):
 
 class AggregatedRatingsSerializer(serializers.Serializer):
     class RatingsSerializer(serializers.Serializer):
-        poor = serializers.IntegerField(default=0)
-        fair = serializers.IntegerField(default=0)
-        good = serializers.IntegerField(default=0)
-        very_good = serializers.IntegerField(default=0)
-        excellent = serializers.IntegerField(default=0)
+        Met_None = serializers.IntegerField(default=0)
+        Met_Some = serializers.IntegerField(default=0)
+        Met_All = serializers.IntegerField(default=0)
+        Exceeded_Some = serializers.IntegerField(default=0)
+        Exceeded_All = serializers.IntegerField(default=0)
 
     ratings = RatingsSerializer(many=False, read_only=True)
     department = serializers.CharField(max_length=100)

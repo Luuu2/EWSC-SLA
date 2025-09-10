@@ -48,8 +48,8 @@ import { useState } from "react";
 import { toast } from "@/components/ui/use-toast";
 import { searchSlasFormSchema } from "@/pages/sla-entry";
 import ViewImprovementActionPlanDialog from "@/pages/improvement-action-plan/include/ViewImprovementActionPlanDialog";
-import CustomerStatusDialog from "@/pages/sla-entry/include/CustomerStatusDialog";
-import EditSlaRatingEntryDialog from "@/pages/sla-entry/include/EditSlaRatingEntryDialog";
+// import CustomerStatusDialog from "@/pages/sla-entry/include/CustomerStatusDialog";
+// import EditSlaRatingEntryDialog from "@/pages/sla-entry/include/EditSlaRatingEntryDialog";
 import { RatingBadge, StatusBadge } from "./your-sla-ratings-tab";
 import { API_SLA_RATING_ENTRIES_FOR_DEPARTMENT_URL } from "@/app/config";
 

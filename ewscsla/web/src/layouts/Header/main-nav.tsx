@@ -1,7 +1,7 @@
 import React from "react";
 import {cn} from "@/lib/utils"
 import {Link, useLocation} from "react-router-dom";
-import {ENTER_SLA_URL, DASHBOARD_URL, IMPROVEMENT_ACTION_PLAN_URL, REPORTS_URL} from "@/app/config";
+import {ENTER_SLA_URL, DASHBOARD_URL, IMPROVEMENT_ACTION_PLAN_URL, REPORTS_URL, EMAILS_URL} from "@/app/config";
 import {Sheet, SheetContent, SheetTrigger} from "@/components/ui/sheet";
 import {Button} from "@/components/ui/button";
 import {Menu, Package2} from "lucide-react";
@@ -24,6 +24,11 @@ const routes = [
     {
         url: REPORTS_URL,
         route: "Reports",
+    },
+
+    {
+        url: EMAILS_URL,
+        route: "Emails",
     },
 ]
 

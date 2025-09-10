@@ -5,6 +5,7 @@ export const RATE_SLA_URL = '/sla-rating/';
 export const IMPROVEMENT_ACTION_PLAN_URL = '/improvement-action-plan/';
 export const REPORTS_URL = '/reports/';
 export const PROFILE_URL = '/profile/';
+export const EMAILS_URL = "/emails/";
 
 export const API_GET_USER_PROFILE_URL = "/api/profile/";
 export const API_GET_LOGOUT_USER_URL = "/api/logout/";
@@ -19,3 +20,4 @@ export const API_ADD_SLA_IMPROVEMENT_ACTION_PLAN_URL = "/api/improvement-action-
 export const API_SLA_CUSTOMER_STATUS_URL = "/api/customer-status/";
 export const API_SLA_GENERATE_REPORT_URL = "/api/generate-report/";
 export const API_SLA_GENERATE_SLA_ENTRIES_REPORT_URL = "/api/generate-sla-entries-report/";
+export const API_EMAILS_URL = "/api/emails/";

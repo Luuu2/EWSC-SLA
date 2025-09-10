@@ -63,7 +63,8 @@ def add_sla_entry(request: Request):
 # ======================================================================
 
 class SlaRatingFilter(django_filters.FilterSet):
-    department = django_filters.CharFilter(field_name='sla__department', lookup_expr='exact')
+    department = django_filters.CharFilter(
+        field_name='sla__department', lookup_expr='exact')
 
     class Meta:
         model = SlaRating
@@ -86,7 +87,7 @@ class SlaRatingEntryViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated, ]
     pagination_class = ListPagination
     filterset_class = SlaRatingFilter
-    
+
     def get_queryset(self):
         queryset = self.queryset
         filter_by = self.request.query_params.get('filter_by')
@@ -159,14 +160,18 @@ def generate_report(request):
         sla_ratings = SlaRating.objects.order_by('updated_at')
         for rating in sla_ratings:
             service_provider = rating.sla.department.name
-            customer = rating.rated_by.department.name if (rating.rated_by and rating.rated_by.department) else "N/A"
+            customer = rating.rated_by.department.name if (
+                rating.rated_by and rating.rated_by.department) else "N/A"
             sla_date = rating.sla.date.strftime("%Y-%m-%d")
             rating_value = str(int(rating.rating))
             key_performance_area = rating.sla.key_performance_area
             reason = rating.reason
-            action_plan = rating.action_plan.improvement_action if hasattr(rating, 'action_plan') else "N/A"
-            due_date = rating.action_plan.due_date.strftime("%Y-%m-%d") if hasattr(rating, 'action_plan') else "N/A"
-            manager_status = rating.action_plan.get_status_display() if hasattr(rating, 'action_plan') else "N/A"
+            action_plan = rating.action_plan.improvement_action if hasattr(
+                rating, 'action_plan') else "N/A"
+            due_date = rating.action_plan.due_date.strftime(
+                "%Y-%m-%d") if hasattr(rating, 'action_plan') else "N/A"
+            manager_status = rating.action_plan.get_status_display() if hasattr(rating,
+                                                                                'action_plan') else "N/A"
             customer_status = rating.customer_status.get_status_display() \
                 if hasattr(rating, 'customer_status') else "N/A"
 
@@ -175,7 +180,8 @@ def generate_report(request):
                 action_plan, due_date, manager_status, customer_status
             ])
 
-        response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        response = HttpResponse(
+            content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
         response['Content-Disposition'] = f'attachment; filename=SLA_REPORT_{today}.xlsx'
         response.write(save_virtual_workbook(workbook))
 
@@ -216,8 +222,10 @@ def export_sla_entries(request):
                 sla.added_by.get_full_name() or sla.added_by.username
             ])
 
-        response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-        response['Content-Disposition'] = f'attachment; filename=SLA_ENTRIES_REPORT_{today}.xlsx'
+        response = HttpResponse(
+            content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        response[
+            'Content-Disposition'] = f'attachment; filename=SLA_ENTRIES_REPORT_{today}.xlsx'
         response.write(save_virtual_workbook(workbook))
 
         return response
@@ -239,7 +247,7 @@ def dashboard(request):
         ratings = SlaRating.objects.count()
         action_plans = SlaImprovementPlanEntry.objects.count()
 
-        departments = Department.objects.order_by("pk")
+        departments = Department.objects.order_by("pk")[:5]
         departments_data = departments.annotate(
             employees_count=Count('employees', distinct=True),
             sla_entries_count=Count('sla_entries', distinct=True)
@@ -255,23 +263,23 @@ def dashboard(request):
             for _rating in department_ratings:
                 if _rating["rating"] == 1:
                     _grouped_ratings.update({
-                        "poor": _rating["rating_count"],
+                        "Met_None": _rating["rating_count"],
                     })
                 elif _rating["rating"] == 2:
                     _grouped_ratings.update({
-                        "fair": _rating["rating_count"],
+                        "Met_Some": _rating["rating_count"],
                     })
                 elif _rating["rating"] == 3:
                     _grouped_ratings.update({
-                        "good": _rating["rating_count"],
+                        "Met_All": _rating["rating_count"],
                     })
                 elif _rating["rating"] == 4:
                     _grouped_ratings.update({
-                        "very_good": _rating["rating_count"],
+                        "Exceeded_Some": _rating["rating_count"],
                     })
                 elif _rating["rating"] == 5:
                     _grouped_ratings.update({
-                        "excellent": _rating["rating_count"],
+                        "Exceeded_All": _rating["rating_count"],
                     })
 
             aggregated_ratings.append({
