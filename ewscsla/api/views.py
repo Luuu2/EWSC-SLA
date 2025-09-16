@@ -247,7 +247,7 @@ def dashboard(request):
         ratings = SlaRating.objects.count()
         action_plans = SlaImprovementPlanEntry.objects.count()
 
-        departments = Department.objects.order_by("pk")[:5]
+        departments = Department.objects.order_by("pk")
         departments_data = departments.annotate(
             employees_count=Count('employees', distinct=True),
             sla_entries_count=Count('sla_entries', distinct=True)

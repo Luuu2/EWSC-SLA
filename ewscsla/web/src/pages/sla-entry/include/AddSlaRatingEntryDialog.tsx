@@ -148,7 +148,7 @@ export default function AddSlaRatingEntryDialog(props: AddSLARatingEntryDialogPr
                                                     <SelectValue placeholder="Select rating"/>
                                                 </SelectTrigger>
                                                 <SelectContent>
-                                                    <SelectItem value="1">1 - Met Once</SelectItem>
+                                                    <SelectItem value="1">1 - Met None</SelectItem>
                                                     <SelectItem value="2">2 - Met Some</SelectItem>
                                                     <SelectItem value="3">3 - Met All</SelectItem>
                                                     <SelectItem value="4">4 - Exceeded Some</SelectItem>
