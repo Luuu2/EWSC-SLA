@@ -4,6 +4,8 @@ from django.http import HttpResponse
 from django.utils import timezone
 from openpyxl.workbook import Workbook
 from openpyxl.writer.excel import save_virtual_workbook
+from openpyxl.styles import Font, Alignment, PatternFill
+from openpyxl.utils import get_column_letter
 from rest_framework import viewsets, status
 from rest_framework.decorators import permission_classes, api_view
 from rest_framework.permissions import IsAuthenticated
@@ -147,38 +149,119 @@ def generate_report(request):
         workbook = Workbook()
         worksheet = workbook.active
 
-        worksheet.append(["ESWATINI WATER SERVICES CORPORATION"])
+        # Set page properties
+        worksheet.title = "SLA Report"
+        worksheet.page_setup.fitToPage = True
+        worksheet.page_setup.fitToHeight = 0
+        worksheet.page_setup.fitToWidth = 1
+
+        # Define styles
+        title_font = Font(name='Calibri', size=16, bold=True)
+        header_font = Font(
+            name='Calibri', size=11, bold=True,
+            color="FFFFFF")  # White font color
+        header_fill = PatternFill(
+            start_color="3399FF", end_color="3399FF", fill_type="solid")
+        header_alignment = Alignment(
+            horizontal='center', vertical='center', wrap_text=True)
+        data_alignment = Alignment(vertical='center', wrap_text=True)
+
+        # worksheet.append(["ESWATINI WATER SERVICES CORPORATION"])
+        # worksheet.append([])
+        # worksheet.append(["SLA's MONITORING TOOL"])
+
+        # Add report titles with merged cells and styling
+        worksheet.merge_cells('A1:M1')
+        title_cell_1 = worksheet['A1']
+        title_cell_1.value = "ESWATINI WATER SERVICES CORPORATION"
+        title_cell_1.font = title_font
+        title_cell_1.alignment = Alignment(horizontal='center')
+
+        worksheet.merge_cells('A3:M3')
+        title_cell_2 = worksheet['A3']
+        title_cell_2.value = "SLA's MONITORING TOOL"
+        title_cell_2.font = title_font
+        title_cell_2.alignment = Alignment(horizontal='center')
+
+        # Add an empty row for spacing
         worksheet.append([])
-        worksheet.append(["SLA's MONITORING TOOL"])
 
-        worksheet.append([
-            "Internal Service Provider", "Internal Customer", "Report Qrt Date",
-            "Rating", "SLA", "Reason for rating", "Agreed Improvement Action", "Due Date",
-            "Manager Status (Service Provider)", "Internal Customer Status"
-        ])
+        # worksheet.append([
+        #     "Internal Service Provider", "Internal Customer", "Report Qrt Date",
+        #     "Rating", "SLA", "Reason for rating", "Agreed Improvement Action", "Due Date",
+        #     "Manager Status (Service Provider)", "Internal Customer Status"
+        # ])
 
+        main_headers = [
+            "Internal Service Provider",
+            "Internal Customer",
+            "Report Qrt Date",
+            "Service Provider Responsibility",
+            "Customer Responsibility",
+            "Service Level",
+            "Rating",
+            "SLA",
+            "Reason for rating",
+            "Agreed Improvement Action",
+            "Due Date",
+            "Manager Status (Service Provider)",
+            "Internal Customer Status"
+        ]
+        worksheet.append(main_headers)
+
+        # Apply styles to the header row
+        for col_num, _ in enumerate(main_headers, 1):
+            col_letter = get_column_letter(col_num)
+            cell = worksheet[f"{col_letter}5"]
+            cell.font = header_font
+            cell.alignment = header_alignment
+            cell.fill = header_fill
+
+        # Set a fixed width for the columns with long text paragraphs
+        # Corresponds to SP Responsibility, Customer Responsibility, Service Level, Reason for rating, Agreed Improvement Action
+        long_text_columns = [4, 5, 6, 8, 9, 10]
+        fixed_width = 30
+        for col_num in long_text_columns:
+            col_letter = get_column_letter(col_num)
+            worksheet.column_dimensions[col_letter].width = fixed_width
+
+        # Add data rows
         sla_ratings = SlaRating.objects.order_by('updated_at')
         for rating in sla_ratings:
-            service_provider = rating.sla.department.name
-            customer = rating.rated_by.department.name if (
-                rating.rated_by and rating.rated_by.department) else "N/A"
-            sla_date = rating.sla.date.strftime("%Y-%m-%d")
+            sla_entry = rating.sla
+
+            # Data for each cell
+            service_provider = sla_entry.department.name
+            customer = rating.rated_by.department.name \
+                if (rating.rated_by and rating.rated_by.department) else "N/A"
+            sla_date = sla_entry.date.strftime("%Y-%m-%d")
+            sp_responsibility = sla_entry.service_provider_responsibility or "N/A"
+            cust_responsibility = sla_entry.customer_responsibility or "N/A"
+            service_level = sla_entry.service_level or "N/A"
             rating_value = str(int(rating.rating))
-            key_performance_area = rating.sla.key_performance_area
-            reason = rating.reason
-            action_plan = rating.action_plan.improvement_action if hasattr(
-                rating, 'action_plan') else "N/A"
+            key_performance_area = sla_entry.key_performance_area or "N/A"
+            reason = rating.reason or "N/A"
+            action_plan = rating.action_plan.improvement_action \
+                if hasattr(rating, 'action_plan') else "N/A"
             due_date = rating.action_plan.due_date.strftime(
                 "%Y-%m-%d") if hasattr(rating, 'action_plan') else "N/A"
-            manager_status = rating.action_plan.get_status_display() if hasattr(rating,
-                                                                                'action_plan') else "N/A"
+            manager_status = rating.action_plan.get_status_display() \
+                if hasattr(rating, 'action_plan') else "N/A"
             customer_status = rating.customer_status.get_status_display() \
                 if hasattr(rating, 'customer_status') else "N/A"
 
-            worksheet.append([
-                service_provider, customer, sla_date, rating_value, key_performance_area, reason,
+            row_data = [
+                service_provider, customer, sla_date, sp_responsibility, cust_responsibility,
+                service_level, rating_value, key_performance_area, reason,
                 action_plan, due_date, manager_status, customer_status
-            ])
+            ]
+
+            worksheet.append(row_data)
+
+            # Apply data alignment for the current row, especially for text wrapping
+            for col_num in range(1, len(row_data) + 1):
+                col_letter = get_column_letter(col_num)
+                worksheet[f"{col_letter}{worksheet.max_row}"].alignment = data_alignment
 
         response = HttpResponse(
             content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
@@ -186,6 +269,36 @@ def generate_report(request):
         response.write(save_virtual_workbook(workbook))
 
         return response
+
+        # sla_ratings = SlaRating.objects.order_by('updated_at')
+        # for rating in sla_ratings:
+        #     service_provider = rating.sla.department.name
+        #     customer = rating.rated_by.department.name if (
+        #         rating.rated_by and rating.rated_by.department) else "N/A"
+        #     sla_date = rating.sla.date.strftime("%Y-%m-%d")
+        #     rating_value = str(int(rating.rating))
+        #     key_performance_area = rating.sla.key_performance_area
+        #     reason = rating.reason
+        #     action_plan = rating.action_plan.improvement_action if hasattr(
+        #         rating, 'action_plan') else "N/A"
+        #     due_date = rating.action_plan.due_date.strftime(
+        #         "%Y-%m-%d") if hasattr(rating, 'action_plan') else "N/A"
+        #     manager_status = rating.action_plan.get_status_display() if hasattr(rating,
+        #                                                                         'action_plan') else "N/A"
+        #     customer_status = rating.customer_status.get_status_display() \
+        #         if hasattr(rating, 'customer_status') else "N/A"
+
+        #     worksheet.append([
+        #         service_provider, customer, sla_date, rating_value, key_performance_area, reason,
+        #         action_plan, due_date, manager_status, customer_status
+        #     ])
+
+        # response = HttpResponse(
+        #     content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        # response['Content-Disposition'] = f'attachment; filename=SLA_REPORT_{today}.xlsx'
+        # response.write(save_virtual_workbook(workbook))
+
+        # return response
 
     except Exception as error:
         return Response({
