@@ -315,25 +315,91 @@ def export_sla_entries(request):
         workbook = Workbook()
         worksheet = workbook.active
 
-        worksheet.append(["ESWATINI WATER SERVICES CORPORATION"])
-        worksheet.append([])
-        worksheet.append(["SLA's MONITORING TOOL - SLA ENTRIES"])
+        # Set page properties
+        worksheet.title = "SLA Entries Report"
+        worksheet.page_setup.fitToPage = True
+        worksheet.page_setup.fitToHeight = 0
+        worksheet.page_setup.fitToWidth = 1
 
-        worksheet.append([
-            "SLA Department", "Service Description", "Customer Responsibility",
-            "Service Level", "SLA Date", "Added By",
-        ])
+        title_font = Font(name='Calibri', size=16, bold=True)
+        header_font = Font(
+            name='Calibri', size=11, bold=True,
+            color="FFFFFF")  # White font color
+        header_fill = PatternFill(
+            start_color="3399FF", end_color="3399FF", fill_type="solid")  # Blue fill
+        # Left-aligned with wrapping
+        header_alignment = Alignment(wrap_text=True)
+        data_alignment = Alignment(vertical='top', wrap_text=True)
+
+        # Add report titles with merged cells and styling
+        # Merged across the number of columns (7 columns)
+        worksheet.merge_cells('A1:G1')
+        title_cell_1 = worksheet['A1']
+        title_cell_1.value = "ESWATINI WATER SERVICES CORPORATION"
+        title_cell_1.font = title_font
+        title_cell_1.alignment = Alignment(horizontal='center')
+
+        worksheet.merge_cells('A3:G3')
+        title_cell_2 = worksheet['A3']
+        title_cell_2.value = "SLA's MONITORING TOOL - SLA ENTRIES"
+        title_cell_2.font = title_font
+        title_cell_2.alignment = Alignment(horizontal='center')
+
+        # Add an empty row for spacing
+        worksheet.append([])
+
+        # Main Header Row - ADDED "Service Provider Responsibility"
+        main_headers = [
+            "SLA Department",
+            "Service Description",
+            "Service Provider Responsibility",  # New Field
+            "Customer Responsibility",
+            "Service Level",
+            "SLA Date",
+            "Added By",
+        ]
+        worksheet.append(main_headers)
+
+        # Apply styles to the header row
+        for col_num, _ in enumerate(main_headers, 1):
+            col_letter = get_column_letter(col_num)
+            # The header is on row 5 due to the 3 title rows and 1 empty row
+            cell = worksheet[f"{col_letter}5"]
+            cell.font = header_font
+            cell.alignment = header_alignment
+            cell.fill = header_fill
+
+        # Set a fixed width for the columns with long text paragraphs
+        # Columns 2, 3, 4, and 5 likely have long text (Service Desc, SP Resp, Cust Resp, Service Level)
+        long_text_columns = [1, 2, 3, 4, 5, 7]
+        fixed_width = 30
+        for col_num in long_text_columns:
+            col_letter = get_column_letter(col_num)
+            worksheet.column_dimensions[col_letter].width = fixed_width
 
         sla_entries = SlaEntry.objects.order_by('department__name')
         for sla in sla_entries:
-            worksheet.append([
+            service_provider_responsibility = sla.service_provider_responsibility or "N/A"
+            customer_responsibility = sla.customer_responsibility or "N/A"
+            service_level = sla.service_level or "N/A"
+            key_performance_area = sla.key_performance_area or "N/A"
+            added_by_name = sla.added_by.get_full_name() or sla.added_by.username or "N/A"
+
+            row_data = [
                 sla.department.name,
-                sla.key_performance_area,
-                sla.customer_responsibility,
-                sla.service_level,
+                key_performance_area,
+                service_provider_responsibility,  # New data field
+                customer_responsibility,
+                service_level,
                 sla.date.strftime("%Y-%m-%d"),
-                sla.added_by.get_full_name() or sla.added_by.username
-            ])
+                added_by_name
+            ]
+            worksheet.append(row_data)
+
+            # Apply data alignment for the current row
+            for col_num in range(1, len(row_data) + 1):
+                col_letter = get_column_letter(col_num)
+                worksheet[f"{col_letter}{worksheet.max_row}"].alignment = data_alignment
 
         response = HttpResponse(
             content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
