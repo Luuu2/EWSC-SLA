@@ -80,6 +80,8 @@ class ListSlaRatingSerializer(serializers.ModelSerializer):
         many=False, read_only=True)
     customer_feedback_status = SlaCustomerStatusEntrySerializer(
         many=False, read_only=True)
+    # if the user can delete the rating, can only delete a rating you own
+    can_delete = serializers.SerializerMethodField()
 
     class Meta:
         model = SlaRating
@@ -91,6 +93,12 @@ class ListSlaRatingSerializer(serializers.ModelSerializer):
             # return full_name if full_name else f"@{obj.rated_by.username}"
             return obj.rated_by.department.name if obj.rated_by.department else obj.rated_by.username
         return None
+
+    def get_can_delete(self, obj: SlaRating) -> bool:
+        request = self.context.get('request', None)
+        if request and hasattr(request, 'user') and obj:
+            return request.user.is_authenticated and obj.rated_by == request.user
+        return False
 
 
 class SlaRatingSerializer(serializers.ModelSerializer):

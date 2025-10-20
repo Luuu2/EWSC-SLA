@@ -43,6 +43,9 @@ export type SlaRatingEntry = {
     created_at: string;
     improvement_action_plan: SlaImprovementPlanAction | null;
     customer_feedback_status: SlaCustomerStatus | null;
+
+    // actions state
+    can_delete?: boolean;
 }
 
 export type Rating = {

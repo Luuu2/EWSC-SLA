@@ -52,6 +52,7 @@ import ViewImprovementActionPlanDialog from "@/pages/improvement-action-plan/inc
 // import EditSlaRatingEntryDialog from "@/pages/sla-entry/include/EditSlaRatingEntryDialog";
 import { RatingBadge, StatusBadge } from "./your-sla-ratings-tab";
 import { API_SLA_RATING_ENTRIES_FOR_DEPARTMENT_URL } from "@/app/config";
+import DeleteSlaRatingDialog from "../include/DeleteSlaRatingDialog";
 
 type AllSlaRatingsTabProps = {
   searchSlasForm: any;
@@ -118,8 +119,9 @@ export default function AllSlaRatingsTab({
                 All SLA Ratings | Related to your entries
               </CardTitle>
               <CardDescription className={"max-w-lg"}>
-                Browse all ratings on the SLA entries you have created. This shows all the ratings related to the SLA entries you have entered.
-                Ratings for all the SLA Entries you OWN.
+                Browse all ratings on the SLA entries you have created. This
+                shows all the ratings related to the SLA entries you have
+                entered. Ratings for all the SLA Entries you OWN.
               </CardDescription>
             </>
           ) : (
@@ -294,17 +296,30 @@ export default function AllSlaRatingsTab({
                           </>
                         ) : (
                           <>
-                            <DropdownMenuItem
-                              onClick={() => {
-                                toast({
-                                  title: "Coming soon.",
-                                  description:
-                                    "Not yet implemented. Coming soon.",
-                                });
-                              }}
-                            >
-                              Delete SLA Rating
-                            </DropdownMenuItem>
+                            {rating.can_delete && (
+                              <DeleteSlaRatingDialog
+                                sla_rating={rating}
+                                onDeleteSuccess={() => {
+                                  // After successful delete, re-fetch the data to update the table
+                                  onSearchAllSlaEntryRatings(
+                                    searchSlasForm.getValues()
+                                  );
+                                }}
+                              />
+                            )}
+                            {!rating.can_delete && (
+                              <DropdownMenuItem
+                                onClick={() => {
+                                  toast({
+                                    title: "No actions available.",
+                                    description:
+                                      "You can only delete ratings you created.",
+                                  });
+                                }}
+                              >
+                                No Actions
+                              </DropdownMenuItem>
+                            )}
                           </>
                         )}
                       </DropdownMenuContent>

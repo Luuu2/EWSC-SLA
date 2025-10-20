@@ -103,6 +103,31 @@ class SlaRatingEntryViewSet(viewsets.ModelViewSet):
             return ListSlaRatingSerializer
         return SlaRatingSerializer
 
+    def destroy(self, request, *args, **kwargs):
+        """
+        Allows deletion only if the user who created the rating is the one requesting the delete.
+        """
+        try:
+            instance: SlaRating = self.get_object()
+            if instance.rated_by != request.user:
+                return Response(
+                    {"detail": "You do not have permission to delete this rating."},
+                    status=status.HTTP_403_FORBIDDEN
+                )
+            self.perform_destroy(instance)
+            return Response(status=status.HTTP_204_NO_CONTENT)
+
+        except SlaRating.DoesNotExist:
+            return Response(
+                {"detail": "Not found."},
+                status=status.HTTP_404_NOT_FOUND
+            )
+        except Exception as e:
+            return Response(
+                {"detail": f"An error occurred during deletion: {e}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])

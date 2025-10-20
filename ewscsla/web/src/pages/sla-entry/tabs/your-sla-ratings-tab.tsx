@@ -24,6 +24,7 @@ import ViewImprovementActionPlanDialog from "@/pages/improvement-action-plan/inc
 import CustomerStatusDialog from "@/pages/sla-entry/include/CustomerStatusDialog";
 import EditSlaRatingEntryDialog from "@/pages/sla-entry/include/EditSlaRatingEntryDialog";
 import {SelectGroup} from "@radix-ui/react-select";
+import DeleteSlaRatingDialog from "../include/DeleteSlaRatingDialog";
 
 type RatingBadgeProps = {
     rating: string;
@@ -263,12 +264,15 @@ export default function YourSlaRatingsTab(
                                                             </>
                                                             : <>
                                                                 <EditSlaRatingEntryDialog rating={rating}/>
-                                                                <DropdownMenuItem onClick={() => {
-                                                                    toast({
-                                                                        title: "Coming soon.",
-                                                                        description: "Not yet implemented. Coming soon."
-                                                                    })
-                                                                }}>Delete SLA Rating</DropdownMenuItem>
+                                                                {rating.can_delete && (
+                                                                <DeleteSlaRatingDialog 
+                                                                    sla_rating={rating} 
+                                                                    onDeleteSuccess={() => {
+                                                                        // After successful delete, re-fetch the data to update the table
+                                                                        onSearchSlaEntryRatings(searchSlasForm.getValues());
+                                                                    }}
+                                                                />
+                                                                )}
                                                             </>
                                                     }
                                                 </DropdownMenuContent>
