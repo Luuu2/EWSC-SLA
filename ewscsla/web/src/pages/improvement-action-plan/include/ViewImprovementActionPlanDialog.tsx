@@ -31,6 +31,12 @@ export default function ViewImprovementActionPlanDialog({sla_rating}: ViewImprov
                         <p className={"font-bold"}>
                             Rating: <RatingBadge rating={sla_rating.rating} />
                         </p>
+                        <div className="flex flex-wrap items-center gap-2 text-sm text-slate-700">
+                            <span className="font-medium text-slate-500">Rated by:</span>
+                            <span className="font-semibold text-slate-900">
+                                {sla_rating.rated_by}
+                            </span>
+                        </div>
                         <p className={"font-bold"}>Reason: {sla_rating.reason}</p>
                     </DialogDescription>
                 </DialogHeader>
