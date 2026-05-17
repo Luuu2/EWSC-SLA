@@ -180,10 +180,11 @@ export default function ImprovementActionPlan() {
 
                     <TableHeader>
                         <TableRow>
-                            <TableHead className={"border-x border-t w-[25%]"}>SLA</TableHead>
+                            <TableHead className={"border-x border-t w-[20%]"}>SLA</TableHead>
                             <TableHead className="border-x border-t w-[10%]">Department</TableHead>
                             <TableHead className="border-x border-t lg:w-[10%]">Rating</TableHead>
-                            <TableHead className="border-x border-t w-[25%]">Reason</TableHead>
+                            <TableHead className="border-x border-t lg:w-[10%]">Rated By</TableHead>
+                            <TableHead className="border-x border-t w-[20%]">Reason</TableHead>
                             <TableHead className="border-x border-t w-[20%]">
                                 Improvement Plan
                             </TableHead>
@@ -207,6 +208,11 @@ export default function ImprovementActionPlan() {
                                         </TableCell>
                                         <TableCell className="border-x align-top">
                                             <RatingBadge rating={rating.rating}/>
+                                        </TableCell>
+                                        <TableCell className="align-top">
+                                            <Badge className="text-xs" variant="outline">
+                                                {rating.rated_by}
+                                            </Badge>
                                         </TableCell>
                                         <TableCell className="border-x align-top">
                                             {rating.reason || "N/A"}
