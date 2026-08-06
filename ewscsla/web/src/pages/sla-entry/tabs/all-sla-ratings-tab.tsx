@@ -30,7 +30,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { cn } from "@/lib/utils";
+import { cn, formatDate } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import {
   DropdownMenu,
@@ -210,7 +210,7 @@ export default function AllSlaRatingsTab({
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className={"border-x border-t w-[25%]"}>SLA</TableHead>
+              <TableHead className={"border-x border-t w-[20%]"}>SLA</TableHead>
               <TableHead className="border-x border-t w-[10%]">
                 Department
               </TableHead>
@@ -223,13 +223,14 @@ export default function AllSlaRatingsTab({
               <TableHead className="border-x border-t w-[15%]">
                 Reason
               </TableHead>
-              <TableHead className="border-x border-t w-[20%]">
+              <TableHead className="border-x border-t w-[18%]">
                 Improvement Plan
               </TableHead>
+              <TableHead className="border-x border-t w-[9%]">Date</TableHead>
               <TableHead className="border-x border-t w-[10%]">
                 Customer Status
               </TableHead>
-              <TableHead className="border-x border-t w-[10%]">
+              <TableHead className="border-x border-t w-[8%]">
                 Actions
               </TableHead>
             </TableRow>
@@ -258,12 +259,15 @@ export default function AllSlaRatingsTab({
                   <TableCell className="border-x align-top">
                     <RatingBadge rating={rating.rating} />
                   </TableCell>
-                  <TableCell className="border-x align-top">
+                  <TableCell className="border-x align-top whitespace-pre-line">
                     {rating.reason || "N/A"}
                   </TableCell>
                   <TableCell className={"border-x align-top"}>
                     {rating.improvement_action_plan?.improvement_action ||
                       "N/A"}
+                  </TableCell>
+                  <TableCell className="border-x align-top">
+                    {formatDate(rating.updated_at) || "N/A"}
                   </TableCell>
                   <TableCell className={"border-x align-top"}>
                     {rating.customer_feedback_status ? (
@@ -330,7 +334,7 @@ export default function AllSlaRatingsTab({
             ) : (
               <TableRow className="bg-accent">
                 <TableCell
-                  colSpan={8}
+                  colSpan={9}
                   className={"border-x border-t text-center"}
                 >
                   <div className="text-muted-foreground">No Data.</div>

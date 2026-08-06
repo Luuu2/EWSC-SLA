@@ -39,14 +39,15 @@ $ py -3.11 -m venv venv
 $ venv\scripts\activate
 $ (venv) cd ewscsla
 $ (venv) pip install -r requirements.txt
-$ (venv) manage.py migrate
-$ (venv) manage.py runserver
+$ (venv) python manage.py migrate
+$ (venv) python manage.py runserver
 ```
 
 ### Backend css files setup
 
 ```shell
 $ cd ewscsla
+$ npm i
 $ npm run build # to generate css for login page
 ```
 
@@ -54,6 +55,7 @@ $ npm run build # to generate css for login page
 
 ```shell
 $ cd ewscsla/web/src
+$ npm i
 $ npm run build # to generate the frontend bundle
 ```
 

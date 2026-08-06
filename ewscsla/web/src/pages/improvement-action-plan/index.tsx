@@ -3,7 +3,7 @@ import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
 import {LoadingButton} from "@/components/ui/loadingButton";
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
-import {cn} from "@/lib/utils";
+import {cn, formatDate} from "@/lib/utils";
 import {Badge} from "@/components/ui/badge";
 import {
     DropdownMenu,
@@ -183,12 +183,13 @@ export default function ImprovementActionPlan() {
                             <TableHead className={"border-x border-t w-[20%]"}>SLA</TableHead>
                             <TableHead className="border-x border-t w-[10%]">Department</TableHead>
                             <TableHead className="border-x border-t lg:w-[10%]">Rating</TableHead>
-                            <TableHead className="border-x border-t lg:w-[10%]">Rated By</TableHead>
+                            <TableHead className="border-x border-t lg:w-[8%]">Rated By</TableHead>
                             <TableHead className="border-x border-t w-[20%]">Reason</TableHead>
+                            <TableHead className="border-x border-t w-[7%]">Date</TableHead>
                             <TableHead className="border-x border-t w-[20%]">
                                 Improvement Plan
                             </TableHead>
-                            <TableHead className="border-x border-t w-[10%]">Actions</TableHead>
+                            <TableHead className="border-x border-t w-[5%]">Actions</TableHead>
                         </TableRow>
                     </TableHeader>
 
@@ -216,6 +217,9 @@ export default function ImprovementActionPlan() {
                                         </TableCell>
                                         <TableCell className="border-x align-top">
                                             {rating.reason || "N/A"}
+                                        </TableCell>
+                                        <TableCell className="border-x align-top">
+                                            {formatDate(rating.updated_at) || "N/A"}
                                         </TableCell>
                                         <TableCell className={"border-x align-top"}>
                                             {rating.improvement_action_plan?.improvement_action || "N/A"}
@@ -258,7 +262,7 @@ export default function ImprovementActionPlan() {
                                     </TableRow>
                                 ))
                                 : <TableRow className="bg-accent">
-                                    <TableCell colSpan={7} className={"border-x text-center"}>
+                                    <TableCell colSpan={8} className={"border-x text-center"}>
                                         <div className="text-muted-foreground">
                                             No Data. No SLA Ratings.
                                         </div>
