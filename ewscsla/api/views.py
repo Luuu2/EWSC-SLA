@@ -67,10 +67,11 @@ def add_sla_entry(request: Request):
 class SlaRatingFilter(django_filters.FilterSet):
     department = django_filters.CharFilter(
         field_name='sla__department', lookup_expr='exact')
+    is_archived = django_filters.BooleanFilter(field_name='is_archived')
 
     class Meta:
         model = SlaRating
-        fields = ('department',)
+        fields = ('department', 'is_archived',)
 
 
 class UserSlaRatingEntriesView(generics.ListAPIView):
@@ -80,18 +81,19 @@ class UserSlaRatingEntriesView(generics.ListAPIView):
 
     def get_queryset(self):
         return SlaRating.objects.filter(
-            rated_by=self.request.user
+            rated_by=self.request.user,
+            is_archived=False
         ).order_by('pk')
 
 
 class SlaRatingEntryViewSet(viewsets.ModelViewSet):
-    queryset = SlaRating.objects.order_by('pk')
+    queryset = SlaRating.objects.filter(is_archived=False).order_by('pk')
     permission_classes = [IsAuthenticated, ]
     pagination_class = ListPagination
     filterset_class = SlaRatingFilter
 
     def get_queryset(self):
-        queryset = self.queryset
+        queryset = self.queryset.filter(is_archived=False)
         filter_by = self.request.query_params.get('filter_by')
         if filter_by == 'my_entries':
             # Filter by the current user's SLA entries
@@ -153,7 +155,7 @@ def add_sla_rating_entry(request: Request):
 # ======================================================================
 
 class SlaImprovementActionPlanViewSet(viewsets.ModelViewSet):
-    queryset = SlaImprovementPlanEntry.objects.order_by('pk')
+    queryset = SlaImprovementPlanEntry.objects.filter(rating__is_archived=False).order_by('pk')
     permission_classes = [IsAuthenticated, ]
     serializer_class = SlaImprovementPlanEntrySerializer
 
@@ -161,7 +163,7 @@ class SlaImprovementActionPlanViewSet(viewsets.ModelViewSet):
 # ======================================================================
 
 class SlaCustomerStatusPlanViewSet(viewsets.ModelViewSet):
-    queryset = SlaCustomerStatusEntry.objects.order_by('pk')
+    queryset = SlaCustomerStatusEntry.objects.filter(rating__is_archived=False).order_by('pk')
     permission_classes = [IsAuthenticated, ]
     serializer_class = SlaCustomerStatusEntrySerializer
 
@@ -448,8 +450,10 @@ def dashboard(request):
     try:
         users = AuthUser.objects.count()
         sla_entries = SlaEntry.objects.count()
-        ratings = SlaRating.objects.count()
-        action_plans = SlaImprovementPlanEntry.objects.count()
+        ratings = SlaRating.objects.filter(is_archived=False).count()
+        action_plans = SlaImprovementPlanEntry.objects.filter(
+            rating__is_archived=False
+        ).count()
 
         departments = Department.objects.order_by("pk")
         departments_data = departments.annotate(
@@ -460,7 +464,8 @@ def dashboard(request):
         aggregated_ratings = []
         for department in departments:
             department_ratings = SlaRating.objects.filter(
-                sla__department=department
+                sla__department=department,
+                is_archived=False
             ).values('rating').annotate(rating_count=Count("rating"))
 
             _grouped_ratings = {}

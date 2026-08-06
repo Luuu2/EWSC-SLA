@@ -56,6 +56,13 @@ class SlaRating(models.Model):
     rated_by = models.ForeignKey(
         AuthUser, on_delete=models.CASCADE, related_name="sla_ratings")
 
+    # new archiving feature
+    is_archived = models.BooleanField(
+        default=False,
+        db_index=True,
+        help_text="Designates whether this rating belongs to a previous quarter."
+    )
+
     class Meta:
         db_table = "core_sla_ratings"
 

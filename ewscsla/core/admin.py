@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib import admin
+from django.contrib import admin, messages
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserChangeForm
 
@@ -50,8 +50,28 @@ class SlaEntryAdmin(admin.ModelAdmin):
 
 @admin.register(SlaRating)
 class SlaRatingAdmin(admin.ModelAdmin):
-    list_per_page = 50
-    list_display = ('sla', 'rating')
+    list_per_page = 10
+    list_display = ('sla', 'rating', 'rated_by', 'is_archived', 'updated_at')
+    list_filter = ('is_archived', 'rating', 'sla__department')
+    actions = ['archive_selected_ratings', 'unarchive_selected_ratings']
+
+    @admin.action(description="Archive selected SLA ratings")
+    def archive_selected_ratings(self, request, queryset):
+        count = queryset.update(is_archived=True)
+        self.message_user(
+            request,
+            f"Successfully archived {count} SLA rating(s).",
+            messages.SUCCESS
+        )
+
+    @admin.action(description="Unarchive/Restore selected SLA ratings")
+    def unarchive_selected_ratings(self, request, queryset):
+        count = queryset.update(is_archived=False)
+        self.message_user(
+            request,
+            f"Successfully restored {count} SLA rating(s).",
+            messages.SUCCESS
+        )
 
 
 @admin.register(SlaImprovementPlanEntry)
