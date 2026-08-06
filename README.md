@@ -2,6 +2,9 @@
 
 Eswatini Water Services Corporation SLA Project.
 
+> [!NOTE]
+> Updated README.md
+
 ## Features
 
 - SLA Entries (unlimited)
@@ -10,6 +13,7 @@ Eswatini Water Services Corporation SLA Project.
 - SLA Customer Feedback (on SLA Ratings added)
 - Authentication (Session Authentication)
 - Excel reports
+- Archiving of old ratings and improvement plans
 
 ### Project Requirements & Setup
 
@@ -72,3 +76,23 @@ $ (venv) manage.py createsuperuser
 ```shell
 xhanka<rootroot>
 ```
+
+
+### Archiving Ratings (Quarter Reset)
+
+Superadmins can archive quarterly records within the **Django Admin Portal**:
+
+#### Bulk Select Specific Ratings
+1. Go to **Django Admin** -> **Core** -> **Sla Ratings** (`/admin/core/slarating/`).
+2. Use the checkboxes to select specific ratings.
+3. Open the **Action** dropdown at the top, select **"Archive selected SLA ratings"**, and click **RUN**.
+4. Be careful not to click the **"Delete selected items"**, this will permanetely delete entries, so keep backups just in case
+
+### Restoring / Unarchiving Ratings
+
+If ratings were archived by mistake, superadmins can restore them to the active state:
+
+1. Go to **Django Admin** -> **Core** -> **Sla Ratings** (`/admin/core/slarating/`).
+2. Set the **IS ARCHIVED** sidebar filter to **Yes** to show hidden records.
+3. Select the ratings you wish to restore.
+4. Open the **Action** dropdown, select **"Unarchive/Restore selected SLA ratings"**, and click **RUN**.
