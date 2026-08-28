@@ -193,18 +193,14 @@ def generate_report(request):
             horizontal='center', vertical='center', wrap_text=True)
         data_alignment = Alignment(vertical='center', wrap_text=True)
 
-        # worksheet.append(["ESWATINI WATER SERVICES CORPORATION"])
-        # worksheet.append([])
-        # worksheet.append(["SLA's MONITORING TOOL"])
-
         # Add report titles with merged cells and styling
-        worksheet.merge_cells('A1:M1')
+        worksheet.merge_cells('A1:O1')
         title_cell_1 = worksheet['A1']
         title_cell_1.value = "ESWATINI WATER SERVICES CORPORATION"
         title_cell_1.font = title_font
         title_cell_1.alignment = Alignment(horizontal='center')
 
-        worksheet.merge_cells('A3:M3')
+        worksheet.merge_cells('A3:O3')
         title_cell_2 = worksheet['A3']
         title_cell_2.value = "SLA's MONITORING TOOL"
         title_cell_2.font = title_font
@@ -222,7 +218,9 @@ def generate_report(request):
         main_headers = [
             "Internal Service Provider",
             "Internal Customer",
-            "Report Qrt Date",
+            "SLA Entry Date",             # Renamed for clarity
+            "Rating Date Created",        # NEW
+            "Rating Date Updated",        # NEW
             "Service Provider Responsibility",
             "Customer Responsibility",
             "Service Level",
@@ -246,7 +244,8 @@ def generate_report(request):
 
         # Set a fixed width for the columns with long text paragraphs
         # Corresponds to SP Responsibility, Customer Responsibility, Service Level, Reason for rating, Agreed Improvement Action
-        long_text_columns = [4, 5, 6, 8, 9, 10]
+        # CHANGED: Updated column indexes for fixed width text columns (6, 7, 8, 10, 11, 12)
+        long_text_columns = [6, 7, 8, 10, 11, 12]
         fixed_width = 30
         for col_num in long_text_columns:
             col_letter = get_column_letter(col_num)
@@ -261,7 +260,12 @@ def generate_report(request):
             service_provider = sla_entry.department.name
             customer = rating.rated_by.department.name \
                 if (rating.rated_by and rating.rated_by.department) else "N/A"
-            sla_date = sla_entry.date.strftime("%Y-%m-%d")
+
+            # CHANGED: Extracted all 3 dates
+            sla_date = sla_entry.date.strftime("%Y-%m-%d") if sla_entry.date else "N/A"
+            rating_created_at = rating.created_at.strftime("%Y-%m-%d") if rating.created_at else "N/A"
+            rating_updated_at = rating.updated_at.strftime("%Y-%m-%d") if rating.updated_at else "N/A"
+            
             sp_responsibility = sla_entry.service_provider_responsibility or "N/A"
             cust_responsibility = sla_entry.customer_responsibility or "N/A"
             service_level = sla_entry.service_level or "N/A"
@@ -277,8 +281,11 @@ def generate_report(request):
             customer_status = rating.customer_status.get_status_display() \
                 if hasattr(rating, 'customer_status') else "N/A"
 
+            # CHANGED: Added rating_created_at and rating_updated_at into row_data
             row_data = [
-                service_provider, customer, sla_date, sp_responsibility, cust_responsibility,
+                service_provider, customer, 
+                sla_date, rating_created_at, rating_updated_at,
+                sp_responsibility, cust_responsibility,
                 service_level, rating_value, key_performance_area, reason,
                 action_plan, due_date, manager_status, customer_status
             ]

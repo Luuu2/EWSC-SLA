@@ -4,6 +4,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
+  CardFooter
 } from "@/components/ui/card";
 import {
   Form,
@@ -45,6 +46,13 @@ import { Department, SlaRatingEntry } from "@/types/types";
 import { z } from "zod";
 import axios from "axios";
 import { useState } from "react";
+import {
+    Pagination,
+    PaginationContent, PaginationEllipsis,
+    PaginationItem,
+    PaginationNext,
+    PaginationPrevious
+} from "@/components/ui/pagination";
 import { toast } from "@/components/ui/use-toast";
 import { searchSlasFormSchema } from "@/pages/sla-entry";
 import ViewImprovementActionPlanDialog from "@/pages/improvement-action-plan/include/ViewImprovementActionPlanDialog";
@@ -53,6 +61,17 @@ import ViewImprovementActionPlanDialog from "@/pages/improvement-action-plan/inc
 import { RatingBadge, StatusBadge } from "./your-sla-ratings-tab";
 import { API_SLA_RATING_ENTRIES_FOR_DEPARTMENT_URL } from "@/app/config";
 import DeleteSlaRatingDialog from "../include/DeleteSlaRatingDialog";
+
+
+type SlaRatingsResponse = {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  current_page: number;
+  per_page: number;
+  total_pages: number;
+  results: SlaRatingEntry[];
+};
 
 type AllSlaRatingsTabProps = {
   searchSlasForm: any;
@@ -63,16 +82,14 @@ export default function AllSlaRatingsTab({
   searchSlasForm,
   departments,
 }: AllSlaRatingsTabProps) {
-  const [allSlaRatingEntries, setAllSlaRatingEntries] = useState<
-    SlaRatingEntry[]
-  >([]);
-
+  const [slaRatingsResponse, setSlaRatingsResponse] = useState<SlaRatingsResponse | null>(null);
   const [filterBy, setFilterBy] = useState<string>("all");
+  
+  const [selectedDepartment, setSelectedDepartment] = useState<string>("");
 
-  async function onSearchAllSlaEntryRatings(
-    values: z.infer<typeof searchSlasFormSchema>
-  ) {
-    const params: { department?: string; filter_by?: string } = {};
+  async function fetchSlaRatings(page?: number) {
+    const values = searchSlasForm.getValues();
+    const params: { department?: string; filter_by?: string; page?: number } = {};
 
     if (values.department) {
       params.department = values.department;
@@ -83,30 +100,44 @@ export default function AllSlaRatingsTab({
       params.filter_by = "my_entries";
     }
 
-    await axios
-      .get(API_SLA_RATING_ENTRIES_FOR_DEPARTMENT_URL, {
-        params: params,
-      })
-      .then((response) => {
-        console.log("All SLA ratings response:", response.data);
-        setAllSlaRatingEntries(response.data.results || []);
-        toast({
-          variant: "success",
-          title: "Request successful.",
-          description:
-            "All SLA Ratings for selected department updated successfully.",
-        });
-      })
-      .catch((error) => {
-        console.error("Error fetching all SLA ratings:", error);
-        toast({
-          variant: "destructive",
-          title: "Uh oh! Something went wrong.",
-          description:
-            "Failed to load all SLA Ratings. There was a problem with your request. ",
-        });
+    if (page) {
+      params.page = page;
+    }
+
+    try {
+      const response = await axios.get(API_SLA_RATING_ENTRIES_FOR_DEPARTMENT_URL, {
+        params,
       });
+      setSlaRatingsResponse(response.data || null);
+      toast({
+        variant: "success",
+        title: "Request successful.",
+        description:
+          "All SLA Ratings for selected department updated successfully.",
+      });
+    } catch (error) {
+      console.error("Error fetching all SLA ratings:", error);
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description:
+          "Failed to load all SLA Ratings. There was a problem with your request.",
+      });
+    }
   }
+
+  async function onSearchAllSlaEntryRatings(
+    values: z.infer<typeof searchSlasFormSchema>
+  ) {
+    setSelectedDepartment(values.department);
+    await fetchSlaRatings(1);
+  }
+
+  async function paginateRatingEntries(page: number) {
+    await fetchSlaRatings(page);
+  }
+
+  const results = slaRatingsResponse?.results || [];
 
   return (
     <Card className="min-h-[300px] mb-5">
@@ -236,9 +267,8 @@ export default function AllSlaRatingsTab({
             </TableRow>
           </TableHeader>
           <TableBody>
-            {Array.isArray(allSlaRatingEntries) &&
-            allSlaRatingEntries.length >= 1 ? (
-              allSlaRatingEntries.map((rating, index) => (
+            {Array.isArray(results) && results.length >= 1 ? (
+              results.map((rating, index) => (
                 <TableRow
                   key={index}
                   className={cn(index % 2 === 0 && "bg-accent")}
@@ -344,6 +374,54 @@ export default function AllSlaRatingsTab({
           </TableBody>
         </Table>
       </CardContent>
+      <CardFooter>
+        {slaRatingsResponse?.results && (
+          <Pagination>
+            <PaginationContent>
+              <div className="flex min-w-[100px] items-center justify-center text-sm font-medium">
+                Page {slaRatingsResponse?.current_page || "--"} of{" "}
+                {slaRatingsResponse?.total_pages || "--"}
+              </div>
+
+              {slaRatingsResponse?.previous ? (
+                <PaginationItem>
+                  <PaginationPrevious
+                    onClick={() =>
+                      paginateRatingEntries(
+                        slaRatingsResponse.current_page - 1
+                      )
+                    }
+                  />
+                </PaginationItem>
+              ) : (
+                <PaginationItem>
+                  <PaginationPrevious />
+                </PaginationItem>
+              )}
+
+              <PaginationItem>
+                <PaginationEllipsis />
+              </PaginationItem>
+
+              {slaRatingsResponse?.next ? (
+                <PaginationItem>
+                  <PaginationNext
+                    onClick={() =>
+                      paginateRatingEntries(
+                        slaRatingsResponse.current_page + 1
+                      )
+                    }
+                  />
+                </PaginationItem>
+              ) : (
+                <PaginationItem>
+                  <PaginationNext />
+                </PaginationItem>
+              )}
+            </PaginationContent>
+          </Pagination>
+        )}
+      </CardFooter>
     </Card>
   );
 }
